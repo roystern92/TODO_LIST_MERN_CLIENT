@@ -1,5 +1,5 @@
 import React from 'react';
-import AppLogo from '../../assets/images/Yellow_Duck.jpg';
+import AppLogo from '../../assets/images/todoLogo.png';
 import classes from './Logo.module.css';
 
 const logo = (props) => (

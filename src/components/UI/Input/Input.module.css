@@ -5,14 +5,14 @@
 }
 
 .Label {
-    font-weight: bold;
-    display: block;
+    display: flex;
     margin-bottom: 8px;
 }
 
 .InputElement {
     outline: none;
-    border: 1px solid #ccc;
+    border: none;
+    border-bottom: 1px solid rgb(91, 99, 102);
     background-color: white;
     font: inherit;
     padding: 6px 10px;
@@ -23,7 +23,6 @@
 
 .InputElement:focus {
     outline: none;
-    background-color: #ccc;
 }
 
 .Invalid {

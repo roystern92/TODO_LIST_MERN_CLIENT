@@ -1,11 +1,57 @@
 .SignUp {
     margin: 20px auto;
-    width: 80%;
+    width: 100%;
     text-align: center;
-    box-shadow: 0 2px 3px #ccc;
-    border: 1px solid #eee;
     padding: 10px;
     box-sizing: border-box;
+}
+
+.Submit{
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    color: white;
+    background: #0052D4;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #6FB1FC, #4364F7, #0052D4);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #6FB1FC, #4364F7, #0052D4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.TermsAndPolicy{
+    margin-top: 15px;
+    font-size: 14px ;
+    color: rgb(210, 208, 213);
+}
+
+.TermsAndPolicy span{
+    text-decoration: underline;
+}
+
+.Member{
+    margin-top: 15px;
+    font-size: 14px ;
+}
+
+.Member span{
+    color: rgb(118, 110, 230);
+}
+
+
+.Title{
+    padding-left: 5px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: start;
+    font-family: 'Muli', sans-serif;
+}
+
+.SignIn{
+    color: rgb(118, 110, 230);
+}
+
+.Or{
+    color: rgb(210, 208, 213);
 }
 
 @media (min-width: 600px) {

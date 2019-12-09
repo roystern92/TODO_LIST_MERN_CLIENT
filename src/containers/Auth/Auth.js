@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classes from './Auth.module.css';
 
 // Redux
 import { connect } from 'react-redux';
@@ -11,7 +12,9 @@ import SignUp from '../../components/Forms/SignUp/SignUp';
 class Auth extends Component {
     render() {
         return (
-            <SignUp />
+            <div className={classes.Auth}>
+                <SignUp />
+            </div>
         );
     };
 

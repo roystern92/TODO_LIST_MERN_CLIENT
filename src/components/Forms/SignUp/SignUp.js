@@ -106,6 +106,7 @@ class SignUpForm extends Component {
         let form = null;
         let inputs = formElementsArray.map(formElement => {
             return <Input
+                label={formElement.id}
                 key={formElement.id}
                 value={formElement.config.value}
                 invalid={!formElement.config.valid}
@@ -122,8 +123,25 @@ class SignUpForm extends Component {
         }
 
         form = <form onSubmit={this.submitHandler}>
+
+            <div className={classes.Title}>
+                <h2> <span className={classes.SignIn}>Sign In</span>  <span className={classes.Or}>or</span> Sign Up </h2>
+            </div>
+
             {inputs}
-            <Button btnType="Success" disabled={!this.state.formIsValid} >SUBMIT</Button>
+
+
+            <div className={classes.Submit}>
+                <Button disabled={!this.state.formIsValid} >Sign Up</Button>
+            </div>
+
+            <div className={classes.TermsAndPolicy}>
+                <p> By clicking the button, I agree to the <span className={classes.Underline}>Term of Services</span> and <span className={classes.Underline}>Privacy Policy</span>.</p>
+            </div>
+
+            <div className={classes.Member}>
+                <p> Already a member? <span>Sign In</span></p>
+            </div>
         </form>;
 
         return form;
