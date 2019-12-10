@@ -14,12 +14,6 @@ const withErrorHandler = (WrappedComponent, axios) => {
                 this.setState({ error: null });
                 return req;
             });
-
-            // const token = store.getState().session.token;
-            // config.headers.Authorization =  token;
-        
-            // return config;
-
             this.resInterceptor = axios.interceptors.response.use(res => res
             , error => {
             console.log(error.response);

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import classes from './Auth.module.css';
 
-// Redux
-import { connect } from 'react-redux';
 
 //Forms
 import Auth from '../../components/Forms/Auth/AuthForm';
@@ -22,10 +20,5 @@ class SignUp extends Component {
 
 };
 
-const mapStateToProps = (state) => {
-    return {
-        isAuthenticated: state.auth.token !== null
-    };
-}
+export default SignUp;
 
-export default connect(mapStateToProps)(SignUp);
