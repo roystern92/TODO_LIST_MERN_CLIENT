@@ -1,0 +1,23 @@
+.Top h1, .Top p{
+    margin-bottom: 15px;
+}
+
+.Body{
+    margin-top: 20px;
+}
+
+.Botoom{
+    margin-top: 25px;
+}
+
+.Spinner{
+    /* margin-top: 30%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Loader {
+    position: fixed;
+    width: 100%;
+}

@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 //For the routes 
 import { BrowserRouter } from 'react-router-dom';
@@ -32,7 +33,7 @@ const store = createStore(rootReducer, composeEnhancers(
 const app = (
     <Provider store={store}>
         <BrowserRouter>
-            <App />
+            <App/>
         </BrowserRouter>
     </Provider>
 );

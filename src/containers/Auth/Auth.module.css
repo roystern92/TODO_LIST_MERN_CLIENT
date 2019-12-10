@@ -1,0 +1,9 @@
+.Auth{
+    width: 100%;
+    /* margin-left: 50%; */
+    height: 82%;
+    background-color: rgb(238, 240, 245);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

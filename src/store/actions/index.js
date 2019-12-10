@@ -1,9 +1,5 @@
 export {
-    signUp
-    // login,
-    // logout,
-    // authCheckState
-    // logout,
-    // setAuthRedirectPath,
-    // authCheckState
+    signUp,
+    logout,
+    authCheckState
 } from './auth';

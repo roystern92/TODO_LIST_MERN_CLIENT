@@ -1,4 +1,13 @@
 .Content {
     margin-top: 72px;
+    top: 10%;
+    height: 100%;
 }
 
+.About{
+    top: 82%;
+    /* background-color: salmon; */
+    left: 0;
+    height: 18%;
+    width: 100%;
+}

@@ -5,15 +5,17 @@ import classes from './Auth.module.css';
 import { connect } from 'react-redux';
 
 //Forms
-import SignUp from '../../components/Forms/SignUp/SignUp';
+import Auth from '../../components/Forms/Auth/AuthForm';
+import * as controls from '../../components/Forms/Controls/auth';
+
 // const login;
 
 
-class Auth extends Component {
+class SignIn extends Component {
     render() {
         return (
             <div className={classes.Auth}>
-                <SignUp />
+                <Auth controls={controls.signInControls} isSignIn={true} />
             </div>
         );
     };
@@ -26,4 +28,4 @@ const mapStateToProps = (state) => {
     };
 }
 
-export default connect(mapStateToProps)(Auth);
+export default connect(mapStateToProps)(SignIn);
