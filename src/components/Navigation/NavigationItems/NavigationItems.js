@@ -16,6 +16,7 @@ const navigationItems = (props) => {
                 <NavigationItem link="/my-day" exact>My Day</NavigationItem>
                 <NavigationItem link="/my-lists" exact>My Lists</NavigationItem>
                 <NavigationItem link="/profile" exact>Profile</NavigationItem>
+                <NavigationItem link="/logout" exact>Sign Out</NavigationItem>
             </ul>
         );
     }

@@ -7,6 +7,9 @@ import Layout from './hoc/Layout/Layout';
 import Test from './components/test';
 import SignIn from './containers/Auth/SignIn';
 import SignUp from './containers/Auth/SignUp';
+import Logout from './containers/Auth/Signout';
+import Loader from './components/Loader/Loader';
+import Profile from './components/Views/Profile/Profile';
 
 import { connect } from 'react-redux';
 import * as actions from './store/actions/index';
@@ -24,12 +27,13 @@ class App extends Component {
   render() {
     let routes = (
       <Switch>
-        <Route path="/my-day" component={Test} />
-        <Route path="/my-lists" component={Test} />
-        <Route path="/profile" component={Test} />
+        <Route path="/my-day" component={Loader} />
+        <Route path="/my-lists" component={Loader} />
+        <Route path="/profile" component={Profile} />
         <Route path="/signIn" component={SignIn} />
         <Route path="/signUp" component={SignUp} />
-        <Route path="/" exact component={Test} />
+        <Route path="/logout" component={Logout} />
+        <Route path="/" exact component={Loader} />
         <Redirect to="/" />
       </Switch>
     );

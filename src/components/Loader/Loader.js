@@ -1,35 +1,11 @@
 import React, { Component } from 'react';
 import classes from './Loader.module.css';
-import { connect } from 'react-redux';
-import { Jumbotron, Button, Spinner } from 'reactstrap';
-import axios from '../../axios/axios-todo-lists';
-import withErrorHandler from '../../hoc/ErrorHandler/ErrorHandler';
+import { Jumbotron, Button} from 'reactstrap';
 
 class Loader extends Component {
-    state = {
-        loading: false
-    }
-    
-    createMyDayList = () => {
-        const formData = new FormData();
-        formData.append('name', "My Day");
-        formData.append('isPublic', false);
-        formData.append('isRemovable', false);
-
-        axios.post('/admin/list', formData)
-            .then(res => {
-                console.log("New list was created.");
-                this.setState({ loading: false });
-            })
-            .catch(err => {
-                this.setState({ loading: false });
-                console.log("Error while tring to create new list.");
-            });
-    }
-
+  
     buttonClickHandler = (event) => {
-        this.setState({ loading: true });
-        this.createMyDayList();
+            this.props.history.push('/signup');
     };
 
     render() {
@@ -52,14 +28,6 @@ class Loader extends Component {
                     </div>
                 </Jumbotron>;
 
-        if (this.state.loading) {
-            loader =
-                <div className={classes.Spinner}>
-                    <Spinner style={{ width: '10rem', height: '10rem' }} />{' '}
-                </div>;
-        }
-
-
         return (
             <div className={classes.Loader}>
                 {loader}
@@ -69,12 +37,8 @@ class Loader extends Component {
     };
 };
 
-const mapStatesToProps = (state) => {
-    return {
-        token: state.auth.token !== null,
-    };
-};
 
 
 
-export default connect(mapStatesToProps)(withErrorHandler(Loader, axios));
+
+export default Loader;

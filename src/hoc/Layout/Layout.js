@@ -36,13 +36,7 @@ class Layout extends Component {
                         closed={this.sideDrawerClosedHandler} />
 
                         {this.props.children}
-
-
-                    <div className={classes.About}>
-                    </div>
                 </main>
-
-
             </Fragment>
         )
     }

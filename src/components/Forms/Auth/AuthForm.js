@@ -11,6 +11,7 @@ import Spinner from '../../UI/Spinner/Spinner';
 import Button from '../../UI/Button/Button';
 import Input from '../../UI/Input/Input';
 import axios from 'axios';
+import Loader from '../../Loader/Loader';
 
 class AuthForm extends Component {
     state = {
@@ -95,8 +96,8 @@ class AuthForm extends Component {
                   </p>
             </div> : null;
 
-        let member = this.props.isSignIn ? <div className={classes.Member}> <p> Already a member? <span>Sign In</span></p>  </div> : 
-        <div className={classes.Member}> <p> Not a member? <span>Sign Up</span></p> </div>;
+        let member = this.props.isSignIn ? <div className={classes.Member}> <p> Already a member? <span>Sign In</span></p>  </div> :
+            <div className={classes.Member}> <p> Not a member? <span>Sign Up</span></p> </div>;
 
         let button = <div className={classes.Submit}>
             <Button disabled={!this.state.formIsValid} >{submit}</Button>
@@ -107,7 +108,7 @@ class AuthForm extends Component {
             {inputs}
             {button}
             {terms}
-             {member}
+            {member}
         </form>;
 
         if (this.props.loading) {
@@ -118,17 +119,19 @@ class AuthForm extends Component {
 
     submitHandler = (event) => {
         event.preventDefault();
-        if (!this.props.isSignIn) {
-            this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.controls.name.value);
+        let signUp = this.props.isSignIn === false;
+
+        if (signUp) {
+            this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.controls.name.value, true);
         } else {
-            console.log("DDDDD");
+            this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, null, false);
             // Todo
         }
     };
 
     createMyDayList = () => {
         const formData = new FormData();
-        formData.append('name', "Agrid");
+        formData.append('name', "My Day");
         formData.append('isPublic', false);
         formData.append('isRemovable', false);
 
@@ -137,12 +140,11 @@ class AuthForm extends Component {
         axios.post('http://localhost:8080/admin/list', formData)
             .then(res => {
                 console.log("New list was created.");
-                this.setState({ loading: false });
             })
             .catch(err => {
-                this.setState({ loading: false });
                 console.log("Error while tring to create new list.");
-            });
+            });;
+
     };
 
     render() {
@@ -152,16 +154,6 @@ class AuthForm extends Component {
         let error = this.props.error ? <p>{this.props.error.message}</p> : null;
         let authRedirect = null;
 
-        if (this.props.isAuthenticated) {
-            authRedirect = <Redirect to='/' />;
-        } else {
-            authRedirect = null;
-        }
-
-        if (this.props.isAuthenticated && !this.props.isSignIn) {
-            authRedirect = <Redirect to='/' />;
-            this.createMyDayList();
-        }
 
         let authForm = <div
             className={classes.SignUp}>
@@ -170,9 +162,27 @@ class AuthForm extends Component {
             {form}
         </div>;
 
+
+
+        if (this.props.isAuthenticated && !this.props.isSignIn) {
+            authForm = <Redirect to='/' />;
+            this.createMyDayList()
+        }
+        else if (this.props.isAuthenticated) {
+            authForm = <Redirect to='/' />;
+        } else {
+            authRedirect = null;
+            authForm = <div
+                className={classes.SignUp}>
+                {authRedirect}
+                {error}
+                {form}
+            </div>;
+        };
+        
         return (
             authForm
-        );
+        )
     };
 };
 
@@ -186,7 +196,7 @@ const mapStatesToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAuth: (email, password, fullName) => dispatch(actions.signUp(email, password, fullName))
+        onAuth: (email, password, fullName, signUp) => dispatch(actions.signUp(email, password, fullName, signUp))
     };
 };
 

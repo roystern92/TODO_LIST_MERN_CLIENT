@@ -34,6 +34,7 @@ export const checkAuthTimeout = (expirationTime) => {
 };
 
 export const logout = () => {
+    console.log("Yahel Ran Was here");
     localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');
     localStorage.removeItem('userId');
@@ -43,16 +44,23 @@ export const logout = () => {
 };
 
 
-export const signUp = (email, password, name) => {
+export const signUp = (email, password, name , signUp) => {
     return dispatch => {
         dispatch(authStart());
+        let url =  '/auth/login';; 
         const formData = new FormData();
-        formData.append('name', name);
+        
+        if(signUp){
+            formData.append('name', name);
+            url = '/auth/signup';
+        }
+
         formData.append('email', email);
         formData.append('password', password);
+
         // formData.append('image', file);
 
-        axios.post('/auth/signup', formData)
+        axios.post(url, formData)
             .then(res => {
                 const expirationDate = new Date(new Date().getTime() + res.data.expiresTimeInMiliseconds);
                 localStorage.setItem('token', res.data.token);
@@ -67,6 +75,7 @@ export const signUp = (email, password, name) => {
             });
     }
 };
+
 
 export const authCheckState = () => {
     return dispatch => {
