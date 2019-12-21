@@ -25,18 +25,30 @@ class App extends Component {
 
 
   render() {
-    let routes = (
-      <Switch>
-        <Route path="/my-day" component={Loader} />
-        <Route path="/my-lists" component={Loader} />
-        <Route path="/profile" component={Profile} />
-        <Route path="/signIn" component={SignIn} />
-        <Route path="/signUp" component={SignUp} />
-        <Route path="/logout" component={Logout} />
-        <Route path="/" exact component={Loader} />
-        <Redirect to="/" />
-      </Switch>
-    );
+
+    let routes = null;
+
+    if(this.props.isAuthenticated){
+      routes =(
+        <Switch>
+          <Route path="/my-day" component={Loader} />
+          <Route path="/my-lists" component={Loader} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/logout" component={Logout} />
+          <Redirect to="/my-day" />
+        </Switch>
+      );
+    }else{
+      routes = (
+        <Switch>
+          <Route path="/signIn" component={SignIn} />
+          <Route path="/signUp" component={SignUp} />
+          <Route path="/" exact component={Loader} />
+          <Redirect to="/" />
+        </Switch>
+      );
+    }
+   
 
     return (
       <div className="App">

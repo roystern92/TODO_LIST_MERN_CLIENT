@@ -3,8 +3,8 @@ import classes from './Auth.module.css';
 
 
 //Forms
-import Auth from '../../components/Forms/Auth/AuthForm';
-import * as controls from '../../components/Forms/Controls/auth';
+import Auth from './Forms/Auth/AuthForm';
+import * as controls from './Forms/Controls/auth';
 
 // const login;
 

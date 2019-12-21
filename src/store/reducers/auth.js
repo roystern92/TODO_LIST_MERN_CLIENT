@@ -13,7 +13,8 @@ const authStart = (state, action) => {
 };
 
 const authFail = (state, action) => {
-    return updateObject(state, { error: action.error, loading: false });
+    let error = action.error;
+    return updateObject(state, { error: error[0].msg, loading: false });
 };
 
 const authSuccess = (state, action) => {

@@ -25,7 +25,6 @@ export const authSuccess = (token, userId) => {
 
 
 export const checkAuthTimeout = (expirationTime) => {
-    console.log("expirationTime " + expirationTime);
     return dispatch => {
         setTimeout(() => {
             dispatch(logout());
@@ -33,8 +32,8 @@ export const checkAuthTimeout = (expirationTime) => {
     };
 };
 
+
 export const logout = () => {
-    console.log("Yahel Ran Was here");
     localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');
     localStorage.removeItem('userId');
@@ -43,14 +42,31 @@ export const logout = () => {
     };
 };
 
+export const createMyDayList = () => {
+    console.log("CreateMyDayList ");
+    const formData = new FormData();
+    formData.append('name', "My Day");
+    formData.append('isPublic', false);
+    formData.append('isRemovable', false);
 
-export const signUp = (email, password, name , signUp) => {
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
+
+    axios.post('http://localhost:8080/admin/list', formData)
+        .then(res => {
+            console.log("New list was created.");
+        })
+        .catch(err => {
+            console.log("Error while tring to create new list.");
+        });;
+};
+
+export const signUp = (email, password, name, signUp) => {
     return dispatch => {
         dispatch(authStart());
-        let url =  '/auth/login';; 
+        let url = '/auth/login';;
         const formData = new FormData();
-        
-        if(signUp){
+
+        if (signUp) {
             formData.append('name', name);
             url = '/auth/signup';
         }
@@ -69,9 +85,15 @@ export const signUp = (email, password, name , signUp) => {
                 let timeToLogout = expirationDate.getTime() - new Date().getTime();
                 dispatch(authSuccess(res.data.token, res.data.userId));
                 dispatch(checkAuthTimeout(timeToLogout));
-            }).catch(err => {
-                console.log(err.response.data.err);
-                dispatch(authFail(err.response.data));
+            })
+            .then(() => {
+                if (signUp) {
+                    createMyDayList();
+                }
+            })
+            .catch(err => {
+                console.log(err.response.data.err.data);
+                dispatch(authFail(err.response.data.err.data));
             });
     }
 };

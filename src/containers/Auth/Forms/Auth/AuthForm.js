@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import classes from './AuthForm.module.css';
 
-import { updateObject, checkValidity } from '../../../shared/utility';
-import { Redirect } from 'react-router-dom';
+import { updateObject, checkValidity } from '../../../../shared/utility';
+import { Redirect, Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import * as actions from '../../../store/actions/index';
+import * as actions from '../../../../store/actions';
 
-import Spinner from '../../UI/Spinner/Spinner';
-import Button from '../../UI/Button/Button';
-import Input from '../../UI/Input/Input';
+import Spinner from '../../../../components/UI/Spinner/Spinner';
+import Button from '../../../../components/UI/Button/Button';
+import Input from '../../../../components/UI/Input/Input';
 import axios from 'axios';
-import Loader from '../../Loader/Loader';
+import Loader from '../../../../components/Loader/Loader';
 
 class AuthForm extends Component {
     state = {
@@ -75,6 +75,54 @@ class AuthForm extends Component {
         return inputs;
     };
 
+    createTitle = () => {
+        let res = null;
+
+        if (this.props.isSignIn) {
+            res = <div className={classes.Title}>
+                <h2> <Link to='/signUp'>
+                    <span className={classes.SignIn}>Sign Up</span>
+                </Link>
+                    <span className={classes.Or}>or</span> Sign In </h2>
+            </div>;
+        } else {
+            res = <div className={classes.Title}>
+                <h2>
+                    <Link to='/signIn'>
+                        <span className={classes.SignIn}>Sign In</span>
+                    </Link>
+                    <span className={classes.Or}>or</span> Sign Up
+                    </h2>
+            </div>;
+        }
+
+        return res;
+    };
+
+    createMemberView = () => {
+        let member = null;
+
+        if (!this.props.isSignIn) {
+            member = <div className={classes.Member}>
+                <p> Already a member?
+                <Link to='/signIn'>
+                        <span>Sign In</span>
+                    </Link>
+                </p>
+            </div>
+        } else {
+            member = <div className={classes.Member}>
+                <p> Not a member?
+            <Link to='/signUp'>
+                        <span>Sign Up</span>
+                    </Link>
+                </p>
+            </div>
+        }
+
+        return member;
+    };
+
     createFormOfInputs = (formElementsArray) => {
         let form = null;
         let inputs = this.createInputs(formElementsArray);
@@ -82,9 +130,7 @@ class AuthForm extends Component {
 
         let submit = this.props.isSignIn ? 'Sign In' : 'Sign Up';
 
-        let title = this.props.isSignIn ?
-            <div className={classes.Title}> <h2> <span className={classes.SignIn}>Sign Up</span>  <span className={classes.Or}>or</span> Sign In </h2>  </div> :
-            <div className={classes.Title}> <h2> <span className={classes.SignIn}>Sign In</span>  <span className={classes.Or}>or</span> Sign Up </h2> </div>;
+        let title = this.createTitle();
 
         let terms = !this.props.isSignIn ?
             <div className={classes.TermsAndPolicy}>
@@ -96,9 +142,7 @@ class AuthForm extends Component {
                   </p>
             </div> : null;
 
-        let member = this.props.isSignIn ? <div className={classes.Member}> <p> Already a member? <span>Sign In</span></p>  </div> :
-            <div className={classes.Member}> <p> Not a member? <span>Sign Up</span></p> </div>;
-
+        let member = this.createMemberView();
         let button = <div className={classes.Submit}>
             <Button disabled={!this.state.formIsValid} >{submit}</Button>
         </div>;
@@ -129,57 +173,20 @@ class AuthForm extends Component {
         }
     };
 
-    createMyDayList = () => {
-        const formData = new FormData();
-        formData.append('name', "My Day");
-        formData.append('isPublic', false);
-        formData.append('isRemovable', false);
-
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
-
-        axios.post('http://localhost:8080/admin/list', formData)
-            .then(res => {
-                console.log("New list was created.");
-            })
-            .catch(err => {
-                console.log("Error while tring to create new list.");
-            });;
-
-    };
-
     render() {
 
         let formElementsArray = this.createArrayFromObject();
         let form = this.createFormOfInputs(formElementsArray);
-        let error = this.props.error ? <p>{this.props.error.message}</p> : null;
-        let authRedirect = null;
+        let error = this.props.error;
+        // Todo add all errors not only the first, add css to errors
+        let authForm = null;
 
-
-        let authForm = <div
+        authForm = <div
             className={classes.SignUp}>
-            {authRedirect}
             {error}
             {form}
         </div>;
 
-
-
-        if (this.props.isAuthenticated && !this.props.isSignIn) {
-            authForm = <Redirect to='/' />;
-            this.createMyDayList()
-        }
-        else if (this.props.isAuthenticated) {
-            authForm = <Redirect to='/' />;
-        } else {
-            authRedirect = null;
-            authForm = <div
-                className={classes.SignUp}>
-                {authRedirect}
-                {error}
-                {form}
-            </div>;
-        };
-        
         return (
             authForm
         )
