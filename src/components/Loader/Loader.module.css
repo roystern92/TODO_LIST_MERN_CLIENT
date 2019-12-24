@@ -10,6 +10,10 @@
     margin-top: 25px;
 }
 
+.Body img{
+    width: 40%;
+}
+
 .Spinner{
     margin-top: 15%;
     display: flex;
@@ -19,5 +23,6 @@
 
 .Loader {
     position: fixed;
+    height: 100%;
     width: 100%;
 }

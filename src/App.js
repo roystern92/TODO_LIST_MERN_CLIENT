@@ -23,7 +23,6 @@ class App extends Component {
     this.props.onTryAutoSignup();
   }
 
-
   render() {
 
     let routes = null;
@@ -43,6 +42,7 @@ class App extends Component {
         <Switch>
           <Route path="/signIn" component={SignIn} />
           <Route path="/signUp" component={SignUp} />
+          <Route path="/test" component={Test} />
           <Route path="/" exact component={Loader} />
           <Redirect to="/" />
         </Switch>
@@ -73,7 +73,5 @@ const mapDispatchToProps = dispatch => {
     onTryAutoSignup: () => dispatch(actions.authCheckState())
   };
 };
-
-
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

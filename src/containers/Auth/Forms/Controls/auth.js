@@ -23,7 +23,7 @@ export const signInControls = {
         value: '',
         validation: {
             required: true,
-            minLength: 6
+            minLength: 5
         },
         valid: false,
         touched: false
@@ -68,7 +68,7 @@ export const signUpControls = {
         value: '',
         validation: {
             required: true,
-            minLength: 6
+            minLength: 5
         },
         valid: false,
         touched: false

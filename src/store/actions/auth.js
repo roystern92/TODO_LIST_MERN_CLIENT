@@ -1,13 +1,14 @@
 import axios from '../../axios/axios-todo-lists';
 import * as actionTypes from './actionTypes';
 
-export const authStart = () => {
+
+const authStart = () => {
     return {
         type: actionTypes.AUTH_START
     };
 };
 
-export const authFail = (error) => {
+const authFail = (error) => {
     return {
         type: actionTypes.AUTH_FAIL,
         error: error
@@ -15,7 +16,7 @@ export const authFail = (error) => {
 };
 
 
-export const authSuccess = (token, userId) => {
+const authSuccess = (token, userId) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         token: token,
@@ -24,7 +25,7 @@ export const authSuccess = (token, userId) => {
 };
 
 
-export const checkAuthTimeout = (expirationTime) => {
+const checkAuthTimeout = (expirationTime) => {
     return dispatch => {
         setTimeout(() => {
             dispatch(logout());
@@ -42,7 +43,13 @@ export const logout = () => {
     };
 };
 
-export const createMyDayList = () => {
+export const authResetError = () => {
+    return {
+        type: actionTypes.AUTH_RESET_ERROR
+    };
+};
+
+const createMyDayList = () => {
     console.log("CreateMyDayList ");
     const formData = new FormData();
     formData.append('name', "My Day");
@@ -63,7 +70,8 @@ export const createMyDayList = () => {
 export const signUp = (email, password, name, signUp) => {
     return dispatch => {
         dispatch(authStart());
-        let url = '/auth/login';;
+        let url = '/auth/login';
+
         const formData = new FormData();
 
         if (signUp) {
@@ -92,8 +100,8 @@ export const signUp = (email, password, name, signUp) => {
                 }
             })
             .catch(err => {
-                console.log(err.response.data.err.data);
-                dispatch(authFail(err.response.data.err.data));
+                console.log(err.response);
+                dispatch(authFail(err.response.data.message));
             });
     }
 };

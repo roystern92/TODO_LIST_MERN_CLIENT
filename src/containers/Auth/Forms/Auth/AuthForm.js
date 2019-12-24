@@ -10,13 +10,16 @@ import * as actions from '../../../../store/actions';
 import Spinner from '../../../../components/UI/Spinner/Spinner';
 import Button from '../../../../components/UI/Button/Button';
 import Input from '../../../../components/UI/Input/Input';
-import axios from 'axios';
-import Loader from '../../../../components/Loader/Loader';
+
 
 class AuthForm extends Component {
     state = {
         controls: this.props.controls,
         formIsValid: false
+    };
+
+    componentDidMount() {
+        this.props.onResetError();
     };
 
     checkIfFormIsValid = () => {
@@ -26,8 +29,16 @@ class AuthForm extends Component {
                 isFormValid = false;
             }
         }
+        // console.log("password: " + this.state.controls.password.valid);
 
-        return isFormValid;
+        if (this.state.formIsValid !== isFormValid) {
+
+            this.setState({ formIsValid: isFormValid });
+
+        }
+
+       
+        // return isFormValid;
     };
 
     onInputChangeHandler = (event, controlName) => {
@@ -39,9 +50,9 @@ class AuthForm extends Component {
             })
         });
 
-        let formIsValid = this.checkIfFormIsValid();
+        // let formIsValid = this.checkIfFormIsValid();
 
-        this.setState({ controls: updatedControls, formIsValid: formIsValid });
+        this.setState({ controls: updatedControls }, this.checkIfFormIsValid);
     };
 
     createArrayFromObject = () => {
@@ -80,18 +91,18 @@ class AuthForm extends Component {
 
         if (this.props.isSignIn) {
             res = <div className={classes.Title}>
-                <h2> <Link to='/signUp'>
+                <h2> <Link to='/signUp '>
                     <span className={classes.SignIn}>Sign Up</span>
                 </Link>
-                    <span className={classes.Or}>or</span> Sign In </h2>
+                    <span className={classes.Or}> or</span> Sign In </h2>
             </div>;
         } else {
             res = <div className={classes.Title}>
                 <h2>
-                    <Link to='/signIn'>
+                    <Link to='/signIn '>
                         <span className={classes.SignIn}>Sign In</span>
                     </Link>
-                    <span className={classes.Or}>or</span> Sign Up
+                    <span className={classes.Or}> or</span> Sign Up
                     </h2>
             </div>;
         }
@@ -147,8 +158,12 @@ class AuthForm extends Component {
             <Button disabled={!this.state.formIsValid} >{submit}</Button>
         </div>;
 
+        let error = this.createErrors();
+
+
         form = <form onSubmit={this.submitHandler}>
             {title}
+            {error}
             {inputs}
             {button}
             {terms}
@@ -167,23 +182,28 @@ class AuthForm extends Component {
 
         if (signUp) {
             this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.controls.name.value, true);
+           
         } else {
             this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, null, false);
-            // Todo
         }
+    };
+
+    createErrors = () => {
+        let errors = this.props.error ? <div className={classes.Errors}>
+            <h5>{this.props.error}</h5>
+        </div> : null;
+
+        return errors;
     };
 
     render() {
 
         let formElementsArray = this.createArrayFromObject();
         let form = this.createFormOfInputs(formElementsArray);
-        let error = this.props.error;
-        // Todo add all errors not only the first, add css to errors
         let authForm = null;
 
         authForm = <div
             className={classes.SignUp}>
-            {error}
             {form}
         </div>;
 
@@ -203,7 +223,8 @@ const mapStatesToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAuth: (email, password, fullName, signUp) => dispatch(actions.signUp(email, password, fullName, signUp))
+        onAuth: (email, password, fullName, signUp) => dispatch(actions.signUp(email, password, fullName, signUp)),
+        onResetError: () => dispatch(actions.authResetError())
     };
 };
 

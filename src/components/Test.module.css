@@ -1,0 +1,29 @@
+.image {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+}
+
+.Test{
+    background: url('../assets/images/note.png');
+    background-size: cover;
+    box-sizing: border-box;
+    width: 297px;
+    height: 329px ;
+
+}
+
+.Test2{
+    background: url('../assets/images/notebook.png');
+    background-size: cover;
+    box-sizing: border-box;
+    width: 65%;
+    height: 650px;
+}
+
+
+.Routes{
+    padding: 100px;
+    display: flex;
+    height: 100%;
+}

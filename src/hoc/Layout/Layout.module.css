@@ -1,14 +1,4 @@
 .Content {
     margin-top: 72px;
-    background-color: rgb(238, 240, 245);
-    top: 10%;
     height: 100%;
-}
-
-.About{
-    top: 82%;
-    /* background-color: salmon; */
-    left: 0;
-    height: 18%;
-    width: 100%;
 }
