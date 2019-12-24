@@ -1,0 +1,63 @@
+.List{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+
+}
+
+.Notebook{
+    /*margin-right: 5%;*/
+    /*margin-top: 70px ;*/
+    /*margin: 10px ;*/
+
+    padding: 70px 10px;
+    padding-bottom: 50px;
+
+    background: url('../../assets/images/notebook.png');
+    background-size: cover;
+    box-sizing: border-box;
+    min-width: 45%;
+    height: 89%;
+}
+
+.Note{
+    padding: 70px 100px;
+    padding-bottom: 40px;
+    background: url('../../assets/images/note2.png');
+    background-size: cover;
+    box-sizing: border-box;
+    width: 478px;
+    height: 339px;
+}
+
+.Header{
+    display: flex;
+    flex-flow: column;
+    align-items: start;
+    padding: 0px 25px;
+
+}
+
+.Header h1{
+    font-size: 2rem;
+}
+
+.Header h5{
+    color: rgb(60, 60, 60);
+    font-size: 0.7rem;
+
+}
+
+.Tasks{
+    min-width: 45%;
+    height: 89%;
+    overflow: scroll;
+    display: flex;
+    flex-flow: column;
+    align-items: start;
+    padding: 0px 25px;
+    padding-top: 25px;
+
+
+
+}

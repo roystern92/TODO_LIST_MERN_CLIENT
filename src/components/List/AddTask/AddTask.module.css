@@ -1,0 +1,32 @@
+.AddTask{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+}
+
+.Content{
+    width: 100%;
+}
+
+.Icon{
+    color: rgb(45, 121, 208);
+    margin-right: 10px;
+}
+
+.AddTask input{
+    border: none;
+    background: none ;
+    padding: 0 5px;
+}
+
+.Line {
+    width: 95%;
+    margin: 5px 0;
+
+}
+
+.AddTask input:focus{
+    outline: none;
+}

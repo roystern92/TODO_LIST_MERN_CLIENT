@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import {Route, Switch, Redirect} from 'react-router-dom';
-import Loader from './Loader/Loader';
 import classes from './Test.module.css';
 
 class Test extends Component {
@@ -10,6 +8,7 @@ class Test extends Component {
 
 
     componentDidMount() {
+        console.log("FFFFFFF");
         this.props.history.push("/test/1");
     };
 
