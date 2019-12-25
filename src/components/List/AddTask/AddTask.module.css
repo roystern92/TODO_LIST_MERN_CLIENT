@@ -3,6 +3,7 @@
     background: none ;
     padding: 0 5px;
     font-size: 1rem;
+    width: 85%;
 }
 
 
@@ -19,13 +20,18 @@
 
 .Task .Icon{
     margin-right: 6px;
-    color: rgb(45, 121, 208);
+    color: #0275d8;
 }
 
 .Line{
     width: 95%;
     margin-left: 0;
     margin-top: 0;
+}
+
+.Task .AddButton{
+    padding: 3px;
+    font-size: 0.7rem;
 }
 
 

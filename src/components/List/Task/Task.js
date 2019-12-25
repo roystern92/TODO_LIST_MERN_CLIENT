@@ -2,8 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {ContextMenu, MenuItem, ContextMenuTrigger} from "react-contextmenu";
 import './Task.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-// import { faCircleNotch  } from '@fortawesome/free-solid-svg-icons'
-import {faCircle} from '@fortawesome/free-regular-svg-icons';
+import {faCircle, faEdit} from '@fortawesome/free-regular-svg-icons';
 import classes from './Task.module.css';
 
 
@@ -19,8 +18,10 @@ class Task extends Component {
 
                 <div className={classes.Task}>
                     {element}
-                    <h1>Kill Voldermort And then Fuck Hermat=dfd dffddfd dfdfdf</h1>
+                    <h1>{this.props.task.task}</h1>
+                    <FontAwesomeIcon className={classes.Pen} icon={faEdit} size="sm"/>
                 </div>
+
                 <hr className={classes.Line}/>
             </Fragment>
 
@@ -46,12 +47,12 @@ class Task extends Component {
 
             </div>
         );
-
-        // Todo Create all The Task
     };
 
 
     render() {
+        console.log("[Task] - Render ");
+
         let task = this.createTask();
         return task;
     };

@@ -2,6 +2,8 @@ import React, {Component, Fragment} from 'react';
 import classes from './List.module.css';
 import Task from './Task/Task';
 import AddTask from './AddTask/AddTask';
+import { animateScroll } from "react-scroll";
+
 
 class List extends Component {
 
@@ -9,38 +11,37 @@ class List extends Component {
         openTaskId: null
     };
 
+    componentDidMount() {
+        this.scrollToBottom();
+    }
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
+    scrollToBottom() {
+        animateScroll.scrollToBottom({
+            containerId: "scroll"
+        });
+    };
+
     createTasks = () => {
 
-        let task = null;
+        let tasks = this.props.list.tasks.map((task) => {
+            return <Task key={task._id} task={task}/>
+        });
 
 
-        let tasks =
+        let notebook =
             <Fragment>
-
-                <div className={classes.Tasks}>
-                    {task}
-                    <Task task="fuck"/>
-                    <Task task="fuck"/>
-                    <Task task="fuck"/>
-                    <Task task="fuck"/>
-                    <Task task="fuck"/>
-                    <Task task="fuck"/>
-                    <Task task="fuck"/>
-                    <Task task="fuck"/>
-                    <Task task="fuck"/>
-                    <Task task="fuck"/>
-                    <Task task="fuck"/>
-                    <Task task="fuck"/>
+                <div id='scroll' className={classes.Tasks}>
+                    {tasks}
                 </div>
 
                 <div className={classes.AddTask}>
-
-                <AddTask/>
+                    <AddTask listId={this.props.list._id} onAddTask={this.props.onTaskChange} />
                 </div>
-
-
             </Fragment>;
-        return tasks;
+
+        return notebook;
     };
 
     createNote = () => {
@@ -60,6 +61,9 @@ class List extends Component {
 
 
     render() {
+
+        console.log("[List] - Render ");
+        console.log(this.state.list);
         let header = this.createHeader();
         let tasks = this.createTasks();
         let note = this.createNote();

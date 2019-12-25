@@ -9,6 +9,8 @@ class MyDay extends Component {
         list: null
     }
 
+
+
     fetchList = () => {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
 
@@ -28,15 +30,17 @@ class MyDay extends Component {
        this.fetchList();
     };
 
-    taskDeleteHandler = () => {
+    taskChangeHandler = () => {
         this.fetchList();
     };
 
 
     render() {
+        console.log("[MyDay] - Render ");
+
         let list = this.state.list ?
             <div className={classes.MyDay}>
-                <List list={this.state.list} isMyDay={true} onTaskDelete={this.taskDeleteHandler}/>
+                <List list={this.state.list} isMyDay={true} onTaskChange={this.taskChangeHandler}/>
             </div> : null ;
 
         return list;
