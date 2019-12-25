@@ -63,7 +63,6 @@ class List extends Component {
     render() {
 
         console.log("[List] - Render ");
-        console.log(this.state.list);
         let header = this.createHeader();
         let tasks = this.createTasks();
         let note = this.createNote();

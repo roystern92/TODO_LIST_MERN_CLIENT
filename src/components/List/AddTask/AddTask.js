@@ -3,7 +3,7 @@ import classes from './AddTask.module.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'reactstrap';
-import axios from 'axios';
+import axios from '../../../axios/axios-todo-lists';
 
 class AddTask extends Component {
     state = {
@@ -16,20 +16,17 @@ class AddTask extends Component {
 
     addTaskHandler = () => {
 
-        let fetch = axios.create({
-            baseURL: 'http://localhost:8080/admin'
-        });
-
-        fetch.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
-
-        let url = '/todo-item/' + this.props.listId;
-
+        if (this.props.value === ""){
+            return;
+        }
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
+        let url = '/admin/todo-item/' + this.props.listId;
         let data = new FormData();
 
         data.append('task', this.state.value);
 
 
-        fetch.post(url,data)
+        axios.post(url,data)
             .then(res => {
                 this.props.onAddTask();
                 this.setState({value: ""});
@@ -38,7 +35,7 @@ class AddTask extends Component {
     };
 
     createAddTask = () => {
-        const addIcon = <FontAwesomeIcon className={classes.Icon} icon={faPlusCircle} size="lg"/>
+        const addIcon = <FontAwesomeIcon onClick={this.addTaskHandler} className={classes.Icon} icon={faPlusCircle} size="lg"/>
 
         let addTask =
                 <div className={classes.Task}>

@@ -58,13 +58,8 @@ const createMyDayList = () => {
 
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
 
-    axios.post('http://localhost:8080/admin/list', formData)
-        .then(res => {
-            console.log("New list was created.");
-        })
-        .catch(err => {
-            console.log("Error while tring to create new list.");
-        });;
+   return axios.post('http://localhost:8080/admin/list', formData);
+
 };
 
 export const signUp = (email, password, name, signUp) => {
@@ -82,8 +77,6 @@ export const signUp = (email, password, name, signUp) => {
         formData.append('email', email);
         formData.append('password', password);
 
-        // formData.append('image', file);
-
         axios.post(url, formData)
             .then(res => {
                 const expirationDate = new Date(new Date().getTime() + res.data.expiresTimeInMiliseconds);
@@ -91,13 +84,23 @@ export const signUp = (email, password, name, signUp) => {
                 localStorage.setItem('expirationDate', expirationDate);
                 localStorage.setItem('userId', res.data.userId);
                 let timeToLogout = expirationDate.getTime() - new Date().getTime();
-                dispatch(authSuccess(res.data.token, res.data.userId));
+
                 dispatch(checkAuthTimeout(timeToLogout));
-            })
-            .then(() => {
+
                 if (signUp) {
-                    createMyDayList();
+                    createMyDayList()
+                        .then(res => {
+                            dispatch(authSuccess(res.data.token, res.data.userId));
+                            // console.log("New list was created.");
+                        })
+                        .catch(err => {
+                            console.log("Error while trying to create new list.");
+                            console.log(err);
+                        });
+                }else{
+                    dispatch(authSuccess(res.data.token, res.data.userId));
                 }
+                return res;
             })
             .catch(err => {
                 console.log(err.response);

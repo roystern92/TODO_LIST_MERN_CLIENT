@@ -26,11 +26,12 @@ class App extends Component {
 
     render() {
 
+        console.log('[App] Render' );
+
+
         let routes = null;
 
         if (this.props.isAuthenticated) {
-            console.log("test123");
-
             routes = (
                 <Switch>
                     <Route path="/my-day" component={MyDay}/>

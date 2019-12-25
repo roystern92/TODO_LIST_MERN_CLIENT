@@ -21,6 +21,7 @@
 .Task .Icon{
     margin-right: 6px;
     color: #0275d8;
+    cursor: pointer ;
 }
 
 .Line{

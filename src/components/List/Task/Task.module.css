@@ -19,6 +19,7 @@
 .Task .Icon{
     margin-right: 6px;
     color: rgb(120, 120, 120);
+    cursor: pointer;
 
 }
 
@@ -32,8 +33,15 @@
 }
 
 .Task .Pen{
+    cursor: pointer;
     margin-left: 6px;
     color: #0275d8;
     /*padding: 3px;*/
     /*font-size: 0.7rem;*/
+}
+
+.Task h1.Completed {
+    text-decoration-line: line-through;
+    text-decoration-style: solid;
+
 }

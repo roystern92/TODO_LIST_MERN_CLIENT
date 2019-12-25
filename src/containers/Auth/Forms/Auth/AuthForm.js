@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import classes from './AuthForm.module.css';
 
-import { updateObject, checkValidity } from '../../../../shared/utility';
-import { Redirect, Link } from 'react-router-dom';
+import {updateObject, checkValidity} from '../../../../shared/utility';
+import {Redirect, Link} from 'react-router-dom';
 
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import * as actions from '../../../../store/actions';
 
 import Spinner from '../../../../components/UI/Spinner/Spinner';
@@ -33,11 +33,11 @@ class AuthForm extends Component {
 
         if (this.state.formIsValid !== isFormValid) {
 
-            this.setState({ formIsValid: isFormValid });
+            this.setState({formIsValid: isFormValid});
 
         }
 
-       
+
         // return isFormValid;
     };
 
@@ -52,7 +52,7 @@ class AuthForm extends Component {
 
         // let formIsValid = this.checkIfFormIsValid();
 
-        this.setState({ controls: updatedControls }, this.checkIfFormIsValid);
+        this.setState({controls: updatedControls}, this.checkIfFormIsValid);
     };
 
     createArrayFromObject = () => {
@@ -60,9 +60,9 @@ class AuthForm extends Component {
 
         for (let key in this.state.controls) {
             formElementsArray.push({
-                id: key,
-                config: this.state.controls[key]
-            }
+                    id: key,
+                    config: this.state.controls[key]
+                }
             );
         }
 
@@ -91,7 +91,7 @@ class AuthForm extends Component {
 
         if (this.props.isSignIn) {
             res = <div className={classes.Title}>
-                <h2> <Link to='/signUp '>
+                <h2><Link to='/signUp '>
                     <span className={classes.SignIn}>Sign Up</span>
                 </Link>
                     <span className={classes.Or}> or</span> Sign In </h2>
@@ -103,7 +103,7 @@ class AuthForm extends Component {
                         <span className={classes.SignIn}>Sign In</span>
                     </Link>
                     <span className={classes.Or}> or</span> Sign Up
-                    </h2>
+                </h2>
             </div>;
         }
 
@@ -116,7 +116,7 @@ class AuthForm extends Component {
         if (!this.props.isSignIn) {
             member = <div className={classes.Member}>
                 <p> Already a member?
-                <Link to='/signIn'>
+                    <Link to='/signIn'>
                         <span>Sign In</span>
                     </Link>
                 </p>
@@ -124,7 +124,7 @@ class AuthForm extends Component {
         } else {
             member = <div className={classes.Member}>
                 <p> Not a member?
-            <Link to='/signUp'>
+                    <Link to='/signUp'>
                         <span>Sign Up</span>
                     </Link>
                 </p>
@@ -135,33 +135,28 @@ class AuthForm extends Component {
     };
 
     createFormOfInputs = (formElementsArray) => {
-        let form = null;
         let inputs = this.createInputs(formElementsArray);
-
-
         let submit = this.props.isSignIn ? 'Sign In' : 'Sign Up';
-
         let title = this.createTitle();
-
         let terms = !this.props.isSignIn ?
             <div className={classes.TermsAndPolicy}>
                 <p>
                     By clicking the button, I agree to the
-                 <span className={classes.Underline}>Term of Services</span>
+                    <span className={classes.Underline}>Term of Services</span>
                     and
-                  <span className={classes.Underline}>Privacy Policy</span>.
-                  </p>
+                    <span className={classes.Underline}>Privacy Policy</span>.
+                </p>
             </div> : null;
 
         let member = this.createMemberView();
         let button = <div className={classes.Submit}>
-            <Button disabled={!this.state.formIsValid} >{submit}</Button>
+            <Button disabled={!this.state.formIsValid}>{submit}</Button>
         </div>;
 
         let error = this.createErrors();
 
 
-        form = <form onSubmit={this.submitHandler}>
+        let form = <form onSubmit={this.submitHandler}>
             {title}
             {error}
             {inputs}
@@ -171,8 +166,14 @@ class AuthForm extends Component {
         </form>;
 
         if (this.props.loading) {
-            form = <Spinner />
+            form = <Spinner/>
         }
+
+        if (this.props.loading) {
+            form = <Spinner/>
+        }
+
+
         return form;
     };
 
@@ -182,7 +183,7 @@ class AuthForm extends Component {
 
         if (signUp) {
             this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.controls.name.value, true);
-           
+
         } else {
             this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, null, false);
         }
@@ -200,12 +201,11 @@ class AuthForm extends Component {
 
         let formElementsArray = this.createArrayFromObject();
         let form = this.createFormOfInputs(formElementsArray);
-        let authForm = null;
-
-        authForm = <div
-            className={classes.SignUp}>
-            {form}
-        </div>;
+        let authForm =
+            <div
+                className={classes.SignUp}>
+                {form}
+            </div>;
 
         return (
             authForm

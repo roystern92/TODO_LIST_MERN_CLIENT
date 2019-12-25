@@ -6,6 +6,7 @@ const initialState = {
     userId: null,
     error: null,
     loading: false,
+    createMyDayList: false
 };
 
 const authStart = (state, action) => {
