@@ -1,27 +1,32 @@
-import React, {Component} from 'react';
-import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
-import  './Task.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, {Component, Fragment} from 'react';
+import {ContextMenu, MenuItem, ContextMenuTrigger} from "react-contextmenu";
+import './Task.css';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 // import { faCircleNotch  } from '@fortawesome/free-solid-svg-icons'
-import { faCircle  } from '@fortawesome/free-regular-svg-icons'
+import {faCircle} from '@fortawesome/free-regular-svg-icons';
+import classes from './Task.module.css';
 
 
 class Task extends Component {
 
-    state = {
-    };
+    state = {};
 
     createTask = () => {
-        const element = <FontAwesomeIcon  icon={faCircle} />
-
+        const element = <FontAwesomeIcon className={classes.Icon} icon={faCircle} size="lg"/>
 
         let task =
-            <div className={Task}>
-                {element}
-            </div>;
+            <Fragment>
+
+                <div className={classes.Task}>
+                    {element}
+                    <h1>Kill Voldermort And then Fuck Hermat=dfd dffddfd dfdfdf</h1>
+                </div>
+                <hr className={classes.Line}/>
+            </Fragment>
+
 
         return (
-            <div>
+            <div className={classes.Container}>
                 <ContextMenuTrigger id="some_unique_identifier">
                     {task}
                 </ContextMenuTrigger>
@@ -33,7 +38,7 @@ class Task extends Component {
                     <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
                         Mark as important
                     </MenuItem>
-                    <MenuItem divider />
+                    <MenuItem divider/>
                     <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
                         Delete
                     </MenuItem>

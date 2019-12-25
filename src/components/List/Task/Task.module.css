@@ -1,0 +1,27 @@
+.Container{
+    width: 100%;
+}
+
+.Line{
+    width: 95%;
+    margin-left: 0;
+}
+
+.Task{
+    /*border: 1px solid black;*/
+    width: 100%;
+    /*margin: 2px 0px;*/
+    display: flex;
+    align-items: center;
+    /*justify-content: start;*/
+}
+
+.Task .Icon{
+    margin-right: 6px;
+}
+
+.Task h1{
+    font-size: 1rem;
+    margin: 0;
+    padding-left: 5px;
+}

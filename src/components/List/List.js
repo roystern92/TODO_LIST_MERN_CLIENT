@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import classes from './List.module.css';
 import Task from './Task/Task';
 import AddTask from './AddTask/AddTask';
@@ -15,48 +15,31 @@ class List extends Component {
 
 
         let tasks =
-            <div className={classes.Tasks}>
-                {task}
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
-                <Task task="fuck" />
+            <Fragment>
 
-                <AddTask />
+                <div className={classes.Tasks}>
+                    {task}
+                    <Task task="fuck"/>
+                    <Task task="fuck"/>
+                    <Task task="fuck"/>
+                    <Task task="fuck"/>
+                    <Task task="fuck"/>
+                    <Task task="fuck"/>
+                    <Task task="fuck"/>
+                    <Task task="fuck"/>
+                    <Task task="fuck"/>
+                    <Task task="fuck"/>
+                    <Task task="fuck"/>
+                    <Task task="fuck"/>
+                </div>
 
-            </div>;
+                <div className={classes.AddTask}>
 
+                <AddTask/>
+                </div>
+
+
+            </Fragment>;
         return tasks;
     };
 

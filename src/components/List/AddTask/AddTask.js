@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import classes from './AddTask.module.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPlusCircle} from '@fortawesome/free-solid-svg-icons'
@@ -13,20 +13,21 @@ class AddTask extends Component {
     };
 
     createAddTask = () => {
-        const addIcon = <FontAwesomeIcon className={classes.Icon} icon={faPlusCircle}/>
+        const addIcon = <FontAwesomeIcon className={classes.Icon} icon={faPlusCircle} size="lg"/>
 
         let addTask =
-            <div className={classes.Content} >
-                <div className={classes.AddTask}>
+            <Fragment>
+                {/*<hr className={classes.Line}/>*/}
+
+                <div className={classes.Task}>
                     {addIcon}
                     <input type="text" onChange={(event) => {
                         this.onChangeHandler(event)
                     }} value={this.state.value} placeholder="Add task"/>
                 </div>
 
-                <hr className={classes.Line}/>
-            </div>
 
+            </Fragment>
         return addTask;
     };
 

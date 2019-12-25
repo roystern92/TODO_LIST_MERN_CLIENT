@@ -1,32 +1,31 @@
-.AddTask{
-    width: 100%;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-
-}
-
-.Content{
-    width: 100%;
-}
-
-.Icon{
-    color: rgb(45, 121, 208);
-    margin-right: 10px;
-}
-
-.AddTask input{
+.Task input{
     border: none;
     background: none ;
     padding: 0 5px;
+    font-size: 1rem;
 }
 
-.Line {
-    width: 95%;
-    margin: 5px 0;
 
-}
-
-.AddTask input:focus{
+.Task input:focus{
     outline: none;
 }
+
+
+.Task{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.Task .Icon{
+    margin-right: 6px;
+    color: rgb(45, 121, 208);
+}
+
+.Line{
+    width: 95%;
+    margin-left: 0;
+    margin-top: 0;
+}
+
+
