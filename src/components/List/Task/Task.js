@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 import  './Task.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+// import { faCircleNotch  } from '@fortawesome/free-solid-svg-icons'
+import { faCircle  } from '@fortawesome/free-regular-svg-icons'
 
 
 class Task extends Component {
@@ -11,7 +12,7 @@ class Task extends Component {
     };
 
     createTask = () => {
-        const element = <FontAwesomeIcon style={{color: 'green'}} icon={faPlusCircle} />
+        const element = <FontAwesomeIcon  icon={faCircle} />
 
 
         let task =
@@ -27,14 +28,14 @@ class Task extends Component {
 
                 <ContextMenu id="some_unique_identifier">
                     <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
-                        ContextMenu Item 1
+                        Mark as completed
                     </MenuItem>
                     <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
-                        ContextMenu Item 2
+                        Mark as important
                     </MenuItem>
                     <MenuItem divider />
                     <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
-                        ContextMenu Item 3
+                        Delete
                     </MenuItem>
                 </ContextMenu>
 
