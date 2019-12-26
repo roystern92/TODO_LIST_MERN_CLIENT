@@ -69,22 +69,29 @@ const getLists = (lists) => {
     };
 };
 
-const fetchLists = async () => {
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
-    return axios.get('http://localhost:8080/admin/lists');
+const fetchLists = async (dispatch) => {
+    try{
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
+        let result = await axios.get('http://localhost:8080/admin/lists');
+        let lists = result.data.lists;
+        console.log(lists);
+        dispatch(getLists(lists));
+    }
+    catch (e) {
+        console.log(e.response);
+    }
 };
 
 
-// export const authLists = async () => {
-//     return dispatch => {
-//         try {
-//             let lists = await fetchLists();
-//             dispatch(getLists(lists));
-//         }catch (e) {
-//             console.log(e.response);
-//         }
-//     };
-// };
+export const authLists = async () => {
+    return async (dispatch) => {
+        try {
+            await fetchLists(dispatch);
+        }catch (e) {
+            console.log(e.response);
+        }
+    };
+};
 
 
 export const postAuth = async (formData, url, signUp, dispatch) => {
@@ -102,20 +109,14 @@ export const postAuth = async (formData, url, signUp, dispatch) => {
         if (signUp) {
             await createMyDayList();
         }
-
-        let result = await fetchLists();
-        let lists = result.data.lists;
-        console.log(lists);
-        dispatch(getLists(lists));
-
         dispatch(authSuccess(res.data.token, res.data.userId));
 
+        await fetchLists(dispatch);
 
     } catch (e) {
         console.log(e.response);
         dispatch(authFail(e.response.data.message));
     }
-
 }
 
 
@@ -139,8 +140,10 @@ export const auth = (email, password, name, signUp) => {
 };
 
 
-export const authCheckState = () => {
-    return dispatch => {
+
+
+export const authCheckState =  () => {
+    return async (dispatch) => {
         const token = localStorage.getItem('token');
         if (!token) {
             dispatch(logout());
@@ -149,9 +152,12 @@ export const authCheckState = () => {
             if (expirationDate <= new Date()) {
                 dispatch(logout());
             } else {
+
                 const userId = localStorage.getItem('userId');
                 dispatch(authSuccess(token, userId));
                 dispatch(checkAuthTimeout(expirationDate.getTime() - new Date().getTime()));
+
+                await fetchLists(dispatch);
             }
         }
     };
