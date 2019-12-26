@@ -16,26 +16,37 @@ class Task extends Component {
         value: this.props.task.task
     };
 
-    taskCompletedHandler = () => {
-        let completed =!this.state.completed;
-            this.setState({completed: completed}, () => {
-        });
+    taskStatusChangeHandler = async (isImportant, isCompleted) => {
+        try {
+            let url = '/admin/todo-item/' + this.state.task._id;
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
+            let data = new FormData();
+            let important = isImportant ? !this.state.important : this.state.important;
+            let completed = isCompleted ? !this.state.completed : this.state.completed;
+            this.setState({completed: completed, important: important});
 
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
-        let url = '/admin/todo-item/' + this.state.task._id;
-        let data = new FormData();
+            data.append('task', this.state.task.task);
+            data.append('note', this.state.task.note);
+            data.append('completed', completed);
+            data.append('important', important);
 
-        data.append('task', this.state.task.task);
-        data.append('note', this.state.task.note);
-        data.append('completed', !this.state.task.completed);
-        data.append('important', this.state.task.important);
+            let res = await axios.put(url, data);
+            this.setState({task: res.data.task});
 
+        }catch (e) {
+            console.log(e.response);
+        }
+    };
 
-        axios.put(url, data)
-            .then(res => {
-                this.setState({task: res.data.task});
-            })
-            .catch(err => console.log(err.response));
+    deleteTaskHandler = async () => {
+        try {
+            let url = '/admin/todo-item/' + this.state.task._id;
+            this.props.deleteTask(this.state.task._id);
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
+            await axios.delete(url);
+        }catch (e) {
+            console.log(e.response);
+        }
     };
 
 
@@ -47,16 +58,19 @@ class Task extends Component {
             icon = faCircle;
         }
 
-        let res = <FontAwesomeIcon onClick={this.taskCompletedHandler} className={classes.Icon} icon={icon}
-                                   size="lg"/>
-        return res;
+        let res =
+            <FontAwesomeIcon
+                onClick={() => this.taskStatusChangeHandler(false, true)}
+                className={classes.Icon} icon={icon}
+                size="lg"/>
 
+        return res;
     };
 
 
     createTask = () => {
         let element = this.createIcon();
-        let content = this.state.completed ?  <h1 className={classes.Completed}>{this.state.task.task}</h1> :
+        let content = this.state.completed ? <h1 className={classes.Completed}>{this.state.task.task}</h1> :
             <h1>{this.state.task.task}</h1>;
 
         let task =
@@ -80,15 +94,17 @@ class Task extends Component {
 
                 <ContextMenu id={this.state.task._id}>
                     <MenuItem data={{foo: 'bar'}} onClick={() => {
-                        this.taskCompletedHandler();
+                        this.taskStatusChangeHandler(false, true);
                     }}>
                         {this.state.completed ? "Mark as not completed" : "Mark as completed"}
                     </MenuItem>
-                    <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
+                    <MenuItem data={{foo: 'bar'}} onClick={() => {
+                        this.taskStatusChangeHandler(true, false);
+                    }}>
                         {this.state.important ? "Mark as not important" : "Mark as important"}
                     </MenuItem>
                     <MenuItem divider/>
-                    <MenuItem data={{foo: 'bar'}} onClick={this.handleClick}>
+                    <MenuItem  onClick={this.deleteTaskHandler}>
                         Delete
                     </MenuItem>
                 </ContextMenu>
@@ -109,7 +125,8 @@ class Task extends Component {
 
 
     render() {
-        console.log("[Task] - Render ");
+        // console.log("[Task] - Render ");
+        // console.log(this.state.task);
 
         let task = this.createTask();
         return task;

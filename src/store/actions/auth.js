@@ -43,6 +43,40 @@ export const logout = () => {
     };
 };
 
+
+
+export const addingNewTask = (list, task) => {
+    return dispatch => {
+        // console.log(list);
+        let currentList = {...list};
+        currentList.tasks.push(task);
+        dispatch(disableAddTaskStart(list));
+    };
+};
+
+
+export const disableAddTaskStart = (list) => {
+    return {
+        type: actionTypes.DISABLE_ADD_TASK_START,
+        list: list
+    };
+};
+
+
+export const disableAddTaskSuccess = () => {
+
+    return {
+        type: actionTypes.DISABLE_ADD_TASK_SUCCESS
+    };
+};
+
+export const setList = (list) => {
+    return {
+        type: actionTypes.SET_CURRENT_LIST,
+        list: list
+    };
+};
+
 export const authResetError = () => {
     return {
         type: actionTypes.AUTH_RESET_ERROR
@@ -74,7 +108,7 @@ const fetchLists = async (dispatch) => {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
         let result = await axios.get('http://localhost:8080/admin/lists');
         let lists = result.data.lists;
-        console.log(lists);
+        // console.log(lists);
         dispatch(getLists(lists));
     }
     catch (e) {
@@ -83,7 +117,7 @@ const fetchLists = async (dispatch) => {
 };
 
 
-export const authLists = async () => {
+export const authFetchLists = () => {
     return async (dispatch) => {
         try {
             await fetchLists(dispatch);

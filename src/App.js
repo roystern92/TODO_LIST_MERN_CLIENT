@@ -26,7 +26,7 @@ class App extends Component {
 
     render() {
 
-        console.log('[App] Render' );
+        // console.log('[App] Render' );
 
 
         let routes = null;

@@ -6,8 +6,9 @@ const initialState = {
     userId: null,
     error: null,
     loading: false,
-    createMyDayList: false,
-    lists: null
+    lists: null,
+    disabled: false,
+    currentList: null
 };
 
 const authStart = (state, action) => {
@@ -15,7 +16,6 @@ const authStart = (state, action) => {
 };
 
 const authFail = (state, action) => {
-    let error = action.error;
     return updateObject(state, { error: action.error, loading: false });
 };
 
@@ -29,7 +29,7 @@ const authSuccess = (state, action) => {
 };
 
 const authLogout = (state, action) => {
-    return updateObject(state, { token: null, userId: null , loading: false});
+    return updateObject(state, { token: null, userId: null , loading: false, lists: null, error: null});
 };
 const resetError = (state, action) => {
     return updateObject(state, { error: null});
@@ -37,6 +37,18 @@ const resetError = (state, action) => {
 
 const setLists = (state, action) => {
     return updateObject(state, { lists: action.lists});
+};
+
+const disableAddTaskStart = (state, action) => {
+    return updateObject(state, { disabled: true, list: action.list});
+};
+
+const disableAddTaskSuccess = (state, action) => {
+    return updateObject(state, { disabled: false});
+};
+
+const setCurrentList = (state, action) => {
+    return updateObject(state, { currentList: action.list});
 };
 
 
@@ -48,6 +60,9 @@ const reducer = (state = initialState, action) => {
         case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
         case actionTypes.AUTH_RESET_ERROR: return resetError(state, action);
         case actionTypes.AUTH_GET_LISTS: return setLists(state, action);
+        case actionTypes.DISABLE_ADD_TASK_START: return disableAddTaskStart(state, action);
+        case actionTypes.DISABLE_ADD_TASK_SUCCESS: return disableAddTaskSuccess(state, action);
+        case actionTypes.SET_CURRENT_LIST: return setCurrentList(state, action);
         default:
             return state;
     }

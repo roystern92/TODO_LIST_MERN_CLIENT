@@ -2,54 +2,51 @@ import React, {Component} from 'react';
 import classes from './MyDay.module.css';
 import axios from '../../axios/axios-todo-lists';
 import List from '../../components/List/List';
+import {connect} from  'react-redux';
+import * as actions from "../../store/actions";
 
 class MyDay extends Component {
 
-    state = {
-        list: null
-    }
-
-    componentDidUpdate() {
-    }
-
-
-    fetchList = () => {
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
-
-        let listName  = 'My_Day';
-        let url = '/admin/list/' + listName;
-
-        axios.get(url)
-            .then(res => {
-                this.setState({list: res.data.list});
-            })
-            .catch(err => {
-                console.log(err);
-            });
+    findMyDayList = () => {
+       return this.props.lists.find(list => list.name.toLowerCase() === "my day");
     };
 
-    componentDidMount() {
-        this.fetchList();
-    };
+    // componentDidMount() {
+    //     console.log("[MyDay] - componentDidMount ");
+    // };
 
     taskChangeHandler = () => {
-        this.fetchList();
+        // console.log("[MyDay] - taskChangeHandler ");
+        this.props.onFetchLists();
     };
 
 
 
 
     render() {
-        console.log("[MyDay] - Render ");
+        // console.log("[MyDay] - Render ");
 
-        let list = this.state.list ?
-            <div className={classes.MyDay}>
-                <List list={this.state.list} isMyDay={false} onTaskChange={this.taskChangeHandler}/>
-            </div> : null ;
+        let list = this.props.lists ? this.findMyDayList() : null;
 
-        return list;
+        return  this.props.lists?  <div className={classes.MyDay}>
+            <List list={list} isMyDay={false} onTaskChange={this.taskChangeHandler}/>
+        </div> : null;
     }
 };
 
-export default MyDay;
+
+const mapStateToProps = state => {
+    return {
+        lists: state.auth.lists
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onFetchLists: () => dispatch(actions.authFetchLists())
+    };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyDay);
 

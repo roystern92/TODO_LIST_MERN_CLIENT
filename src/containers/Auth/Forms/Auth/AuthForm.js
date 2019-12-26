@@ -149,7 +149,7 @@ class AuthForm extends Component {
             </div> : null;
 
         let member = this.createMemberView();
-        let button = <div className={classes.Submit}>
+        let button = <div onClick={this.submitHandler} className={classes.Submit}>
             <Button disabled={!this.state.formIsValid}>{submit}</Button>
         </div>;
 

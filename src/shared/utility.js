@@ -16,7 +16,6 @@ export const checkValidity = ( value, rules ) => {
     }
 
     if ( rules.minLength ) {
-        console.log("value.length" + rules.minLength);
         isValid = value.length >= rules.minLength && isValid
     }
 
