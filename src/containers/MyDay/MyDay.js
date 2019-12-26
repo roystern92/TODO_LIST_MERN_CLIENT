@@ -9,6 +9,8 @@ class MyDay extends Component {
         list: null
     }
 
+    componentDidUpdate() {
+    }
 
 
     fetchList = () => {
@@ -27,7 +29,7 @@ class MyDay extends Component {
     };
 
     componentDidMount() {
-       this.fetchList();
+        this.fetchList();
     };
 
     taskChangeHandler = () => {
@@ -35,12 +37,14 @@ class MyDay extends Component {
     };
 
 
+
+
     render() {
         console.log("[MyDay] - Render ");
 
         let list = this.state.list ?
             <div className={classes.MyDay}>
-                <List list={this.state.list} isMyDay={true} onTaskChange={this.taskChangeHandler}/>
+                <List list={this.state.list} isMyDay={false} onTaskChange={this.taskChangeHandler}/>
             </div> : null ;
 
         return list;

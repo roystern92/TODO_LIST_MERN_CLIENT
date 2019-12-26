@@ -100,6 +100,8 @@ export const signUp = (email, password, name, signUp) => {
                 }else{
                     dispatch(authSuccess(res.data.token, res.data.userId));
                 }
+
+
                 return res;
             })
             .catch(err => {

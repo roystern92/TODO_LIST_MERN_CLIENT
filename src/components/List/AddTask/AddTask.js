@@ -5,6 +5,11 @@ import {faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'reactstrap';
 import axios from '../../../axios/axios-todo-lists';
 
+
+const avi = () => {
+    console.log("ddddd");
+}
+
 class AddTask extends Component {
     state = {
         value: ""
@@ -14,24 +19,22 @@ class AddTask extends Component {
         this.setState({value: event.target.value});
     };
 
-    addTaskHandler = () => {
-
-        if (this.props.value === ""){
-            return;
-        }
+    saveTaskAtServer = () => {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
-        let url = '/admin/todo-item/' + this.props.listId;
+        let url = '/admin/todo-item/' + this.props.list._id;
         let data = new FormData();
 
         data.append('task', this.state.value);
+        this.setState({value: ""});
 
+        return axios.post(url,data);
+    };
 
-        axios.post(url,data)
-            .then(res => {
-                this.props.onAddTask();
-                this.setState({value: ""});
-            })
-            .catch(err => console.log(err.response));
+    addTaskHandler = () => {
+        if (this.props.value !== ""){
+            let task = {task: this.state.value, _id: Date.now().toString()};
+            this.props.onAddTask(task, this.saveTaskAtServer);
+        }
     };
 
     createAddTask = () => {
@@ -47,6 +50,13 @@ class AddTask extends Component {
                 </div>
         return addTask;
     };
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if(this.props.list !== nextProps.list || this.state.value !== nextState.value){
+            return true;
+        }
+        return false;
+    }
 
 
     render() {

@@ -43,5 +43,7 @@
 .Task h1.Completed {
     text-decoration-line: line-through;
     text-decoration-style: solid;
+    color: rgb(120, 120, 120);
+
 
 }

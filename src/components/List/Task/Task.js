@@ -17,9 +17,7 @@ class Task extends Component {
     };
 
     taskCompletedHandler = () => {
-        console.log("ffff");
         let completed =!this.state.completed;
-        console.log(completed);
             this.setState({completed: completed}, () => {
         });
 
