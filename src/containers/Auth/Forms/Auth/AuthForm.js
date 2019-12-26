@@ -223,7 +223,7 @@ const mapStatesToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAuth: (email, password, fullName, signUp) => dispatch(actions.signUp(email, password, fullName, signUp)),
+        onAuth: (email, password, fullName, signUp) => dispatch(actions.auth(email, password, fullName, signUp)),
         onResetError: () => dispatch(actions.authResetError())
     };
 };

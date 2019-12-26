@@ -1,5 +1,5 @@
 export {
-    signUp,
+    auth,
     logout,
     authCheckState, 
     authResetError

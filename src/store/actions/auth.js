@@ -49,8 +49,7 @@ export const authResetError = () => {
     };
 };
 
-const createMyDayList = () => {
-    console.log("CreateMyDayList ");
+const createMyDayList = async () => {
     const formData = new FormData();
     formData.append('name', "My Day");
     formData.append('isPublic', false);
@@ -58,11 +57,69 @@ const createMyDayList = () => {
 
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
 
-   return axios.post('http://localhost:8080/admin/list', formData);
+    return axios.post('http://localhost:8080/admin/list', formData);
 
 };
 
-export const signUp = (email, password, name, signUp) => {
+
+const getLists = (lists) => {
+    return {
+        type: actionTypes.AUTH_GET_LISTS,
+        lists: lists
+    };
+};
+
+const fetchLists = async () => {
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
+    return axios.get('http://localhost:8080/admin/lists');
+};
+
+
+// export const authLists = async () => {
+//     return dispatch => {
+//         try {
+//             let lists = await fetchLists();
+//             dispatch(getLists(lists));
+//         }catch (e) {
+//             console.log(e.response);
+//         }
+//     };
+// };
+
+
+export const postAuth = async (formData, url, signUp, dispatch) => {
+
+    try {
+        let res = await axios.post(url, formData);
+        const expirationDate = new Date(new Date().getTime() + res.data.expiresTimeInMiliseconds);
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('expirationDate', expirationDate);
+        localStorage.setItem('userId', res.data.userId);
+        let timeToLogout = expirationDate.getTime() - new Date().getTime();
+
+        dispatch(checkAuthTimeout(timeToLogout));
+
+        if (signUp) {
+            await createMyDayList();
+        }
+
+        let result = await fetchLists();
+        let lists = result.data.lists;
+        console.log(lists);
+        dispatch(getLists(lists));
+
+        dispatch(authSuccess(res.data.token, res.data.userId));
+
+
+    } catch (e) {
+        console.log(e.response);
+        dispatch(authFail(e.response.data.message));
+    }
+
+}
+
+
+export const auth = (email, password, name, signUp) => {
     return dispatch => {
         dispatch(authStart());
         let url = '/auth/login';
@@ -77,37 +134,7 @@ export const signUp = (email, password, name, signUp) => {
         formData.append('email', email);
         formData.append('password', password);
 
-        axios.post(url, formData)
-            .then(res => {
-                const expirationDate = new Date(new Date().getTime() + res.data.expiresTimeInMiliseconds);
-                localStorage.setItem('token', res.data.token);
-                localStorage.setItem('expirationDate', expirationDate);
-                localStorage.setItem('userId', res.data.userId);
-                let timeToLogout = expirationDate.getTime() - new Date().getTime();
-
-                dispatch(checkAuthTimeout(timeToLogout));
-
-                if (signUp) {
-                    createMyDayList()
-                        .then(res => {
-                            dispatch(authSuccess(res.data.token, res.data.userId));
-                            // console.log("New list was created.");
-                        })
-                        .catch(err => {
-                            console.log("Error while trying to create new list.");
-                            console.log(err);
-                        });
-                }else{
-                    dispatch(authSuccess(res.data.token, res.data.userId));
-                }
-
-
-                return res;
-            })
-            .catch(err => {
-                console.log(err.response);
-                dispatch(authFail(err.response.data.message));
-            });
+        postAuth(formData, url, signUp, dispatch);
     }
 };
 
@@ -129,6 +156,7 @@ export const authCheckState = () => {
         }
     };
 };
+
 
 
 

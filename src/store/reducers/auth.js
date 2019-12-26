@@ -6,7 +6,8 @@ const initialState = {
     userId: null,
     error: null,
     loading: false,
-    createMyDayList: false
+    createMyDayList: false,
+    lists: null
 };
 
 const authStart = (state, action) => {
@@ -34,6 +35,10 @@ const resetError = (state, action) => {
     return updateObject(state, { error: null});
 };
 
+const setLists = (state, action) => {
+    return updateObject(state, { lists: action.lists});
+};
+
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -42,6 +47,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.AUTH_FAIL: return authFail(state, action);
         case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
         case actionTypes.AUTH_RESET_ERROR: return resetError(state, action);
+        case actionTypes.AUTH_GET_LISTS: return setLists(state, action);
         default:
             return state;
     }
