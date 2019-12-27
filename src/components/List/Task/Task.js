@@ -5,7 +5,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCircle, faEdit, faCheckCircle} from '@fortawesome/free-regular-svg-icons';
 import classes from './Task.module.css';
 import axios from '../../../axios/axios-todo-lists';
-
+import * as actions from "../../../store/actions";
+import {connect} from 'react-redux';
 
 class Task extends Component {
 
@@ -38,16 +39,16 @@ class Task extends Component {
         }
     };
 
-    deleteTaskHandler = async () => {
-        try {
-            let url = '/admin/todo-item/' + this.state.task._id;
-            this.props.deleteTask(this.state.task._id);
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
-            await axios.delete(url);
-        }catch (e) {
-            console.log(e.response);
-        }
-    };
+    // deleteTaskHandler = async () => {
+    //     try {
+    //         let url = '/admin/todo-item/' + this.state.task._id;
+    //         this.props.deleteTask(this.state.task._id);
+    //         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
+    //         await axios.delete(url);
+    //     }catch (e) {
+    //         console.log(e.response);
+    //     }
+    // };
 
 
     createIcon = () => {
@@ -104,7 +105,7 @@ class Task extends Component {
                         {this.state.important ? "Mark as not important" : "Mark as important"}
                     </MenuItem>
                     <MenuItem divider/>
-                    <MenuItem  onClick={this.deleteTaskHandler}>
+                    <MenuItem  onClick={() => this.props.onDeleteTask(this.props.currentList, this.props.task._id)}>
                         Delete
                     </MenuItem>
                 </ContextMenu>
@@ -126,12 +127,24 @@ class Task extends Component {
 
     render() {
         // console.log("[Task] - Render ");
-        // console.log(this.state.task);
 
         let task = this.createTask();
         return task;
-    }
-    ;
+    };
 };
 
-export default Task;
+const mapStateToProps = state => {
+    return {
+        currentList : state.auth.currentList
+    };
+};
+
+
+const mapDispatchToProps = dispatch => {
+
+    return {
+        onDeleteTask : (list, task) => dispatch(actions.onDeleteTask(list, task))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Task);

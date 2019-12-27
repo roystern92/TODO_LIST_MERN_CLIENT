@@ -1,9 +1,8 @@
 export {
     auth,
     authFetchLists,
-    disableAddTaskStart,
-    disableAddTaskSuccess,
     addingNewTask,
+    onDeleteTask,
     setList,
     logout,
     authCheckState, 

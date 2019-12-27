@@ -1,10 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, {Component, Fragment} from 'react';
 import classes from './Layout.module.css';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 
 // Redux
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 
 class Layout extends Component {
@@ -14,12 +14,12 @@ class Layout extends Component {
     }
 
     sideDrawerClosedHandler = () => {
-        this.setState({ showSideDrawer: false });
+        this.setState({showSideDrawer: false});
     }
 
     sideDrawerToggleHandler = () => {
         this.setState((prevState) => {
-            return { showSideDrawer: !prevState.showSideDrawer };
+            return {showSideDrawer: !prevState.showSideDrawer};
         });
     }
 
@@ -28,14 +28,15 @@ class Layout extends Component {
             <Fragment>
                 <main className={classes.Content}>
                     <Toolbar isAuth={this.props.isAuthenticated}
-                        drawerToggleClicked={this.sideDrawerToggleHandler}
+                             drawerToggleClicked={this.sideDrawerToggleHandler}
                     />
                     <SideDrawer
                         isAuth={this.props.isAuthenticated}
                         open={this.state.showSideDrawer}
-                        closed={this.sideDrawerClosedHandler} />
-
+                        closed={this.sideDrawerClosedHandler}/>
+                    <div className={classes.Content}>
                         {this.props.children}
+                    </div>
                 </main>
             </Fragment>
         )

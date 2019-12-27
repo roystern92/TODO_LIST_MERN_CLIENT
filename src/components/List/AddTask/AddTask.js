@@ -3,7 +3,6 @@ import classes from './AddTask.module.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import {Button} from 'reactstrap';
-import axios from '../../../axios/axios-todo-lists';
 import {connect} from 'react-redux';
 import * as actions from "../../../store/actions";
 
@@ -13,47 +12,46 @@ class AddTask extends Component {
         value: ""
     };
 
-    // componentDidMount() {
-    //     this.props.AddingNewTask();
-    // }
 
     onChangeHandler = (event) => {
         this.setState({value: event.target.value});
     };
 
-    saveTaskAtServer = async () => {
-        try {
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
-            let url = '/admin/todo-item/' + this.props.list._id;
-            let data = new FormData();
-
-            data.append('task', this.state.value);
-            this.setState({value: ""});
-            return await axios.post(url, data);
-
-        } catch (e) {
-            console.log(e);
-        }
-
-    };
 
     addTaskHandler = () => {
         if (this.state.value !== "") {
             let task = {task: this.state.value, _id: Date.now().toString()};
             this.props.AddingNewTask(this.props.list, task);
-            this.props.onAddTask(task, this.saveTaskAtServer);
+            this.setState({value: ""})
         }
     };
 
     onEnterPressedHandler = (event) => {
-        if (event.key === "Enter") {
+        if (event.key === "Enter" && !this.props.addTaskDisabled) {
             this.addTaskHandler();
         }
     };
 
+
+
+    createIcon = () => {
+        let iconClass = !this.props.addTaskDisabled ? classes.Icon : classes.IconDisabled;
+        console.log(iconClass);
+        let icon = <FontAwesomeIcon
+            onClick={() => {
+                if(!this.props.addTaskDisabled) {
+                    this.addTaskHandler();
+                }}}
+            className={iconClass}
+            icon={faPlusCircle}
+            size="lg"/>;
+
+        return icon;
+    }
+
     createAddTask = () => {
-        const addIcon = <FontAwesomeIcon onClick={this.addTaskHandler} className={classes.Icon} icon={faPlusCircle}
-                                         size="lg"/>
+        const addIcon = this.createIcon();
+
 
         let addTask =
             <div className={classes.Task}>
@@ -61,13 +59,13 @@ class AddTask extends Component {
                 <input onKeyDown={this.onEnterPressedHandler} type="text" onChange={(event) => {
                     this.onChangeHandler(event)
                 }} value={this.state.value} placeholder="Add task"/>
-                <Button onClick={this.addTaskHandler} className={classes.AddButton} size='sm'>Add</Button>
+                <Button disabled={this.props.addTaskDisabled} onClick={this.addTaskHandler} className={classes.AddButton} size='sm'>Add</Button>
             </div>
         return addTask;
     };
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        if (this.props.list !== nextProps.list || this.state.value !== nextState.value) {
+        if (this.props.list !== nextProps.list || this.state.value !== nextState.value || this.props.addTaskDisabled !== nextProps.addTaskDisabled) {
             return true;
         }
         return false;
@@ -75,9 +73,7 @@ class AddTask extends Component {
 
 
     render() {
-        // console.log("[AddTask] - Render ");
-        // console.log(this.props.addTaskDisabled);
-
+        console.log("[AddTask] - Render ");
         let addTask = this.createAddTask();
         return addTask;
 

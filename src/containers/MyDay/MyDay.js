@@ -11,21 +11,14 @@ class MyDay extends Component {
        return this.props.lists.find(list => list.name.toLowerCase() === "my day");
     };
 
-    // componentDidMount() {
-    //     console.log("[MyDay] - componentDidMount ");
-    // };
+
 
     taskChangeHandler = () => {
-        // console.log("[MyDay] - taskChangeHandler ");
         this.props.onFetchLists();
     };
 
 
-
-
     render() {
-        // console.log("[MyDay] - Render ");
-
         let list = this.props.lists ? this.findMyDayList() : null;
 
         return  this.props.lists?  <div className={classes.MyDay}>

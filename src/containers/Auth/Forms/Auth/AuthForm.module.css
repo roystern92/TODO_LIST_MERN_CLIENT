@@ -20,6 +20,10 @@
     background: linear-gradient(to right, #6FB1FC, #4364F7, #0052D4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+.SubmitDisabled{
+    cursor:  not-allowed;;
+}
+
 .TermsAndPolicy{
     margin-top: 15px;
     font-size: 14px ;

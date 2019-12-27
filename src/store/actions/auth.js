@@ -46,11 +46,60 @@ export const logout = () => {
 
 
 export const addingNewTask = (list, task) => {
-    return dispatch => {
-        // console.log(list);
-        let currentList = {...list};
-        currentList.tasks.push(task);
-        dispatch(disableAddTaskStart(list));
+    return async dispatch => {
+        try {
+            let data = new FormData();
+            let currentList = {...list};
+            currentList.tasks.push(task);
+
+            dispatch(disableAddTaskStart(list));
+
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
+            let url = '/admin/todo-item/' + list._id;
+            data.append('task', task.task);
+
+            await axios.post(url, data);
+            await fetchLists(dispatch);
+            dispatch(disableAddTaskSuccess());
+
+
+        } catch (e) {
+            console.log(e);
+        }
+
+    };
+};
+
+export const deleteTask = (list) => {
+    return {
+        type: actionTypes.DELETE_TASK,
+        list: list
+    };
+};
+
+export const onDeleteTask = (currentList, taskId) => {
+    return async dispatch => {
+        try {
+            let tasks = currentList.tasks.filter(task => {
+                return (task._id !== taskId);
+            });
+
+            let list = {...currentList};
+            list.tasks = [...tasks];
+
+            dispatch(deleteTask(list));
+
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
+            let url = '/admin/todo-item/' + taskId;
+
+            await axios.delete(url);
+            dispatch(disableAddTaskSuccess());
+            await fetchLists(dispatch);
+
+        } catch (e) {
+            console.log(e);
+        }
+
     };
 };
 

@@ -10,8 +10,7 @@ import {connect} from 'react-redux';
 class List extends Component {
 
     state = {
-        openTaskId: null,
-        list: this.props.list,
+        openTaskId: null
     };
 
     componentDidMount() {
@@ -31,27 +30,21 @@ class List extends Component {
 
 
     deleteTaskHandler = (taskId) => {
-        console.log("2");
-
-        let tasks = this.state.list.tasks.filter(task => {
+        let tasks = this.props.currentList.tasks.filter(task => {
             return (task._id !== taskId);
         });
-        let res = {...this.state.list};
+
+        let res = {... this.props.currentList};
         res.tasks = [...tasks];
-        console.log(res);
 
         this.setState({list: res}, () => {
-            // this.props.onTaskChange();
-            console.log(this.state.list);
-
-            console.log("3");
-
+            this.props.onTaskChange();
         });
     };
 
 
     addTaskHandler = (task, cb) => {
-        let list = {...this.state.list };
+        let list = {... this.props.currentList };
         list.tasks.push(task);
 
         this.setState({list: list}, () => {
@@ -64,8 +57,7 @@ class List extends Component {
     };
 
     createTasks = () => {
-
-        let tasks = this.state.list.tasks.map((task) => {
+        let tasks = this.props.currentList.tasks.map((task) => {
             return <Task key={task._id} task={task} deleteTask={this.deleteTaskHandler} />
         });
 
@@ -77,7 +69,7 @@ class List extends Component {
                 </div>
 
                 <div className={classes.AddTask}>
-                    <AddTask list={this.state.list} onAddTask={this.addTaskHandler}/>
+                    <AddTask list={ this.props.currentList} onAddTask={this.addTaskHandler}/>
                 </div>
             </Fragment>;
 
@@ -92,57 +84,36 @@ class List extends Component {
         let date = this.props.isMyDay ? <h5> {new Date().toDateString()}</h5> : null;
         let header =
             <div className={classes.Header}>
-                <h1> {this.state.list.name} </h1>
+                <h1> { this.props.currentList.name} </h1>
                 {date}
             </div>;
 
         return header;
     };
 
-    static getDerivedStateFromProps(props, state) {
-
-        // console.log("[List] - getDerivedStateFromProps ");
-        let propsTasksLength = props.list.tasks.length;
-        let stateTasksLength = state.list.tasks.length;
-
-        // must check if the last task id is not  equal
-        // (the list last task right now id dummy one)
-        // and the second check is that user didn't delete any task
-        // if he delete a task, we don't want the list from the props.
-
-        if (propsTasksLength > 0 && stateTasksLength > 0) {
-            if(props.list.tasks[propsTasksLength -1]._id.toString() !== state.list.tasks[stateTasksLength -1]._id
-                && propsTasksLength === stateTasksLength){
-                return ({
-                    list: props.list
-                })
-            }
-
-        }
-        return null;
-    }
-
-
     render() {
 
-        // console.log("[List] - Render ");
-        // console.log( this.props.currentList);
-        let header = this.createHeader();
-        let tasks = this.createTasks();
-        let note = this.createNote();
+        console.log("[List] - Render ");
+        let list = null;
 
-        let list =
-            <div className={classes.List}>
-                <div className={classes.Notebook}>
-                    {header}
-                    {tasks}
-                </div>
+        if(this.props.currentList){
+            let header = this.createHeader();
+            let tasks = this.createTasks();
+            let note = this.createNote();
 
-                <div className={classes.Note}>
-                    {note}
-                    <p>dfdd</p>
-                </div>
-            </div>;
+            list =
+                <div className={classes.List}>
+                    <div className={classes.Notebook}>
+                        {header}
+                        {tasks}
+                    </div>
+
+                    <div className={classes.Note}>
+                        {note}
+                        <p>dfdd</p>
+                    </div>
+                </div>;
+        }
 
         return list;
     };

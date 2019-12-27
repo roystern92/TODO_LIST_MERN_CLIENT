@@ -40,7 +40,8 @@ const setLists = (state, action) => {
 };
 
 const disableAddTaskStart = (state, action) => {
-    return updateObject(state, { disabled: true, list: action.list});
+    console.log("start ");
+    return updateObject(state, { disabled: true, currentList: {...action.list}});
 };
 
 const disableAddTaskSuccess = (state, action) => {
@@ -50,6 +51,11 @@ const disableAddTaskSuccess = (state, action) => {
 const setCurrentList = (state, action) => {
     return updateObject(state, { currentList: action.list});
 };
+
+const deleteTask = (state, action) => {
+    return updateObject(state, { disabled: true  ,currentList: {...action.list}});
+};
+
 
 
 const reducer = (state = initialState, action) => {
@@ -62,6 +68,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.AUTH_GET_LISTS: return setLists(state, action);
         case actionTypes.DISABLE_ADD_TASK_START: return disableAddTaskStart(state, action);
         case actionTypes.DISABLE_ADD_TASK_SUCCESS: return disableAddTaskSuccess(state, action);
+        case actionTypes.DELETE_TASK: return deleteTask(state, action);
         case actionTypes.SET_CURRENT_LIST: return setCurrentList(state, action);
         default:
             return state;

@@ -22,7 +22,9 @@
 }
 
 .Loader {
+    margin-top: 20px;
     position: fixed;
     height: 100%;
     width: 100%;
 }
+

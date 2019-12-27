@@ -149,9 +149,16 @@ class AuthForm extends Component {
             </div> : null;
 
         let member = this.createMemberView();
-        let button = <div onClick={this.submitHandler} className={classes.Submit}>
-            <Button disabled={!this.state.formIsValid}>{submit}</Button>
-        </div>;
+        let button =
+            <div
+                onClick={(event) => {
+                    if (this.state.formIsValid) {
+                        this.submitHandler(event);
+                    }
+                }}
+                className={this.state.formIsValid ? classes.Submit : classes.SubmitDisabled + " " + classes.Submit }>
+                <Button disabled={!this.state.formIsValid}>{submit}</Button>
+            </div>;
 
         let error = this.createErrors();
 
