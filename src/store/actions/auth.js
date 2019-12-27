@@ -60,8 +60,8 @@ export const addingNewTask = (list, task) => {
 
             await axios.post(url, data);
             await fetchLists(dispatch);
+            await fetchCurrentList(dispatch, list.name);
             dispatch(disableAddTaskSuccess());
-
 
         } catch (e) {
             console.log(e);
@@ -70,16 +70,27 @@ export const addingNewTask = (list, task) => {
     };
 };
 
-export const deleteTask = (list) => {
-    return {
-        type: actionTypes.DELETE_TASK,
-        list: list
-    };
+const fetchCurrentList = async (dispatch, listName) => {
+    try{
+        console.log("fetchCurrentList");
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
+        let url = '/admin/list/' + listName;
+
+        let result = await axios.get(url);
+
+        let currentList = result.data.list;
+        dispatch(setList(currentList));
+    }
+    catch (e) {
+        console.log(e.response);
+    }
 };
+
 
 export const onDeleteTask = (currentList, taskId) => {
     return async dispatch => {
         try {
+
             let tasks = currentList.tasks.filter(task => {
                 return (task._id !== taskId);
             });
@@ -87,7 +98,9 @@ export const onDeleteTask = (currentList, taskId) => {
             let list = {...currentList};
             list.tasks = [...tasks];
 
-            dispatch(deleteTask(list));
+            // dispatch(deleteTask(list));
+            dispatch(disableAddTaskStart(list));
+
 
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
             let url = '/admin/todo-item/' + taskId;
@@ -157,7 +170,6 @@ const fetchLists = async (dispatch) => {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
         let result = await axios.get('http://localhost:8080/admin/lists');
         let lists = result.data.lists;
-        // console.log(lists);
         dispatch(getLists(lists));
     }
     catch (e) {

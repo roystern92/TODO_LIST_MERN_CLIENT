@@ -18,6 +18,8 @@ class MyDay extends Component {
     };
 
 
+
+
     render() {
         let list = this.props.lists ? this.findMyDayList() : null;
 
@@ -28,6 +30,7 @@ class MyDay extends Component {
 };
 
 
+
 const mapStateToProps = state => {
     return {
         lists: state.auth.lists
@@ -36,7 +39,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchLists: () => dispatch(actions.authFetchLists())
+        onFetchLists: () => dispatch(actions.authFetchLists()),
+        setCurrentList : (list) => dispatch(actions.setList(list))
+
     };
 };
 

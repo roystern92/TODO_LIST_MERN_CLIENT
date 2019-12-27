@@ -36,7 +36,6 @@ class AddTask extends Component {
 
     createIcon = () => {
         let iconClass = !this.props.addTaskDisabled ? classes.Icon : classes.IconDisabled;
-        console.log(iconClass);
         let icon = <FontAwesomeIcon
             onClick={() => {
                 if(!this.props.addTaskDisabled) {

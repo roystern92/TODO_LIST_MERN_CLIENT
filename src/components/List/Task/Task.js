@@ -30,6 +30,7 @@ class Task extends Component {
             data.append('note', this.state.task.note);
             data.append('completed', completed);
             data.append('important', important);
+            data.append('important', important);
 
             let res = await axios.put(url, data);
             this.setState({task: res.data.task});

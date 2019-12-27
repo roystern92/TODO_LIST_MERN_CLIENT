@@ -15,12 +15,19 @@ class List extends Component {
 
     componentDidMount() {
         this.scrollToBottom();
+        console.log("componentDidMount");
+
         this.props.setCurrentList(this.props.list);
     }
 
-    componentDidUpdate() {
-        this.scrollToBottom();
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        console.log("shouldComponentUpdate", this.props.addTaskDisabled);
+        if(this.props.currentList !== nextProps.currentList ){
+            return true;
+        }
+        return false;
     }
+
 
     scrollToBottom() {
         animateScroll.scrollToBottom({
@@ -29,36 +36,9 @@ class List extends Component {
     };
 
 
-    deleteTaskHandler = (taskId) => {
-        let tasks = this.props.currentList.tasks.filter(task => {
-            return (task._id !== taskId);
-        });
-
-        let res = {... this.props.currentList};
-        res.tasks = [...tasks];
-
-        this.setState({list: res}, () => {
-            this.props.onTaskChange();
-        });
-    };
-
-
-    addTaskHandler = (task, cb) => {
-        let list = {... this.props.currentList };
-        list.tasks.push(task);
-
-        this.setState({list: list}, () => {
-            cb()
-                .then(() => {
-                    this.props.onTaskChange();
-                })
-                .catch(err => console.log(err));
-        });
-    };
-
     createTasks = () => {
         let tasks = this.props.currentList.tasks.map((task) => {
-            return <Task key={task._id} task={task} deleteTask={this.deleteTaskHandler} />
+            return <Task key={task._id} task={task}  />
         });
 
 
@@ -69,7 +49,7 @@ class List extends Component {
                 </div>
 
                 <div className={classes.AddTask}>
-                    <AddTask list={ this.props.currentList} onAddTask={this.addTaskHandler}/>
+                    <AddTask list={ this.props.currentList}/>
                 </div>
             </Fragment>;
 
@@ -94,6 +74,7 @@ class List extends Component {
     render() {
 
         console.log("[List] - Render ");
+        console.log(this.props.currentList);
         let list = null;
 
         if(this.props.currentList){
@@ -122,7 +103,8 @@ class List extends Component {
 
 const mapStateToProps = state => {
     return {
-        currentList : state.auth.currentList
+        currentList : state.auth.currentList,
+        addTaskDisabled : state.auth.disabled
     };
 };
 

@@ -40,7 +40,6 @@ const setLists = (state, action) => {
 };
 
 const disableAddTaskStart = (state, action) => {
-    console.log("start ");
     return updateObject(state, { disabled: true, currentList: {...action.list}});
 };
 
@@ -49,7 +48,7 @@ const disableAddTaskSuccess = (state, action) => {
 };
 
 const setCurrentList = (state, action) => {
-    return updateObject(state, { currentList: action.list});
+    return updateObject(state, { currentList: {...action.list}});
 };
 
 const deleteTask = (state, action) => {
