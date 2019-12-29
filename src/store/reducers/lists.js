@@ -9,9 +9,6 @@ const initialState = {
 };
 
 
-const resetError = (state, action) => {
-    return updateObject(state, { error: null});
-};
 
 const setLists = (state, action) => {
     return updateObject(state, { lists: action.lists});
@@ -32,7 +29,6 @@ const setCurrentList = (state, action) => {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.AUTH_RESET_ERROR: return resetError(state, action);
         case actionTypes.AUTH_GET_LISTS: return setLists(state, action);
         case actionTypes.DISABLE_ADD_TASK_START: return disableAddTaskStart(state, action);
         case actionTypes.DISABLE_ADD_TASK_SUCCESS: return disableAddTaskSuccess(state, action);

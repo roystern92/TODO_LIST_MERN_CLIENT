@@ -33,7 +33,7 @@ class MyDay extends Component {
 
 const mapStateToProps = state => {
     return {
-        lists: state.auth.lists
+        lists: state.lists.lists
     };
 };
 

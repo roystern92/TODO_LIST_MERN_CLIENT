@@ -1,22 +1,18 @@
 export {
     auth,
-    authFetchLists,
-    addingNewTask,
-    onDeleteTask,
-    setList,
     logout,
-    authCheckState, 
+    authCheckState,
     authResetError
 } from './auth';
 
-// export {
-//     authFetchLists,
-//     addingNewTask,
-//     onDeleteTask,
-//     setList,
-//     authResetError
-// } from './auth';
-//
+export {
+    authFetchLists,
+    fetchLists,
+    addingNewTask,
+    onDeleteTask,
+    setList,
+} from './lists';
+
 
 
  

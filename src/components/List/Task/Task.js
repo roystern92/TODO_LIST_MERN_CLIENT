@@ -126,7 +126,7 @@ class Task extends Component {
 
 const mapStateToProps = state => {
     return {
-        currentList : state.auth.currentList
+        currentList : state.lists.currentList
     };
 };
 

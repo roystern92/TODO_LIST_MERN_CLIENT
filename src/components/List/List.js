@@ -102,8 +102,8 @@ class List extends Component {
 
 const mapStateToProps = state => {
     return {
-        currentList : state.auth.currentList,
-        addTaskDisabled : state.auth.disabled
+        currentList : state.lists.currentList,
+        addTaskDisabled : state.lists.disabled
     };
 };
 

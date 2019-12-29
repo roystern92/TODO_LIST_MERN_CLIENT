@@ -86,8 +86,8 @@ class AddTask extends Component {
 
 const mapStateToProps = state => {
     return {
-        addTaskDisabled: state.auth.disabled,
-        list: state.auth.currentList
+        addTaskDisabled: state.lists.disabled,
+        list: state.lists.currentList
     };
 };
 
