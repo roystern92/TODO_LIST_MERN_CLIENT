@@ -14,7 +14,7 @@ class MyDay extends Component {
 
 
     taskChangeHandler = () => {
-        this.props.onFetchLists();
+        // this.props.onFetchLists();
     };
 
 
@@ -24,7 +24,7 @@ class MyDay extends Component {
         let list = this.props.lists ? this.findMyDayList() : null;
 
         return  this.props.lists?  <div className={classes.MyDay}>
-            <List list={list} isMyDay={false} onTaskChange={this.taskChangeHandler}/>
+            <List list={list} isMyDay={true} onTaskChange={this.taskChangeHandler}/>
         </div> : null;
     }
 };

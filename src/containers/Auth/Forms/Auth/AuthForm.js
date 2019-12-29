@@ -142,9 +142,9 @@ class AuthForm extends Component {
             <div className={classes.TermsAndPolicy}>
                 <p>
                     By clicking the button, I agree to the
-                    <span className={classes.Underline}>Term of Services</span>
+                    <span className={classes.Underline}> Term of Services </span>
                     and
-                    <span className={classes.Underline}>Privacy Policy</span>.
+                    <span className={classes.Underline}> Privacy Policy</span>.
                 </p>
             </div> : null;
 
@@ -163,7 +163,7 @@ class AuthForm extends Component {
         let error = this.createErrors();
 
 
-        let form = <form onSubmit={this.submitHandler}>
+        let form = <form className={classes.AuthForm} onSubmit={this.submitHandler}>
             {title}
             {error}
             {inputs}
@@ -184,16 +184,20 @@ class AuthForm extends Component {
         return form;
     };
 
-    submitHandler = (event) => {
-        event.preventDefault();
-        let signUp = this.props.isSignIn === false;
+    submitHandler = async (event) => {
+        try {
+            event.preventDefault();
+            let signUp = this.props.isSignIn === false;
 
-        if (signUp) {
-            this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.controls.name.value, true);
+            if (signUp) {
+               await this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.controls.name.value, true);
+            } else {
+                this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, null, false);
+            }
+        }catch (e) {
 
-        } else {
-            this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, null, false);
         }
+
     };
 
     createErrors = () => {
@@ -209,8 +213,7 @@ class AuthForm extends Component {
         let formElementsArray = this.createArrayFromObject();
         let form = this.createFormOfInputs(formElementsArray);
         let authForm =
-            <div
-                className={classes.SignUp}>
+            <div className={classes.Auth}>
                 {form}
             </div>;
 

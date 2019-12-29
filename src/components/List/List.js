@@ -15,13 +15,13 @@ class List extends Component {
 
     componentDidMount() {
         this.scrollToBottom();
-        console.log("componentDidMount");
-
+        console.log("[List] componentDidMount");
         this.props.setCurrentList(this.props.list);
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        console.log("shouldComponentUpdate", this.props.addTaskDisabled);
+        this.scrollToBottom();
+        console.log("[List] shouldComponentUpdate");
         if(this.props.currentList !== nextProps.currentList ){
             return true;
         }
@@ -74,7 +74,6 @@ class List extends Component {
     render() {
 
         console.log("[List] - Render ");
-        console.log(this.props.currentList);
         let list = null;
 
         if(this.props.currentList){
@@ -87,11 +86,11 @@ class List extends Component {
                     <div className={classes.Notebook}>
                         {header}
                         {tasks}
+
                     </div>
 
                     <div className={classes.Note}>
                         {note}
-                        <p>dfdd</p>
                     </div>
                 </div>;
         }

@@ -59,7 +59,7 @@ export const addingNewTask = (list, task) => {
             data.append('task', task.task);
 
             await axios.post(url, data);
-            await fetchLists(dispatch);
+
             await fetchCurrentList(dispatch, list.name);
             dispatch(disableAddTaskSuccess());
 
@@ -72,7 +72,6 @@ export const addingNewTask = (list, task) => {
 
 const fetchCurrentList = async (dispatch, listName) => {
     try{
-        console.log("fetchCurrentList");
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
         let url = '/admin/list/' + listName;
 
@@ -98,16 +97,14 @@ export const onDeleteTask = (currentList, taskId) => {
             let list = {...currentList};
             list.tasks = [...tasks];
 
-            // dispatch(deleteTask(list));
             dispatch(disableAddTaskStart(list));
-
 
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
             let url = '/admin/todo-item/' + taskId;
-
             await axios.delete(url);
+
             dispatch(disableAddTaskSuccess());
-            await fetchLists(dispatch);
+            fetchCurrentList(dispatch, currentList.name);
 
         } catch (e) {
             console.log(e);
@@ -204,9 +201,10 @@ export const postAuth = async (formData, url, signUp, dispatch) => {
         if (signUp) {
             await createMyDayList();
         }
-        dispatch(authSuccess(res.data.token, res.data.userId));
 
         await fetchLists(dispatch);
+        dispatch(authSuccess(res.data.token, res.data.userId));
+        console.log("1");
 
     } catch (e) {
         console.log(e.response);

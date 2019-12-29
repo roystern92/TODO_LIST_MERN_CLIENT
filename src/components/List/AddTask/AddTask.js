@@ -12,6 +12,16 @@ class AddTask extends Component {
         value: ""
     };
 
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        console.log("[AddTask] - shouldComponentUpdate ");
+
+        if (this.state.value !== nextState.value ||
+            this.props.addTaskDisabled !== nextProps.addTaskDisabled) {
+            return true;
+        }
+        return false;
+    }
+
 
     onChangeHandler = (event) => {
         this.setState({value: event.target.value});
@@ -33,14 +43,14 @@ class AddTask extends Component {
     };
 
 
-
     createIcon = () => {
         let iconClass = !this.props.addTaskDisabled ? classes.Icon : classes.IconDisabled;
         let icon = <FontAwesomeIcon
             onClick={() => {
-                if(!this.props.addTaskDisabled) {
+                if (!this.props.addTaskDisabled) {
                     this.addTaskHandler();
-                }}}
+                }
+            }}
             className={iconClass}
             icon={faPlusCircle}
             size="lg"/>;
@@ -58,17 +68,11 @@ class AddTask extends Component {
                 <input onKeyDown={this.onEnterPressedHandler} type="text" onChange={(event) => {
                     this.onChangeHandler(event)
                 }} value={this.state.value} placeholder="Add task"/>
-                <Button disabled={this.props.addTaskDisabled} onClick={this.addTaskHandler} className={classes.AddButton} size='sm'>Add</Button>
+                <Button disabled={this.props.addTaskDisabled} onClick={this.addTaskHandler}
+                        className={classes.AddButton} size='sm'>Add</Button>
             </div>
         return addTask;
     };
-
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        if (this.props.list !== nextProps.list || this.state.value !== nextState.value || this.props.addTaskDisabled !== nextProps.addTaskDisabled) {
-            return true;
-        }
-        return false;
-    }
 
 
     render() {
@@ -82,7 +86,7 @@ class AddTask extends Component {
 
 const mapStateToProps = state => {
     return {
-        addTaskDisabled : state.auth.disabled,
+        addTaskDisabled: state.auth.disabled,
         list: state.auth.currentList
     };
 };
@@ -91,7 +95,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 
     return {
-        AddingNewTask : (list, task) => dispatch(actions.addingNewTask(list, task))
+        AddingNewTask: (list, task) => dispatch(actions.addingNewTask(list, task))
     };
 };
 

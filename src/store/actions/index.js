@@ -9,4 +9,14 @@ export {
     authResetError
 } from './auth';
 
+// export {
+//     authFetchLists,
+//     addingNewTask,
+//     onDeleteTask,
+//     setList,
+//     authResetError
+// } from './auth';
+//
+
+
  

@@ -40,18 +40,6 @@ class Task extends Component {
         }
     };
 
-    // deleteTaskHandler = async () => {
-    //     try {
-    //         let url = '/admin/todo-item/' + this.state.task._id;
-    //         this.props.deleteTask(this.state.task._id);
-    //         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
-    //         await axios.delete(url);
-    //     }catch (e) {
-    //         console.log(e.response);
-    //     }
-    // };
-
-
     createIcon = () => {
         let icon = null;
         if (this.state.completed) {
@@ -116,6 +104,8 @@ class Task extends Component {
     };
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
+        console.log("[Task] shouldComponentUpdate");
+
         if (this.state.task._id !== nextProps.task._id ||
             this.state.completed !== nextState.completed ||
             this.state.important !== nextState.important) {
@@ -127,7 +117,7 @@ class Task extends Component {
 
 
     render() {
-        // console.log("[Task] - Render ");
+        console.log("[Task] - Render ");
 
         let task = this.createTask();
         return task;

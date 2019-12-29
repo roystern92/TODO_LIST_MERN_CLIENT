@@ -1,21 +1,21 @@
 .List{
     display: flex;
     justify-content: center;
-    height: 87%;
-    width: 85%;
-    margin: auto;
+    height: 100%;
+    width: 100%;
+    padding: 25px 0;
+    padding-left: 70px;
+    box-sizing: border-box;
+
 }
 
 .Notebook{
-    padding: 70px 10px;
-    padding-bottom: 50px;
+    padding: 50px 10px;
+    padding-bottom: 15px;
     background: url('../../assets/images/notebook.png');
     background-size: cover;
-    box-sizing: border-box;
-    /*min-width: 45%;*/
-    /*max-width: 45%;*/
     width: 45%;
-    height: 89%;
+    height: 100%;
 }
 
 .Note{
@@ -29,7 +29,7 @@
 }
 
 .Header{
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     display: flex;
     flex-flow: column;
     align-items: start;
@@ -48,9 +48,9 @@
 }
 
 .Tasks{
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     width: 100%;
-    max-height: 78%;
+    max-height: 70%;
     overflow: scroll;
     display: flex;
     flex-flow: column;
@@ -59,7 +59,6 @@
 }
 
 .AddTask{
-    /*margin-top: 25px;*/
     width: 100%;
     padding: 0px 25px;
 }
