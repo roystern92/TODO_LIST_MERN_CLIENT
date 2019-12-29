@@ -1,26 +1,40 @@
 import React, {Component} from 'react';
 import classes from './AuthForm.module.css';
 
-import {updateObject, checkValidity} from '../../../../shared/utility';
-import {Redirect, Link} from 'react-router-dom';
+import {updateObject, checkValidity} from '../../shared/utility';
+import {Link} from 'react-router-dom';
 
 import {connect} from 'react-redux';
-import * as actions from '../../../../store/actions';
+import * as actions from '../../store/actions';
 
-import Spinner from '../../../../components/UI/Spinner/Spinner';
-import Button from '../../../../components/UI/Button/Button';
-import Input from '../../../../components/UI/Input/Input';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import Button from '../../components/UI/Button/Button';
+import Input from '../../components/UI/Input/Input';
 
 
 class AuthForm extends Component {
     state = {
         controls: this.props.controls,
-        formIsValid: false
+        formIsValid: false,
+        signIn: this.props.isSignIn
     };
 
+    static getDerivedStateFromProps(props, state) {
+        if (props.isSignIn !== state.signIn) {
+            console.log("getDerivedStateFromProps");
+            return {
+                controls: props.controls,
+                signIn: props.isSignIn
+            };
+        }
+        return null;
+    }
+
     componentDidMount() {
+        // console.log("componentDidMount");
         this.props.onResetError();
     };
+
 
     checkIfFormIsValid = () => {
         let isFormValid = true;
@@ -29,16 +43,9 @@ class AuthForm extends Component {
                 isFormValid = false;
             }
         }
-        // console.log("password: " + this.state.controls.password.valid);
-
         if (this.state.formIsValid !== isFormValid) {
-
             this.setState({formIsValid: isFormValid});
-
         }
-
-
-        // return isFormValid;
     };
 
     onInputChangeHandler = (event, controlName) => {
@@ -209,6 +216,7 @@ class AuthForm extends Component {
     };
 
     render() {
+        console.log()
 
         let formElementsArray = this.createArrayFromObject();
         let form = this.createFormOfInputs(formElementsArray);

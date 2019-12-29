@@ -5,18 +5,20 @@ import {Route, Switch, withRouter, Redirect} from 'react-router-dom';
 import Layout from './hoc/Layout/Layout';
 
 import Test from './components/test';
-import SignIn from './containers/Auth/SignIn';
-import SignUp from './containers/Auth/SignUp';
+
 import Logout from './containers/Auth/Signout';
 import Loader from './components/Loader/Loader';
 import Profile from './components/Views/Profile/Profile';
 import MyDay from './containers/MyDay/MyDay';
+
 
 import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
 
 
 import './App.css';
+import * as controls from "./containers/Auth/Controls/auth";
+import Auth from './containers/Auth/AuthForm';
 
 class App extends Component {
 
@@ -25,9 +27,7 @@ class App extends Component {
     }
 
     render() {
-
-        // console.log('[App] Render' );
-
+        console.log('[App] Render' );
 
         let routes = null;
 
@@ -45,8 +45,14 @@ class App extends Component {
         } else {
             routes = (
                 <Switch>
-                    <Route path="/signIn" component={SignIn}/>
-                    <Route path="/signUp" component={SignUp}/>
+                    <Route path="/signIn">
+                        <Auth controls={controls.signInControls} isSignIn={true} />
+                    </Route>
+
+                    <Route path="/signUp" >
+                        <Auth controls={controls.signUpControls} isSignIn={false} />
+                    </Route>
+
                     <Route path="/" exact component={Loader}/>
                     <Redirect to="/"/>
                 </Switch>

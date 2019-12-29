@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import classes from './MyDay.module.css';
-import axios from '../../axios/axios-todo-lists';
 import List from '../../components/List/List';
 import {connect} from  'react-redux';
 import * as actions from "../../store/actions";
@@ -12,19 +11,11 @@ class MyDay extends Component {
     };
 
 
-
-    taskChangeHandler = () => {
-        // this.props.onFetchLists();
-    };
-
-
-
-
     render() {
         let list = this.props.lists ? this.findMyDayList() : null;
 
         return  this.props.lists?  <div className={classes.MyDay}>
-            <List list={list} isMyDay={true} onTaskChange={this.taskChangeHandler}/>
+            <List list={list} isMyDay={true}/>
         </div> : null;
     }
 };
@@ -39,7 +30,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchLists: () => dispatch(actions.authFetchLists()),
         setCurrentList : (list) => dispatch(actions.setList(list))
 
     };

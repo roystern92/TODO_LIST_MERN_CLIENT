@@ -53,7 +53,7 @@ export const logout = () => {
 //             let currentList = {...list};
 //             currentList.tasks.push(task);
 //
-//             dispatch(disableAddTaskStart(list));
+//             dispatch(disableStart(list));
 //
 //             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
 //             let url = '/admin/todo-item/' + list._id;
@@ -62,7 +62,7 @@ export const logout = () => {
 //             await axios.post(url, data);
 //
 //             await fetchCurrentList(dispatch, list.name);
-//             dispatch(disableAddTaskSuccess());
+//             dispatch(disableSuccess());
 //
 //         } catch (e) {
 //             console.log(e);
@@ -98,13 +98,13 @@ export const logout = () => {
 //             let list = {...currentList};
 //             list.tasks = [...tasks];
 //
-//             dispatch(disableAddTaskStart(list));
+//             dispatch(disableStart(list));
 //
 //             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
 //             let url = '/admin/todo-item/' + taskId;
 //             await axios.delete(url);
 //
-//             dispatch(disableAddTaskSuccess());
+//             dispatch(disableSuccess());
 //             fetchCurrentList(dispatch, currentList.name);
 //
 //         } catch (e) {
@@ -115,18 +115,18 @@ export const logout = () => {
 // };
 //
 //
-// export const disableAddTaskStart = (list) => {
+// export const disableStart = (list) => {
 //     return {
-//         type: actionTypes.DISABLE_ADD_TASK_START,
+//         type: actionTypes.DISABLE_USER_ACTION_START,
 //         list: list
 //     };
 // };
 //
 //
-// export const disableAddTaskSuccess = () => {
+// export const disableSuccess = () => {
 //
 //     return {
-//         type: actionTypes.DISABLE_ADD_TASK_SUCCESS
+//         type: actionTypes.DISABLE_USER_ACTION_SUCCESS
 //     };
 // };
 //
@@ -158,12 +158,12 @@ const createMyDayList = async () => {
 
 // const getLists = (lists) => {
 //     return {
-//         type: actionTypes.AUTH_GET_LISTS,
+//         type: actionTypes.GET_LISTS,
 //         lists: lists
 //     };
 // };
 
-// const fetchLists = async (dispatch) => {
+// const fetchListsHelper = async (dispatch) => {
 //     try{
 //         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
 //         let result = await axios.get('http://localhost:8080/admin/lists');
@@ -176,10 +176,10 @@ const createMyDayList = async () => {
 // };
 //
 //
-// export const authFetchLists = () => {
+// export const fetchLists = () => {
 //     return async (dispatch) => {
 //         try {
-//             await fetchLists(dispatch);
+//             await fetchListsHelper(dispatch);
 //         }catch (e) {
 //             console.log(e.response);
 //         }
@@ -203,10 +203,8 @@ export const postAuth = async (formData, url, signUp, dispatch) => {
             await createMyDayList();
         }
 
-        await actions.fetchLists(dispatch);
+        await actions.fetchListsHelper(dispatch);
         dispatch(authSuccess(res.data.token, res.data.userId));
-        console.log("1");
-
     } catch (e) {
         console.log(e.response);
         dispatch(authFail(e.response.data.message));
@@ -251,7 +249,7 @@ export const authCheckState =  () => {
                 dispatch(authSuccess(token, userId));
                 dispatch(checkAuthTimeout(expirationDate.getTime() - new Date().getTime()));
 
-                await actions.fetchLists(dispatch);
+                await actions.fetchListsHelper(dispatch);
             }
         }
     };

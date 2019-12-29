@@ -59,9 +59,9 @@ const reducer = (state = initialState, action) => {
         case actionTypes.AUTH_FAIL: return authFail(state, action);
         case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
         case actionTypes.AUTH_RESET_ERROR: return resetError(state, action);
-        case actionTypes.AUTH_GET_LISTS: return setLists(state, action);
-        case actionTypes.DISABLE_ADD_TASK_START: return disableAddTaskStart(state, action);
-        case actionTypes.DISABLE_ADD_TASK_SUCCESS: return disableAddTaskSuccess(state, action);
+        case actionTypes.GET_LISTS: return setLists(state, action);
+        case actionTypes.DISABLE_USER_ACTION_START: return disableAddTaskStart(state, action);
+        case actionTypes.DISABLE_USER_ACTION_SUCCESS: return disableAddTaskSuccess(state, action);
         case actionTypes.SET_CURRENT_LIST: return setCurrentList(state, action);
         default:
             return state;

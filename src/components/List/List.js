@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import classes from './List.module.css';
 import Task from './Task/Task';
 import AddTask from './AddTask/AddTask';
+import Note from './Note/Note';
 import {animateScroll} from "react-scroll";
 import * as actions from "../../store/actions";
 import {connect} from 'react-redux';
@@ -57,7 +58,7 @@ class List extends Component {
     };
 
     createNote = () => {
-        // Todo Create Note Component
+        return  <Note/>;
     };
 
     createHeader = () => {
@@ -89,9 +90,7 @@ class List extends Component {
 
                     </div>
 
-                    <div className={classes.Note}>
-                        {note}
-                    </div>
+                    {note}
                 </div>;
         }
 

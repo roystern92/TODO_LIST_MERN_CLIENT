@@ -1,6 +1,20 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios/axios-todo-lists";
 
+
+
+// export const changeStatus = (isImportant, isCompleted, taskId) => {
+//     return async dispatch => {
+//         try {
+//
+//
+//         } catch (e) {
+//             console.log(e);
+//         }
+//
+//     };
+// };
+
 export const addingNewTask = (list, task) => {
     return async dispatch => {
         try {
@@ -8,7 +22,7 @@ export const addingNewTask = (list, task) => {
             let currentList = {...list};
             currentList.tasks.push(task);
 
-            dispatch(disableAddTaskStart(list));
+            dispatch(disableStart(list));
 
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
             let url = '/admin/todo-item/' + list._id;
@@ -17,7 +31,34 @@ export const addingNewTask = (list, task) => {
             await axios.post(url, data);
 
             await fetchCurrentList(dispatch, list.name);
-            dispatch(disableAddTaskSuccess());
+            dispatch(disableSuccess());
+
+        } catch (e) {
+            console.log(e);
+        }
+
+    };
+};
+
+export const onDeleteTask = (currentList, taskId) => {
+    return async dispatch => {
+        try {
+
+            let tasks = currentList.tasks.filter(task => {
+                return (task._id !== taskId);
+            });
+
+            let list = {...currentList};
+            list.tasks = [...tasks];
+
+            dispatch(disableStart(list));
+
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
+            let url = '/admin/todo-item/' + taskId;
+            await axios.delete(url);
+
+            dispatch(disableSuccess());
+            fetchCurrentList(dispatch, currentList.name);
 
         } catch (e) {
             console.log(e);
@@ -42,64 +83,8 @@ const fetchCurrentList = async (dispatch, listName) => {
 };
 
 
-export const onDeleteTask = (currentList, taskId) => {
-    return async dispatch => {
-        try {
 
-            let tasks = currentList.tasks.filter(task => {
-                return (task._id !== taskId);
-            });
-
-            let list = {...currentList};
-            list.tasks = [...tasks];
-
-            dispatch(disableAddTaskStart(list));
-
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
-            let url = '/admin/todo-item/' + taskId;
-            await axios.delete(url);
-
-            dispatch(disableAddTaskSuccess());
-            fetchCurrentList(dispatch, currentList.name);
-
-        } catch (e) {
-            console.log(e);
-        }
-
-    };
-};
-
-
-export const disableAddTaskStart = (list) => {
-    return {
-        type: actionTypes.DISABLE_ADD_TASK_START,
-        list: list
-    };
-};
-
-
-export const disableAddTaskSuccess = () => {
-
-    return {
-        type: actionTypes.DISABLE_ADD_TASK_SUCCESS
-    };
-};
-
-export const setList = (list) => {
-    return {
-        type: actionTypes.SET_CURRENT_LIST,
-        list: list
-    };
-};
-
-const getLists = (lists) => {
-    return {
-        type: actionTypes.AUTH_GET_LISTS,
-        lists: lists
-    };
-};
-
-export const fetchLists = async (dispatch) => {
+export const fetchListsHelper = async (dispatch) => {
     try{
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
         let result = await axios.get('http://localhost:8080/admin/lists');
@@ -112,12 +97,43 @@ export const fetchLists = async (dispatch) => {
 };
 
 
-export const authFetchLists = () => {
+export const fetchLists = () => {
     return async (dispatch) => {
         try {
-            await fetchLists(dispatch);
+            await fetchListsHelper(dispatch);
         }catch (e) {
             console.log(e.response);
         }
+    };
+};
+
+
+export const disableStart = (list) => {
+    return {
+        type: actionTypes.DISABLE_USER_ACTION_START,
+        list: list
+    };
+};
+
+
+export const disableSuccess = () => {
+
+    return {
+        type: actionTypes.DISABLE_USER_ACTION_SUCCESS
+    };
+};
+
+
+export const setList = (list) => {
+    return {
+        type: actionTypes.SET_CURRENT_LIST,
+        list: list
+    };
+};
+
+const getLists = (lists) => {
+    return {
+        type: actionTypes.GET_LISTS,
+        lists: lists
     };
 };

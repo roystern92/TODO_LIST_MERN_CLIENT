@@ -6,8 +6,8 @@ export {
 } from './auth';
 
 export {
-    authFetchLists,
     fetchLists,
+    fetchListsHelper,
     addingNewTask,
     onDeleteTask,
     setList,

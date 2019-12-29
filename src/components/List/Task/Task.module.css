@@ -16,6 +16,12 @@
     justify-content: start;
 }
 
+.Task:hover{
+    cursor: pointer;
+    background-color: #dddddd;
+    color: #000000;
+}
+
 .Task .Icon{
     margin-right: 6px;
     color: rgb(120, 120, 120);

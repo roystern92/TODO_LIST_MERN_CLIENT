@@ -14,11 +14,13 @@ class Task extends Component {
         task: this.props.task,
         important: this.props.task.important,
         completed: this.props.task.completed,
-        value: this.props.task.task
     };
+
+    //Todo transfer "taskStatusChangeHandler" to redux.
 
     taskStatusChangeHandler = async (isImportant, isCompleted) => {
         try {
+            console.log(this.state.task._id);
             let url = '/admin/todo-item/' + this.state.task._id;
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
             let data = new FormData();
@@ -30,10 +32,10 @@ class Task extends Component {
             data.append('note', this.state.task.note);
             data.append('completed', completed);
             data.append('important', important);
-            data.append('important', important);
 
             let res = await axios.put(url, data);
             this.setState({task: res.data.task});
+
 
         }catch (e) {
             console.log(e.response);
