@@ -5,11 +5,20 @@ import {faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import {Button} from 'reactstrap';
 import {connect} from 'react-redux';
 import * as actions from "../../../store/actions";
+import {animateScroll} from "react-scroll/modules";
 
 
 class AddTask extends Component {
     state = {
         value: ""
+    };
+
+
+
+    scrollToBottom() {
+        animateScroll.scrollToBottom({
+            containerId: "scroll"
+        });
     };
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -32,7 +41,10 @@ class AddTask extends Component {
         if (this.state.value !== "") {
             let task = {task: this.state.value, _id: Date.now().toString()};
             this.props.AddingNewTask(this.props.list, task);
-            this.setState({value: ""})
+
+            this.setState({value: ""}, () => {
+                this.scrollToBottom();
+            })
         }
     };
 

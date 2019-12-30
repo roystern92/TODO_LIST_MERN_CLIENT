@@ -17,6 +17,7 @@ import thunk from 'redux-thunk';
 //Reducers
 import authReducer from './store/reducers/auth';
 import listsReducer from './store/reducers/lists';
+import taskReducer from './store/reducers/task';
 
 
 
@@ -24,7 +25,8 @@ const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX
 
 const rootReducer = combineReducers({
     lists: listsReducer,
-    auth: authReducer
+    auth: authReducer,
+    task: taskReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

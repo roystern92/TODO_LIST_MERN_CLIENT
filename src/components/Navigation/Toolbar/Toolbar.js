@@ -20,7 +20,7 @@ const toolbar = (props) => (
         </NavLink>
 
         <div className={classes.Title} >
-            <h2>TASK'S</h2>
+            <h2>TASKS</h2>
         </div>
 
         <nav className={classes.DesktopOnly}>

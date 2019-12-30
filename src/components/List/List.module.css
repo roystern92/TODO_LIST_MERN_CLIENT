@@ -1,10 +1,9 @@
 .List{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     height: 100%;
     width: 100%;
-    padding: 25px 0;
-    padding-left: 70px;
+    padding: 25px 7%;
     box-sizing: border-box;
 
 }
@@ -18,15 +17,6 @@
     height: 100%;
 }
 
-.Note{
-    padding: 70px 100px;
-    padding-bottom: 40px;
-    background: url('../../assets/images/note2.png');
-    background-size: cover;
-    box-sizing: border-box;
-    width: 478px;
-    height: 339px;
-}
 
 .Header{
     margin-bottom: 15px;

@@ -1,11 +1,20 @@
+//Auth
 export const AUTH_START = 'AUTH_START';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAIL = 'AUTH_FAIL';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const AUTH_RESET_ERROR = 'AUTH_RESET_ERROR';
+
+//Lists
 export const GET_LISTS = 'GET_LISTS';
 export const DISABLE_USER_ACTION_START = 'DISABLE_USER_ACTION_START';
 export const DISABLE_USER_ACTION_SUCCESS = 'DISABLE_USER_ACTION_SUCCESS';
 export const SET_CURRENT_LIST = 'SET_CURRENT_LIST';
+export const SET_MODAL = 'SET_MODAL';
+
+
+//Task
 export const SET_CURRENT_TASK = 'SET_CURRENT_TASK';
+export const SET_CURRENT_TITLE = 'SET_CURRENT_TITLE';
+export const SET_CURRENT_NOTE = 'SET_CURRENT_NOTE';
 

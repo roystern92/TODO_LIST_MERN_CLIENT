@@ -6,45 +6,46 @@ import Note from './Note/Note';
 import {animateScroll} from "react-scroll";
 import * as actions from "../../store/actions";
 import {connect} from 'react-redux';
-
+import Modal from '../UI/Modal/Modal';
 
 class List extends Component {
 
     state = {
-        openTaskId: null
+        openTaskId: null,
+    };
+
+
+    scrollToTop() {
+        animateScroll.scrollToTop({
+            containerId: "scroll"
+        });
     };
 
     componentDidMount() {
-        this.scrollToBottom();
         console.log("[List] componentDidMount");
+        this.scrollToTop();
         this.props.setCurrentList(this.props.list);
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        this.scrollToBottom();
         console.log("[List] shouldComponentUpdate");
-        if(this.props.currentList !== nextProps.currentList ){
+        if(this.props.currentList !== nextProps.currentList || this.props.showModal !== nextProps.showModal){
             return true;
         }
         return false;
     }
 
 
-    scrollToBottom() {
-        animateScroll.scrollToBottom({
-            containerId: "scroll"
-        });
-    };
-
-
     createTasks = () => {
         let tasks = this.props.currentList.tasks.map((task) => {
-            return <Task key={task._id} task={task}  />
+            return <Task key={task._id} task={task} listName={this.props.currentList.name}  />
         });
 
 
         let notebook =
             <Fragment>
+
+
                 <div id='scroll' className={classes.Tasks}>
                     {tasks}
                 </div>
@@ -55,10 +56,6 @@ class List extends Component {
             </Fragment>;
 
         return notebook;
-    };
-
-    createNote = () => {
-        return  <Note/>;
     };
 
     createHeader = () => {
@@ -72,6 +69,8 @@ class List extends Component {
         return header;
     };
 
+
+
     render() {
 
         console.log("[List] - Render ");
@@ -80,18 +79,19 @@ class List extends Component {
         if(this.props.currentList){
             let header = this.createHeader();
             let tasks = this.createTasks();
-            let note = this.createNote();
 
             list =
+                <Fragment>
+                    <Modal show={this.props.showModal} modalClosed={() => this.props.onSetModal(false)}> <div>FFF</div></Modal>
                 <div className={classes.List}>
                     <div className={classes.Notebook}>
                         {header}
                         {tasks}
-
                     </div>
 
-                    {note}
+                    <Note listName={this.props.currentList.name}/>
                 </div>;
+                </Fragment>
         }
 
         return list;
@@ -102,7 +102,8 @@ class List extends Component {
 const mapStateToProps = state => {
     return {
         currentList : state.lists.currentList,
-        addTaskDisabled : state.lists.disabled
+        addTaskDisabled : state.lists.disabled,
+        showModal: state.lists.showModal
     };
 };
 
@@ -110,7 +111,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 
     return {
-        setCurrentList : (list) => dispatch(actions.setList(list))
+        setCurrentList : (list) => dispatch(actions.setList(list)),
+        onSetModal: (showModal) => dispatch(actions.setModal(showModal))
     };
 };
 

@@ -3,18 +3,6 @@ import axios from "../../axios/axios-todo-lists";
 
 
 
-// export const changeStatus = (isImportant, isCompleted, taskId) => {
-//     return async dispatch => {
-//         try {
-//
-//
-//         } catch (e) {
-//             console.log(e);
-//         }
-//
-//     };
-// };
-
 export const addingNewTask = (list, task) => {
     return async dispatch => {
         try {
@@ -30,7 +18,7 @@ export const addingNewTask = (list, task) => {
 
             await axios.post(url, data);
 
-            await fetchCurrentList(dispatch, list.name);
+            await fetchCurrentListHelper(dispatch, list.name);
             dispatch(disableSuccess());
 
         } catch (e) {
@@ -43,7 +31,6 @@ export const addingNewTask = (list, task) => {
 export const onDeleteTask = (currentList, taskId) => {
     return async dispatch => {
         try {
-
             let tasks = currentList.tasks.filter(task => {
                 return (task._id !== taskId);
             });
@@ -58,7 +45,7 @@ export const onDeleteTask = (currentList, taskId) => {
             await axios.delete(url);
 
             dispatch(disableSuccess());
-            fetchCurrentList(dispatch, currentList.name);
+            fetchCurrentListHelper(dispatch, currentList.name);
 
         } catch (e) {
             console.log(e);
@@ -67,7 +54,7 @@ export const onDeleteTask = (currentList, taskId) => {
     };
 };
 
-const fetchCurrentList = async (dispatch, listName) => {
+ const fetchCurrentListHelper = async (dispatch, listName) => {
     try{
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
         let url = '/admin/list/' + listName;
@@ -80,6 +67,16 @@ const fetchCurrentList = async (dispatch, listName) => {
     catch (e) {
         console.log(e.response);
     }
+};
+
+export const fetchCurrentList = (listName) => {
+    return async (dispatch) => {
+        try {
+            await fetchCurrentListHelper(dispatch, listName);
+        }catch (e) {
+            console.log(e.response);
+        }
+    };
 };
 
 
@@ -135,5 +132,12 @@ const getLists = (lists) => {
     return {
         type: actionTypes.GET_LISTS,
         lists: lists
+    };
+};
+
+export const setModal = (showModal) => {
+    return {
+        type: actionTypes.SET_MODAL,
+        showModal: showModal
     };
 };

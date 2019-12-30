@@ -6,7 +6,7 @@ const initialState = {
     lists: null,
     disabled: false,
     currentList: null,
-    currentTask: null
+    showModal: false
 };
 
 
@@ -24,11 +24,11 @@ const disableSuccess = (state, action) => {
 };
 
 const setCurrentList = (state, action) => {
-    return updateObject(state, { currentList: {...action.list}, currentTask:null});
+    return updateObject(state, { currentList: {...action.list}});
 };
 
-const setCurrentTask = (state, action) => {
-    return updateObject(state, { currentTask: {...action.task}});
+const setShowModal = (state, action) => {
+    return updateObject(state, { showModal: action.showModal});
 };
 
 
@@ -38,7 +38,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.DISABLE_USER_ACTION_START: return disableStart(state, action);
         case actionTypes.DISABLE_USER_ACTION_SUCCESS: return disableSuccess(state, action);
         case actionTypes.SET_CURRENT_LIST: return setCurrentList(state, action);
-        case actionTypes.SET_CURRENT_TASK: return setCurrentTask(state, action);
+        case actionTypes.SET_MODAL: return setShowModal(state, action);
         default:
             return state;
     }

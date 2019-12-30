@@ -1,3 +1,4 @@
+
 export {
     auth,
     logout,
@@ -11,7 +12,15 @@ export {
     addingNewTask,
     onDeleteTask,
     setList,
+    fetchCurrentList,
+    setModal
 } from './lists';
+
+export {
+    setNote,
+    setTitle,
+    setCurrentTask
+} from './task';
 
 
 

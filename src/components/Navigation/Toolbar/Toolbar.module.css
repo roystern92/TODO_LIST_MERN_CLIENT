@@ -21,10 +21,12 @@
 
 
 .Title h2 {
+    font-family: 'Righteous', cursive;
+    font-size: 36px;
+    letter-spacing: 1px;
     margin: 0rem;
-    padding-left: 75px;
+    padding-left: 85px;
     color: white;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 
