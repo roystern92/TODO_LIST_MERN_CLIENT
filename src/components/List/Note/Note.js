@@ -10,28 +10,46 @@ class Note extends Component {
         console.log("[Note] componentDidMount ");
     }
 
+    updateCurrentListWithTheUpdatedTask = () => {
+
+        let task = {...this.props.task};
+        task.task = this.props.title;
+        task.note = this.props.note;
+
+        let tasks = this.props.currentList.tasks.map(el => {
+            if(el._id === task._id){
+                return task;
+            }
+            return el;
+        });
+
+        let list = {...this.props.currentList};
+        list.tasks = [...tasks];
+        this.props.onSetCurrentList(list);
+    };
+
 
     onEditTaskHandler = async (isTitle) => {
-        if(this.props.task.task.trim() !== this.props.title.trim() ||
+        if (this.props.task.task.trim() !== this.props.title.trim() ||
             this.props.task.note.trim() !== this.props.note.trim()
-        ){
+        ) {
             try {
                 let url = '/admin/todo-item/' + this.props.task._id;
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
                 let data = new FormData();
-                let important = this.props.task.important;
-                let completed = this.props.task.completed;
+
 
                 data.append('task', this.props.title);
                 data.append('note', this.props.note);
-                data.append('completed', completed);
-                data.append('important', important);
+                data.append('completed', this.props.task.completed);
+                data.append('important', this.props.task.important);
+
+
+                this.updateCurrentListWithTheUpdatedTask();
 
                 let res = await axios.put(url, data);
                 this.props.onSetTask(res.data.task);
-                if(isTitle){
-                    this.props.onSetCurrentList(this.props.listName);
-                }
+                this.props.onFetchCurrentList(this.props.listName);
             } catch (e) {
                 console.log(e);
             }
@@ -43,9 +61,8 @@ class Note extends Component {
         let note = <div className={classes.Note}></div>;
 
 
-
         if (this.props.task) {
-        let titleClassName = this.props.task.completed ? classes.Title + " " + classes.Completed : classes.Title;
+            let titleClassName = this.props.task.completed ? classes.Title + " " + classes.Completed : classes.Title;
             note =
                 <div className={classes.Note}>
                     <div className={classes.Content}>
@@ -85,7 +102,8 @@ const mapStateToProps = state => {
     return {
         task: state.task.currentTask,
         note: state.task.note,
-        title: state.task.title
+        title: state.task.title,
+        currentList: state.lists.currentList
     };
 };
 
@@ -96,7 +114,9 @@ const mapDispatchToProps = dispatch => {
         onSetTask: (task) => dispatch(actions.setCurrentTask(task)),
         onTitleChanged: (title) => dispatch(actions.setTitle(title)),
         onNoteChanged: (note) => dispatch(actions.setNote(note)),
-        onSetCurrentList: (listName) => dispatch(actions.fetchCurrentList(listName))
+        onFetchCurrentList: (listName) => dispatch(actions.fetchCurrentList(listName)),
+        onSetCurrentList: (list) => dispatch(actions.setList(list)),
+
     };
 };
 

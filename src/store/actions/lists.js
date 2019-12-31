@@ -81,6 +81,7 @@ export const fetchCurrentList = (listName) => {
 
 
 
+
 export const fetchListsHelper = async (dispatch) => {
     try{
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
@@ -139,5 +140,11 @@ export const setModal = (showModal) => {
     return {
         type: actionTypes.SET_MODAL,
         showModal: showModal
+    };
+};
+export const setDeletedTask = (taskId) => {
+    return {
+        type: actionTypes.SET_DELETED_TASK,
+        taskId: taskId
     };
 };

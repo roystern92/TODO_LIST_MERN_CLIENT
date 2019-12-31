@@ -6,7 +6,8 @@ const initialState = {
     lists: null,
     disabled: false,
     currentList: null,
-    showModal: false
+    showModal: false,
+    deletedTaskId: null
 };
 
 
@@ -32,6 +33,11 @@ const setShowModal = (state, action) => {
 };
 
 
+const setDeletedTask = (state, action) => {
+    return updateObject(state, { deletedTaskId: action.taskId});
+};
+
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.GET_LISTS: return setLists(state, action);
@@ -39,6 +45,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.DISABLE_USER_ACTION_SUCCESS: return disableSuccess(state, action);
         case actionTypes.SET_CURRENT_LIST: return setCurrentList(state, action);
         case actionTypes.SET_MODAL: return setShowModal(state, action);
+        case actionTypes.SET_DELETED_TASK: return setDeletedTask(state, action);
         default:
             return state;
     }

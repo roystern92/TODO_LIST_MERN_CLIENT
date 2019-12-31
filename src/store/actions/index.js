@@ -13,7 +13,8 @@ export {
     onDeleteTask,
     setList,
     fetchCurrentList,
-    setModal
+    setModal,
+    setDeletedTask
 } from './lists';
 
 export {

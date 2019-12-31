@@ -15,7 +15,7 @@ class MyDay extends Component {
         let list = this.props.lists ? this.findMyDayList() : null;
 
         return  this.props.lists?  <div className={classes.MyDay}>
-            <List list={list} isMyDay={true}/>
+            <List list={list} isMyDay={false}/>
         </div> : null;
     }
 };

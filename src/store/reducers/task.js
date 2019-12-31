@@ -6,7 +6,7 @@ const initialState = {
     note: null,
     title: null,
     important: null,
-    completed: null
+    completed: null,
 };
 
 

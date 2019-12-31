@@ -27,8 +27,20 @@
     padding-top: 15px;
 }
 
+.Header .Top{
+    display: flex;
+    align-items: center;
+}
+
+.Header .Top button{
+    padding: 5px;
+    padding-bottom: 12px;
+    line-height: 0.7;
+}
+
 .Header h1{
     font-size: 2rem;
+    padding-right: 10px ;
 }
 
 .Header h5{
@@ -51,4 +63,8 @@
 .AddTask{
     width: 100%;
     padding: 0px 25px;
+}
+
+.Icon{
+    margin-right: 2px;
 }

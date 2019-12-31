@@ -1,23 +1,47 @@
 .Modal {
     position: fixed;
+    left: calc(50% - 150px);
+    top: calc(50% - 50px);
+    width: 300px;
+    height: 100px;
     z-index: 500;
     background-color: white;
-    display: flex;
-    width: 250px;
-    height: 250px;
-    margin-top: 15%;
     border: 1px solid #ccc;
-    box-shadow: 1px 1px 1px black;
-    padding: 16px;
-    /*left: 15%;*/
-    /*top: 20%;*/
     box-sizing: border-box;
-    transition: all 0.3s ease-out;
+    padding: 8px;
+    transition: all 0.5s linear;
+
 }
 
-@media (min-width: 600px) {
-    .Modal {
-        width: 500px;
-        left: calc(50% - 250px);
-    }
+.Confirm{
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
 }
+
+
+.Confirm h5{
+    font-size:0.95rem ;
+}
+
+.Buttons{
+    display: flex;
+    justify-content: space-around;
+    padding: 0 50px;
+}
+
+
+
+
+
+
+
+/*}*/
+
+/*@media (min-width: 600px) {*/
+    /*.Modal {*/
+        /*width: 500px;*/
+        /*left: calc(50% - 250px);*/
+    /*}*/
+/*}*/

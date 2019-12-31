@@ -9,6 +9,7 @@ import axios from '../../../axios/axios-todo-lists';
 import * as actions from "../../../store/actions";
 import {connect} from 'react-redux';
 
+
 class Task extends Component {
 
     state = {
@@ -110,11 +111,9 @@ class Task extends Component {
 
             </Fragment>
 
-        // Todo  add a modal before deleting a task.
-
-
         return (
             <div className={classes.Container}>
+
                 <ContextMenuTrigger id={this.state.task._id}>
                     {task}
                 </ContextMenuTrigger>
@@ -132,8 +131,8 @@ class Task extends Component {
                     </MenuItem>
                     <MenuItem divider/>
                     <MenuItem onClick={ () => {
-                        this.props.onDeleteTask(this.props.currentList, this.props.task._id);
                         this.props.onSetModal(true);
+                        this.props.onDeleteTask(this.state.task._id);
                     }}>
                         Delete
                     </MenuItem>
@@ -179,7 +178,7 @@ class Task extends Component {
 
 const mapStateToProps = state => {
     return {
-        currentList: state.lists.currentList,
+        currentList: state.lists.currentList
     };
 };
 
@@ -188,7 +187,7 @@ const mapDispatchToProps = dispatch => {
 
     return {
         onSetTask: (task) => dispatch(actions.setCurrentTask(task)),
-        onDeleteTask: (list, task) => dispatch(actions.onDeleteTask(list, task)),
+        onDeleteTask: (taskId) => dispatch(actions.setDeletedTask(taskId)),
         onTaskClicked: (task) => dispatch(actions.setCurrentTask(task)),
         onSetModal: (showModal) => dispatch(actions.setModal(showModal))
     };
