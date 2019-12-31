@@ -32,11 +32,15 @@
     align-items: center;
 }
 
-.Header .Top button{
-    padding: 5px;
-    padding-bottom: 12px;
+.Header .Dropdown {
+    background-color: rgba(200, 200, 200, 0.3);
+    padding: 3px 5px;
+    padding-bottom: 8px;
     line-height: 0.7;
+    margin-bottom: 4px;
 }
+
+
 
 .Header h1{
     font-size: 2rem;
@@ -66,5 +70,23 @@
 }
 
 .Icon{
+    width: 25px;
     margin-right: 2px;
 }
+
+.DropdownItem{
+    display: flex;
+}
+
+.Top .DropdownMenu{
+    padding: 2px 0;
+}
+
+.DropdownMenu button{
+    padding-left: 10px;
+}
+
+.DropdownMenu hr{
+    margin: 4px 5px;
+}
+

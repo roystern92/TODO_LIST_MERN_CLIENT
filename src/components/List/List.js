@@ -72,25 +72,44 @@ class List extends Component {
 
 
     createDropDown = () => {
-        let deleteIcon = <FontAwesomeIcon
-            onClick={(e) => this.taskStatusChangeHandler(e, false, true)}
-            className={classes.Icon} icon={faTrashAlt}
-            size="lg"/>
+        let deleteIcon =
+            <div className={classes.Icon}>
+                <FontAwesomeIcon
+                    onClick={(e) => this.taskStatusChangeHandler(e, false, true)}
+                    icon={faTrashAlt}
+                    size="lg"/>
+            </div>;
 
-        let editIcon = <FontAwesomeIcon
-            onClick={(e) => this.taskStatusChangeHandler(e, false, true)}
-            className={classes.Icon} icon={faEdit}
-            size="lg"/>
+        let editIcon =
+            <div className={classes.Icon}>
+                <FontAwesomeIcon
+                    onClick={(e) => this.taskStatusChangeHandler(e, false, true)}
+                    icon={faEdit}
+                    size="lg"/>
+            </div>;
 
         let listOptions = !this.props.isMyDay ?
             <Dropdown isOpen={this.state.openDropDown} toggle={this.toggle}>
-                <DropdownToggle>
+                <DropdownToggle className={classes.Dropdown} color="">
                     ...
                 </DropdownToggle>
 
-                <DropdownMenu>
-                    <DropdownItem>{editIcon} Rename list</DropdownItem>
-                    <DropdownItem>{deleteIcon} Delete list</DropdownItem>
+                <DropdownMenu className={classes.DropdownMenu}>
+                    <DropdownItem onClick={() => {
+                        console.log("FFFFF");
+                    }}>
+                        <div className={classes.DropdownItem}>
+                        {editIcon}
+                        Rename list
+                        </div>
+                    </DropdownItem>
+                    <hr/>
+                    <DropdownItem >
+                        <div className={classes.DropdownItem}>
+                        {deleteIcon}
+                        Delete list
+                        </div>
+                    </DropdownItem>
                 </DropdownMenu>
             </Dropdown> : null;
 
