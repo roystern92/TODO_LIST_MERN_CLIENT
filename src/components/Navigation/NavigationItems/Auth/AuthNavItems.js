@@ -32,7 +32,7 @@ class AuthNavItems extends Component {
 
         if (this.props.isAuth) {
             navigationItems =
-                <div className={classes.ProfileDropdown + " DropdownMenu"} onMouseEnter={this.toggle}>
+                <div className={classes.ProfileDropdown + " DropdownMenu"}>
                     <Dropdown isOpen={this.state.openDropDown} toggle={this.toggle}>
                         <DropdownToggle className={classes.Dropdown} color="">
                             {icon}

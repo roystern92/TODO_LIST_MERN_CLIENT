@@ -17,8 +17,10 @@
     margin-right: 10px;
 }
 
-.Dropdwon{
-
+.ProfileDropdown button:hover{
+    color: white;
 }
+
+
 
 

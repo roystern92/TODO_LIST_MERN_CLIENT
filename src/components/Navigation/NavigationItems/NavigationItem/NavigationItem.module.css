@@ -1,45 +1,31 @@
 .NavigationItem {
-    margin: 10px 0;
     box-sizing: border-box;
-    display: block;
-    width: 100%;
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 100%;
+    margin: 0 10px;
 }
 
+
+
 .NavigationItem a {
-    color: #8F5C2C;
     text-decoration: none;
     width: 100%;
     box-sizing: border-box;
     display: block;
+    height: 100%;
+    color: white;
+    padding: 11px 10px;
+    border-bottom: 4px solid transparent;
+    transition: color 0.5s, background-color 0.5s;
 }
 
-.NavigationItem a:hover,
-.NavigationItem a:active,
-.NavigationItem a.active {
-    color: #40A4C8;
+.NavigationItem a:hover {
+    color: rgb(45, 121, 208);
+    background-color: white;
+
 }
 
 
 
-@media(min-width: 500px){
-    .NavigationItem{
-        display: flex;
-        align-items: center;
-        width: auto;
-        height: 100%;
-        margin: 0 10px;
-    }
-    .NavigationItem a{
-        height: 100%;
-        color: white;
-        padding: 16px 10px;
-        border-bottom: 4px solid transparent;
-    }
-
-    .NavigationItem a:hover,
-    .NavigationItem a:active,
-    .NavigationItem a.active{
-        color: white;
-
-    }
-}
