@@ -4,7 +4,7 @@
     align-items: center;
     width: auto;
     height: 100%;
-    margin: 0 10px;
+    margin: 0;
 }
 
 
@@ -18,13 +18,22 @@
     color: white;
     padding: 11px 10px;
     border-bottom: 4px solid transparent;
-    transition: color 0.5s, background-color 0.5s;
+    transition: color 0.4s, background-color 0.4s;
 }
 
 .NavigationItem a:hover {
     color: rgb(45, 121, 208);
     background-color: white;
 
+}
+
+
+
+@media (max-width: 500px) {
+    .NavigationItem a {
+        color: rgb(45, 121, 208);
+        background-color: white;
+    }
 }
 
 

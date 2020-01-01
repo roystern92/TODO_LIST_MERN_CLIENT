@@ -1,0 +1,141 @@
+.Home {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /*background: grey;*/
+    font-family: 'Dosis', sans-serif;
+
+}
+
+.Header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 40%;
+}
+
+
+.MainTitle{
+    margin: 20px 0 0 0;
+    font-family: 'Dosis', sans-serif;
+    font-weight: 700;
+    font-size: 60px;
+}
+
+.SeconderyTitle{
+    color: rgb(150, 150, 150);
+    margin: 25px 0 35px 0;
+    font-family: 'Dosis', sans-serif;
+    font-weight: 400;
+}
+
+
+
+
+.Header .Btn {
+    width: 238px;
+    height: 60px;
+    background: rgb(168, 160 ,240);
+
+    outline: none;
+    border: none;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin: 0 auto;
+    box-shadow: 0 6px rgb(130, 120 ,200);
+    border-radius: 20px;
+
+}
+
+.Header .Btn:hover {
+    box-shadow: 0 4px rgb(130, 120 ,200);
+    top: 2px;
+}
+
+.Header .Btn:active {
+    box-shadow: 0 2px rgb(130, 120 ,200);
+    top: 4px;
+}
+
+.Top {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    background: white;
+}
+
+.Image{
+    width: 150px;
+    height: 150px;
+    background: url("../../../assets/images/todoList.png");
+    background-size: cover;
+    border-radius: 5px;
+
+}
+
+.Content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    padding: 80px 160px;
+    padding-bottom: 0;
+    /*padding-top: 120px;*/
+    font-family: 'Dosis', sans-serif;
+    font-weight: 400;
+}
+
+.Content h2{
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+}
+
+.Content p{
+    font-size: 1.4rem;
+    margin-bottom: 50px;
+}
+
+
+.Right {
+    width: 40%;
+    background: url("../../../assets/images/busyPerson.jpg");
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position-y: 50%;
+
+}
+.Middle{
+    padding: 40px 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 70%;
+    display: flex;
+    color: white;
+    background: rgb(63, 71, 77);
+}
+
+.Middle .DeadlineImage{
+    width: 200px;
+    height: 200px;
+    background: url("../../../assets/images/deadline3.png");
+    background-size: cover;
+    border-radius: 5px;
+}
+
+
+.Middle h2 {
+    font-size: 2.3rem;
+    margin-bottom: 20px;
+}
+
+.Middle p {
+    font-size: 1.4rem;
+}
+

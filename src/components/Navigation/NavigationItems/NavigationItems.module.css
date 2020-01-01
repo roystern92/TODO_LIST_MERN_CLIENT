@@ -5,13 +5,14 @@
     margin-left: 40px;
     list-style: none;
     display: flex;
-    flex-flow: column;
-    align-items: center;
+    justify-content: center;
+
     height: 100%;
 }
 
-@media (min-width: 500px) {
+@media (max-width: 500px) {
     .NavigationItems {
-        flex-flow: row;
+        flex-flow: column;
+        align-items: center;
     }
 }

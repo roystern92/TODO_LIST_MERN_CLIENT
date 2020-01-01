@@ -98,19 +98,11 @@ class AuthForm extends Component {
 
         if (this.props.isSignIn) {
             res = <div className={classes.Title}>
-                <h2><Link to='/signUp '>
-                    <span className={classes.SignIn}>Sign Up</span>
-                </Link>
-                    <span className={classes.Or}> or</span> Sign In </h2>
+                <h2>Log In</h2>
             </div>;
         } else {
             res = <div className={classes.Title}>
-                <h2>
-                    <Link to='/signIn '>
-                        <span className={classes.SignIn}>Sign In</span>
-                    </Link>
-                    <span className={classes.Or}> or</span> Sign Up
-                </h2>
+                <h2>Sign Up</h2>
             </div>;
         }
 
@@ -124,7 +116,7 @@ class AuthForm extends Component {
             member = <div className={classes.Member}>
                 <p> Already a member?
                     <Link to='/signIn'>
-                        <span>Sign In</span>
+                        <span> Sign In</span>
                     </Link>
                 </p>
             </div>
@@ -132,7 +124,7 @@ class AuthForm extends Component {
             member = <div className={classes.Member}>
                 <p> Not a member?
                     <Link to='/signUp'>
-                        <span>Sign Up</span>
+                        <span> Sign Up</span>
                     </Link>
                 </p>
             </div>
@@ -143,7 +135,7 @@ class AuthForm extends Component {
 
     createFormOfInputs = (formElementsArray) => {
         let inputs = this.createInputs(formElementsArray);
-        let submit = this.props.isSignIn ? 'Sign In' : 'Sign Up';
+        let submit = this.props.isSignIn ? 'Log In' : 'Sign Up';
         let title = this.createTitle();
         let terms = !this.props.isSignIn ?
             <div className={classes.TermsAndPolicy}>

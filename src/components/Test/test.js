@@ -24,7 +24,7 @@ class Test extends Component {
         // let routes = 
         // <Switch>
         //     <Route path={this.props.match.url + "/list/:listName"} exact component={Loader} />
-        //     <Route  path={this.props.match.url + "/list/edit/:listName"} exact component={Loader} />
+        //   xx  <Route  path={this.props.match.url + "/list/edit/:listName"} exact component={Loader} />
         //     <Route  path={this.props.match.url + "/1"} exact component={Loader}/>
         // </Switch>;
 

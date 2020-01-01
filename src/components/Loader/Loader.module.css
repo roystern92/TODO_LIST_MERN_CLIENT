@@ -22,9 +22,14 @@
 }
 
 .Loader {
-    margin-top: 20px;
     position: fixed;
     height: 100%;
     width: 100%;
+    /*background: rgb(20, 63, 104);  !* fallback for old browsers *!*/
+
+    /*background: url('https://www.futurity.org/wp/wp-content/uploads/2017/10/broken-pencil-on-blue_1600.jpg');*/
+    /*background-size: cover;*/
+    /*background-position-y: 70%;*/
+
 }
 

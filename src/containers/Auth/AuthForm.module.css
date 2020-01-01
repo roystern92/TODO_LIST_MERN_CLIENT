@@ -1,71 +1,82 @@
 .Auth {
     width: 100%;
-    height: 100%;
-    margin: 60px 0;
-    display: flex;
-    justify-content: center;
-    text-align: center;
     padding: 10px;
     box-sizing: border-box;
+    height: 100%;
+    background: url("https://medlininc.com/wp-content/uploads/2018/09/iStock-939184094.jpg");
+    background-size: cover;
+    background-position-x: 100%;
 }
 
-.AuthForm{
-    width: 40%;
+.AuthForm {
+    margin: 40px auto;
+    margin-left: 10px;
+    width: 35%;
+    height: auto;
+    padding: 40px;
 }
 
-.Submit{
+.Submit {
     cursor: pointer;
-    margin-top: 15px;
+    margin: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 70px;
-    color: white;
-    background: #0052D4;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #6FB1FC, #4364F7, #0052D4);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #6FB1FC, #4364F7, #0052D4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /*background: #6FB1FC ;*/
+
+    background: rgb(20, 63, 104);  /* fallback for old browsers */
+
 }
 
-.SubmitDisabled{
-    cursor:  not-allowed;;
+.SubmitDisabled {
+    cursor: not-allowed;
+    color: black;
+
 }
 
-.TermsAndPolicy{
+.TermsAndPolicy {
     margin-top: 15px;
-    font-size: 14px ;
-    color: rgb(160, 160, 160 );
+    font-size: 14px;
+    color: rgb(160, 160, 160);
 }
 
-.TermsAndPolicy span{
+.TermsAndPolicy span {
     text-decoration: underline;
 }
 
-.Member{
+.Member {
     margin-top: 15px;
-    font-size: 14px ;
+    font-size: 14px;
 }
 
-.Member span{
+.Member span {
     color: rgb(118, 110, 230);
 }
 
 
-.Title{
+.Title {
     padding-left: 5px;
     margin-bottom: 15px;
     display: flex;
     justify-content: start;
-    font-family: 'Muli', sans-serif;
 }
 
-.SignIn{
+.Title h2 {
+    font-family: 'Dosis', sans-serif;
+    font-weight: 700;
+    font-size: 2.8rem;
+}
+
+.SignIn {
     color: rgb(118, 110, 230);
 }
 
-.Or{
+.Or {
     color: rgb(210, 208, 213);
 }
-.Errors{
+
+.Errors {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -75,13 +86,13 @@
     background-color: rgb(67, 100, 247, 0.3);
 }
 
-.Errors h5{
+.Errors h5 {
     font-weight: 400;
     margin: 0;
 }
 
 /*@media  (min-width: 600px) {*/
-    /*.SignUp {*/
-        /*width: 500px;*/
-    /*}*/
+/*.SignUp {*/
+/*width: 500px;*/
+/*}*/
 /*}*/

@@ -27,3 +27,18 @@
     display: flex;
     height: 100%;
 }
+
+
+
+@media (max-width: 500px) {
+    .Title h2 {
+        color: rgb(45, 121, 208);
+        padding-left: 5px;
+    }
+
+    .Container {
+        align-items: center;
+    }
+
+
+}

@@ -1,16 +1,11 @@
 import React, {Component} from 'react';
-
 import {Route, Switch, withRouter, Redirect} from 'react-router-dom';
-
 import Layout from './hoc/Layout/Layout';
-
-import Test from './components/test';
-
 import Logout from './containers/Auth/Signout';
 import Loader from './components/Loader/Loader';
 import Profile from './components/Views/Profile/Profile';
 import MyDay from './containers/MyDay/MyDay';
-
+import Home from './components/Views/Home/Home';
 
 import {connect} from 'react-redux';
 import * as actions from './store/actions/index';
@@ -53,7 +48,7 @@ class App extends Component {
                         <Auth controls={controls.signUpControls} isSignIn={false} />
                     </Route>
 
-                    <Route path="/" exact component={Loader}/>
+                    <Route path="/" exact component={Home}/>
                     <Redirect to="/"/>
                 </Switch>
             );
