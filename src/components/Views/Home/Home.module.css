@@ -50,6 +50,11 @@
     box-shadow: 0 6px rgb(130, 120 ,200);
     border-radius: 20px;
 
+
+}
+
+.Header a:hover {
+  text-decoration: none;
 }
 
 .Header .Btn:hover {

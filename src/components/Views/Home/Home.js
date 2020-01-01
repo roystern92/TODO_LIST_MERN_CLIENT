@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import classes from './Home.module.css';
+import {NavLink} from 'react-router-dom';
+
 class Home extends Component {
 
     createPageTop = () => {
@@ -52,7 +54,15 @@ class Home extends Component {
         <div className={classes.Header}>
                 <h1 className={classes.MainTitle}>Manage Less. Do More.</h1>
                 <h1 className={classes.SeconderyTitle}>Manage your day in just one click.</h1>
+            <NavLink
+                exact
+                to='/signUp'
+                className={classes.Logo}
+            >
                 <button className={classes.Btn}>Get Started for Free</button>
+
+            </NavLink>
+
         </div>;
 
     return header;
