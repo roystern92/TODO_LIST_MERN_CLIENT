@@ -1,0 +1,24 @@
+.NavigationItems {
+    position: fixed;
+    top: 0;
+    height: 7%;
+    right: 0%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    align-self: end;
+}
+
+
+.ProfileDropdown button{
+    color: white;
+    margin-right: 10px;
+}
+
+.Dropdwon{
+
+}
+
+

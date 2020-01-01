@@ -9,3 +9,21 @@
 .Logo img {
     height: 100%;
 }
+
+.Title h2 {
+    font-family: 'Righteous', cursive;
+    font-size: 36px;
+    letter-spacing: 1px;
+    margin: 0rem;
+    padding-left: 20px;
+    color: white;
+}
+
+/*.Container  a:hover {*/
+/*text-decoration: none;*/
+/*}*/
+
+.Container {
+    display: flex;
+    height: 100%;
+}

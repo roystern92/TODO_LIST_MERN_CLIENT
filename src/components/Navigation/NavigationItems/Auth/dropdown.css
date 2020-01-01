@@ -1,0 +1,3 @@
+.DropdownMenu div.dropdown-menu.show {
+    transform: translate3d(-106px, 44px, 0px) !important;
+}

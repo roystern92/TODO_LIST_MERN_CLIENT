@@ -89,7 +89,7 @@ class List extends Component {
             </div>;
 
         let listOptions = !this.props.isMyDay ?
-            <Dropdown isOpen={this.state.openDropDown} toggle={this.toggle}>
+            <Dropdown isOpen={this.state.openDropDown}  toggle={this.toggle}>
                 <DropdownToggle className={classes.Dropdown} color="">
                     ...
                 </DropdownToggle>
@@ -111,7 +111,7 @@ class List extends Component {
                         </div>
                     </DropdownItem>
                 </DropdownMenu>
-            </Dropdown> : null;
+            </Dropdown> : null ;
 
         return listOptions;
     };
