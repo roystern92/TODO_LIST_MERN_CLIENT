@@ -6,6 +6,7 @@ import {faUser} from "@fortawesome/free-regular-svg-icons";
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
 import {NavLink, withRouter} from 'react-router-dom';
 import './dropdown.css';
+
 class AuthNavItems extends Component {
 
     state = {
@@ -31,6 +32,10 @@ class AuthNavItems extends Component {
         );
 
         if (this.props.isAuth) {
+            let userEmail = localStorage.getItem('userEmail');
+            let userFullName = localStorage.getItem('userFullName');
+
+            console.log(userEmail);
             navigationItems =
                 <div className={classes.ProfileDropdown + " DropdownMenu"}>
                     <Dropdown isOpen={this.state.openDropDown} toggle={this.toggle}>
@@ -39,20 +44,24 @@ class AuthNavItems extends Component {
                         </DropdownToggle>
 
                         <DropdownMenu className={classes.DropdownMenu}>
-                            <DropdownItem  onClick={() => {
+                            <DropdownItem onClick={() => {
                                 this.props.history.push('/profile');
                             }}>
 
-                                    Profile
+                                <div className={classes.Profile}>
+                                    <h3>{userFullName}</h3>
+                                    <h5>{userEmail}</h5>
+
+                                </div>
 
                             </DropdownItem>
 
                             <DropdownItem divider/>
 
                             <DropdownItem onClick={() => {
-                             this.props.history.push('/logout');
+                                this.props.history.push('/logout');
                             }}>
-                                    Log out
+                                Log out
                             </DropdownItem>
 
                         </DropdownMenu>

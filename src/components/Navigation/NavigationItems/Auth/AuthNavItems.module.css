@@ -26,6 +26,19 @@
     background: white;
 }
 
+.Profile{
+    display: flex;
+    flex-direction: column;
+}
+
+.Profile h3{
+    font-size: 1.2rem;
+}
+
+.Profile h5{
+    color: #666666;
+    font-size: 0.7rem;
+}
 
 
 

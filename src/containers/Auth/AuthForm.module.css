@@ -29,6 +29,11 @@
 
 }
 
+.Submit button:focus {
+    outline: none;
+
+}
+
 .SubmitDisabled {
     cursor: not-allowed;
     color: black;
@@ -63,7 +68,7 @@
 }
 
 .Title h2 {
-    font-family: 'Dosis', sans-serif;
+    font-family: 'Righteous', cursive;
     font-weight: 700;
     font-size: 2.8rem;
 }
@@ -83,7 +88,7 @@
     margin: 10px;
     padding: 4px;
     border: 1px solid rgb(67, 100, 247);
-    background-color: rgb(67, 100, 247, 0.3);
+    background-color: rgba(67, 100, 247, 0.3);
 }
 
 .Errors h5 {

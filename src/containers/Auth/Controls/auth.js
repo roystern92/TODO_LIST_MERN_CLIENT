@@ -1,5 +1,5 @@
 export const signInControls = {
-    email: {
+    Email: {
         elementType: 'input',
         elementConfig: {
             type: 'email',
@@ -14,7 +14,8 @@ export const signInControls = {
         touched: false
     },
 
-    password: {
+
+    Password: {
         elementType: 'input',
         elementConfig: {
             type: 'password',
@@ -31,7 +32,7 @@ export const signInControls = {
 };
 
 export const signUpControls = {
-    name: {
+    Name: {
         elementType: 'input',
         elementConfig: {
             type: 'text',
@@ -44,7 +45,7 @@ export const signUpControls = {
         valid: false,
         touched: false
     },
-    email: {
+    Email: {
         elementType: 'input',
         elementConfig: {
             type: 'email',
@@ -59,7 +60,7 @@ export const signUpControls = {
         touched: false
     },
 
-    password: {
+    Password: {
         elementType: 'input',
         elementConfig: {
             type: 'password',

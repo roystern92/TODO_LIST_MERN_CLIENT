@@ -152,6 +152,8 @@ class AuthForm extends Component {
             <div
                 onClick={(event) => {
                     if (this.state.formIsValid) {
+                        console.log("GGGGG");
+
                         this.submitHandler(event);
                     }
                 }}
@@ -189,9 +191,9 @@ class AuthForm extends Component {
             let signUp = this.props.isSignIn === false;
 
             if (signUp) {
-               await this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.controls.name.value, true);
+               await this.props.onAuth(this.state.controls.Email.value, this.state.controls.Password.value, this.state.controls.Name.value, true);
             } else {
-                this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, null, false);
+                this.props.onAuth(this.state.controls.Email.value, this.state.controls.Password.value, null, false);
             }
         }catch (e) {
 

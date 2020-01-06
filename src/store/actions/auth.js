@@ -38,7 +38,7 @@ const checkAuthTimeout = (expirationTime) => {
 export const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');
-    localStorage.removeItem('userId');
+    localStorage.removeItem('userEmail');
     return {
         type: actionTypes.AUTH_LOGOUT
     };
@@ -73,7 +73,8 @@ export const postAuth = async (formData, url, signUp, dispatch) => {
         const expirationDate = new Date(new Date().getTime() + res.data.expiresTimeInMiliseconds);
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('expirationDate', expirationDate);
-        localStorage.setItem('user', res.data.user);
+        localStorage.setItem('userFullName', res.data.user.name);
+        localStorage.setItem('userEmail', res.data.user.email);
         let timeToLogout = expirationDate.getTime() - new Date().getTime();
 
         dispatch(checkAuthTimeout(timeToLogout));

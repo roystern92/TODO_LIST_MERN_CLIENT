@@ -7,14 +7,17 @@
 .Label {
     display: flex;
     margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #444444;
 }
 
 .InputElement {
+    font-weight: bold;
     outline: none;
     border: none;
     border-bottom: 1px solid rgb(91, 99, 102);
     background-color: rgb(232, 240, 254);
-    font: inherit;
     padding: 6px 10px;
     display: block;
     width: 100%;
