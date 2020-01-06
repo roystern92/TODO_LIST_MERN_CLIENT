@@ -4,7 +4,7 @@ import NavigationItem from '../NavigationItem/NavigationItem';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser} from "@fortawesome/free-regular-svg-icons";
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
-import {NavLink} from 'react-router-dom';
+import {NavLink, withRouter} from 'react-router-dom';
 import './dropdown.css';
 class AuthNavItems extends Component {
 
@@ -39,22 +39,20 @@ class AuthNavItems extends Component {
                         </DropdownToggle>
 
                         <DropdownMenu className={classes.DropdownMenu}>
-                            <DropdownItem header >
+                            <DropdownItem  onClick={() => {
+                                this.props.history.push('/profile');
+                            }}>
 
-                                <NavLink exact to='/profile'>
                                     Profile
-                                </NavLink>
 
                             </DropdownItem>
 
                             <DropdownItem divider/>
 
-
-
-                            <DropdownItem>
-                                <NavLink exact to='/logout'>
+                            <DropdownItem onClick={() => {
+                             this.props.history.push('/logout');
+                            }}>
                                     Log out
-                                </NavLink>
                             </DropdownItem>
 
                         </DropdownMenu>
@@ -70,4 +68,4 @@ class AuthNavItems extends Component {
 
 };
 
-export default AuthNavItems;
+export default withRouter(AuthNavItems);

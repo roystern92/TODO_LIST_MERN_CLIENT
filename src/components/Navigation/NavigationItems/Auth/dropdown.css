@@ -2,3 +2,22 @@
     transform: translate3d(-106px, 44px, 0px) !important;
 }
 
+.DropdownMenu button.dropdown-item {
+    padding: 10px;
+    color: rgb(20, 63, 104);
+    font-weight: bold;
+}
+
+.DropdownMenu .dropdown-divider {
+    margin: 0;
+}
+.DropdownMenu .dropdown-menu.show {
+    padding: 0;
+}
+
+
+.DropdownMenu button.dropdown-item:hover,
+.DropdownMenu button.dropdown-item:focus{
+    color:  white;
+    background: rgb(20, 63, 104);
+}

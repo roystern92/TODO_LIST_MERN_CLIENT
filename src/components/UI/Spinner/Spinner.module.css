@@ -1,67 +1,73 @@
-.Loader,
-.Loader:before,
-.Loader:after {
-  border-radius: 50%;
+.spinner {
+    width: 80px;
+    height: 80px;
+    border: 10px solid rgb(20, 63, 104);
+    background-color: transparent;
+    box-shadow: 0 0 40px #2266a0;
+
+    position: fixed;
+    top: calc(50% - 40px);
+    left: calc(50% - 40px);
+    border-radius: 50%;
+
+    /*margin: 250px auto;*/
+    -webkit-animation: sk-rotateplane 2s 0.1s infinite linear;
+    animation: sk-rotateplane 2s 0.1s infinite linear;
 }
-.Loader {
-  color: #521751;
-  font-size: 11px;
-  text-indent: -99999em;
-  margin: 55px auto;
-  position: relative;
-  width: 10em;
-  height: 10em;
-  box-shadow: inset 0 0 0 1em;
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  transform: translateZ(0);
+
+.spinner3 {
+    width: 40px;
+    height: 40px;
+    border: 8px solid rgb(20, 63, 104);
+    background-color: transparent;
+    box-shadow: 0 0 40px #2266a0;
+
+    position: fixed;
+    top: calc(50% - 20px);
+    left: calc(50% - 20px);
+    border-radius: 50%;
+
+    /*margin: 250px auto;*/
+    -webkit-animation: sk-rotateplane 2s 0.2s infinite linear;
+    animation: sk-rotateplane 2s 0.2s infinite linear;
 }
-.Loader:before,
-.Loader:after {
-  position: absolute;
-  content: '';
+
+.spinner2 {
+    width: 120px;
+    height: 120px;
+    border: 12px solid rgb(20, 63, 104);
+    background-color: transparent;
+    box-shadow: 0 0 60px #2266a0;
+    border-radius: 50%;
+
+    position: fixed;
+    top: calc(50% - 60px);
+    left: calc(50% - 60px);
+
+
+    /*margin: 250px auto;*/
+    -webkit-animation: sk-rotateplane 2s infinite linear;
+    animation: sk-rotateplane 2s infinite linear;
 }
-.Loader:before {
-  width: 5.2em;
-  height: 10.2em;
-  background: #fff;
-  border-radius: 10.2em 0 0 10.2em;
-  top: -0.1em;
-  left: -0.1em;
-  -webkit-transform-origin: 5.2em 5.1em;
-  transform-origin: 5.2em 5.1em;
-  -webkit-animation: load2 2s infinite ease 1.5s;
-  animation: load2 2s infinite ease 1.5s;
+
+@-webkit-keyframes sk-rotateplane {
+    0% { -webkit-transform: perspective(120px) }
+    50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+    100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
 }
-.Loader:after {
-  width: 5.2em;
-  height: 10.2em;
-  background: #fff;
-  border-radius: 0 10.2em 10.2em 0;
-  top: -0.1em;
-  left: 5.1em;
-  -webkit-transform-origin: 0px 5.1em;
-  transform-origin: 0px 5.1em;
-  -webkit-animation: load2 2s infinite ease;
-  animation: load2 2s infinite ease;
-}
-@-webkit-keyframes load2 {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@keyframes load2 {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+
+@keyframes sk-rotateplane {
+    0% {
+        transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+        -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+
+    } 50% {
+          transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+          -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+
+      } 100% {
+            transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+            -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+
+        }
 }

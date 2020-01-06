@@ -17,8 +17,13 @@
     margin-right: 10px;
 }
 
-.ProfileDropdown button:hover{
-    color: white;
+
+
+
+.ProfileDropdown button:hover,
+.ProfileDropdown button:focus{
+    color:  rgb(20, 63, 104);
+    background: white;
 }
 
 

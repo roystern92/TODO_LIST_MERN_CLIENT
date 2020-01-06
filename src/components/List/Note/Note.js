@@ -74,10 +74,9 @@ class Note extends Component {
                             rows="3"
                             value={this.props.title}
                         />
-                        <hr/>
-                        <textarea onChange={(event) => this.props.onNoteChanged(event.target.value)}
+                        <textarea className={classes.TextAreaNote} onChange={(event) => this.props.onNoteChanged(event.target.value)}
                                   onBlur={() => this.onEditTaskHandler(false)}
-                                  cols="45"
+                                  cols="40"
                                   rows="5"
                                   placeholder="Add note..."
                                   value={this.props.note}/>

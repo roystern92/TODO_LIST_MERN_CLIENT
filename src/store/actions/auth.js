@@ -60,7 +60,7 @@ const createMyDayList = async () => {
 
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
 
-    return axios.post('http://localhost:8080/admin/list', formData);
+    return axios.post('/admin/list', formData);
 
 };
 

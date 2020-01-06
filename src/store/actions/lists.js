@@ -85,7 +85,7 @@ export const fetchCurrentList = (listName) => {
 export const fetchListsHelper = async (dispatch) => {
     try{
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
-        let result = await axios.get('http://localhost:8080/admin/lists');
+        let result = await axios.get('/admin/lists');
         let lists = result.data.lists;
         dispatch(getLists(lists));
     }
