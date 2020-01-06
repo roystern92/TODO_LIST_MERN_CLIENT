@@ -73,7 +73,7 @@ export const postAuth = async (formData, url, signUp, dispatch) => {
         const expirationDate = new Date(new Date().getTime() + res.data.expiresTimeInMiliseconds);
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('expirationDate', expirationDate);
-        localStorage.setItem('userId', res.data.userId);
+        localStorage.setItem('user', res.data.user);
         let timeToLogout = expirationDate.getTime() - new Date().getTime();
 
         dispatch(checkAuthTimeout(timeToLogout));

@@ -1,4 +1,21 @@
-.spinner {
+.spinner1 {
+    width: 120px;
+    height: 120px;
+    border: 12px solid rgb(20, 63, 104);
+    background-color: transparent;
+    box-shadow: 0 0 60px #2266a0;
+    border-radius: 50%;
+
+    position: fixed;
+    top: calc(50% - 60px);
+    left: calc(50% - 60px);
+
+
+    -webkit-animation: sk-rotateplane 2s infinite linear;
+    animation: sk-rotateplane 2s infinite linear;
+}
+
+.spinner2 {
     width: 80px;
     height: 80px;
     border: 10px solid rgb(20, 63, 104);
@@ -32,23 +49,7 @@
     animation: sk-rotateplane 2s 0.2s infinite linear;
 }
 
-.spinner2 {
-    width: 120px;
-    height: 120px;
-    border: 12px solid rgb(20, 63, 104);
-    background-color: transparent;
-    box-shadow: 0 0 60px #2266a0;
-    border-radius: 50%;
 
-    position: fixed;
-    top: calc(50% - 60px);
-    left: calc(50% - 60px);
-
-
-    /*margin: 250px auto;*/
-    -webkit-animation: sk-rotateplane 2s infinite linear;
-    animation: sk-rotateplane 2s infinite linear;
-}
 
 @-webkit-keyframes sk-rotateplane {
     0% { -webkit-transform: perspective(120px) }
