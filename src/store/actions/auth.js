@@ -45,6 +45,14 @@ export const logout = () => {
 };
 
 
+export const authUserProfile = (user) => {
+    return{
+        type: actionTypes.AUTH_USER_PROFILE,
+        user: user
+    }
+}
+
+
 
 export const authResetError = () => {
     return {
@@ -70,19 +78,21 @@ export const postAuth = async (formData, url, signUp, dispatch) => {
 
     try {
         let res = await axios.post(url, formData);
+        dispatch(authUserProfile(res.data.user));
+
         const expirationDate = new Date(new Date().getTime() + res.data.expiresTimeInMiliseconds);
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('expirationDate', expirationDate);
         localStorage.setItem('userFullName', res.data.user.name);
         localStorage.setItem('userEmail', res.data.user.email);
+
         let timeToLogout = expirationDate.getTime() - new Date().getTime();
 
         dispatch(checkAuthTimeout(timeToLogout));
-
         if (signUp) {
             await createMyDayList();
-        }
 
+        }
         await actions.fetchListsHelper(dispatch);
         dispatch(authSuccess(res.data.token, res.data.userId));
     } catch (e) {
@@ -92,7 +102,7 @@ export const postAuth = async (formData, url, signUp, dispatch) => {
 }
 
 
-export const auth = (email, password, name, signUp) => {
+export const auth = (email, password, name, signUp, gender) => {
     return dispatch => {
         dispatch(authStart());
         let url = '/auth/login';
@@ -101,6 +111,7 @@ export const auth = (email, password, name, signUp) => {
 
         if (signUp) {
             formData.append('name', name);
+            formData.append('gender', gender);
             url = '/auth/signup';
         }
 
@@ -128,12 +139,31 @@ export const authCheckState =  () => {
                 const userId = localStorage.getItem('userId');
                 dispatch(authSuccess(token, userId));
                 dispatch(checkAuthTimeout(expirationDate.getTime() - new Date().getTime()));
-
+                fetchProfile(dispatch);
                 await actions.fetchListsHelper(dispatch);
             }
         }
     };
 };
+
+
+export const fetchUserProfile = () => {
+    return  (dispatch) => {
+        fetchProfile(dispatch);
+    };
+};
+
+const fetchProfile = async (dispatch) => {
+        try {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
+            let res = await axios.get('/auth/profile');
+            dispatch(authUserProfile(res.data.user));
+
+        }catch (e) {
+            console.log(e.response);
+        }
+};
+
 
 
 

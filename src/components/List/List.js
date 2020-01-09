@@ -119,13 +119,12 @@ class List extends Component {
 
     createHeader = () => {
         let date = this.props.isMyDay ? <h5> {new Date().toDateString()}</h5> : null;
-        let listOptions = this.createDropDown();
+        // let listOptions = this.createDropDown();
 
         let header =
             <div className={classes.Header}>
                 <div className={classes.Top}>
                     <h1> {this.props.currentList.name} </h1>
-                    {listOptions}
                 </div>
                 {date}
             </div>;

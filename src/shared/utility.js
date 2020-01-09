@@ -34,4 +34,18 @@ export const checkValidity = ( value, rules ) => {
     }
 
     return isValid;
-}
+};
+
+export const createArrayFromObject = (obj) => {
+    let formElementsArray = [];
+
+    for (let key in obj) {
+        formElementsArray.push({
+                id: key,
+                config: obj[key]
+            }
+        );
+    }
+
+    return formElementsArray;
+};

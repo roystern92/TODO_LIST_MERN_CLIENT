@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import classes from './AuthForm.module.css';
-
+import {createArrayFromObject} from '../../shared/utility';
 import {updateObject, checkValidity} from '../../shared/utility';
 import {Link} from 'react-router-dom';
 
@@ -79,6 +79,7 @@ class AuthForm extends Component {
     createInputs = (formElementsArray) => {
         let inputs = formElementsArray.map(formElement => {
             return <Input
+                elementType={formElement.config.elementType}
                 label={formElement.id}
                 key={formElement.id}
                 value={formElement.config.value}
@@ -190,8 +191,9 @@ class AuthForm extends Component {
             event.preventDefault();
             let signUp = this.props.isSignIn === false;
 
+
             if (signUp) {
-               await this.props.onAuth(this.state.controls.Email.value, this.state.controls.Password.value, this.state.controls.Name.value, true);
+               await this.props.onAuth(this.state.controls.Email.value, this.state.controls.Password.value, this.state.controls.Name.value, true, this.state.controls.Gender.value);
             } else {
                 this.props.onAuth(this.state.controls.Email.value, this.state.controls.Password.value, null, false);
             }
@@ -210,9 +212,8 @@ class AuthForm extends Component {
     };
 
     render() {
-        console.log()
+        let formElementsArray = createArrayFromObject(this.state.controls);
 
-        let formElementsArray = this.createArrayFromObject();
         let form = this.createFormOfInputs(formElementsArray);
         let authForm =
             <div className={classes.Auth}>
@@ -235,7 +236,7 @@ const mapStatesToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAuth: (email, password, fullName, signUp) => dispatch(actions.auth(email, password, fullName, signUp)),
+        onAuth: (email, password, fullName, signUp, gender) => dispatch(actions.auth(email, password, fullName, signUp, gender)),
         onResetError: () => dispatch(actions.authResetError())
     };
 };

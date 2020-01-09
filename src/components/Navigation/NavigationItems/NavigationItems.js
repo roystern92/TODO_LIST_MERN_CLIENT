@@ -13,7 +13,6 @@ const navigationItems = (props) => {
         navigationItems = (
             <ul className={classes.NavigationItems}>
                 <NavigationItem link="/my-day" exact>My Day</NavigationItem>
-                <NavigationItem link="/my-lists" exact>My Lists</NavigationItem>
             </ul>
         );
     }

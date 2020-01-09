@@ -12,7 +12,7 @@ import * as actions from './store/actions/index';
 
 
 import './App.css';
-import * as controls from "./containers/Auth/Controls/auth";
+import * as controls from "./shared/Controls/auth";
 import Auth from './containers/Auth/AuthForm';
 
 class App extends Component {
@@ -30,10 +30,9 @@ class App extends Component {
             routes = (
                 <Switch>
                     <Route path="/my-day" component={MyDay}/>
-                    <Route path="/my-lists" component={Loader}/>
                     <Route path="/profile" component={Profile}/>
-                    <Route path="/test" exact component={MyDay}/>
                     <Route path="/logout" component={Logout}/>
+                    <Route path="/" exact component={Home}/>
                     <Redirect to="/my-day"/>
                 </Switch>
             );

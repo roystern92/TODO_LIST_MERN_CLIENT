@@ -3,6 +3,7 @@ export {
     auth,
     logout,
     authCheckState,
+    fetchUserProfile,
     authResetError
 } from './auth';
 

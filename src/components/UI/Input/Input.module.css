@@ -13,6 +13,7 @@
 }
 
 .InputElement {
+    height: 40px;
     font-weight: bold;
     outline: none;
     border: none;
@@ -32,3 +33,4 @@
     border: 1px solid red;
     background-color: #FDA49A;
 }
+

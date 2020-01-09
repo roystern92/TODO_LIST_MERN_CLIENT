@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import AppLogo from '../../assets/images/todoLogo.png';
+import AppLogo from '../../assets/images/logo.png';
 import classes from './Logo.module.css';
 
 const logo = (props) => (

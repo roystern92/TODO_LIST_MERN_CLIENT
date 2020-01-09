@@ -35,7 +35,6 @@ class AuthNavItems extends Component {
             let userEmail = localStorage.getItem('userEmail');
             let userFullName = localStorage.getItem('userFullName');
 
-            console.log(userEmail);
             navigationItems =
                 <div className={classes.ProfileDropdown + " DropdownMenu"}>
                     <Dropdown isOpen={this.state.openDropDown} toggle={this.toggle}>

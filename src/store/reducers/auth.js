@@ -8,7 +8,8 @@ const initialState = {
     loading: false,
     lists: null,
     disabled: false,
-    currentList: null
+    currentList: null,
+    user: null
 };
 
 const authStart = (state, action) => {
@@ -20,6 +21,7 @@ const authFail = (state, action) => {
 };
 
 const authSuccess = (state, action) => {
+
     return updateObject(state, {
         error: null,
         loading: false,
@@ -51,6 +53,10 @@ const setCurrentList = (state, action) => {
     return updateObject(state, { currentList: {...action.list}});
 };
 
+const setUserProfile = (state, action) => {
+    return updateObject(state, { user: {...action.user}});
+};
+
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -63,6 +69,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.DISABLE_USER_ACTION_START: return disableAddTaskStart(state, action);
         case actionTypes.DISABLE_USER_ACTION_SUCCESS: return disableAddTaskSuccess(state, action);
         case actionTypes.SET_CURRENT_LIST: return setCurrentList(state, action);
+        case actionTypes.AUTH_USER_PROFILE: return setUserProfile(state, action);
         default:
             return state;
     }

@@ -16,8 +16,7 @@
     display: block;
     height: 100%;
     color: white;
-    padding: 11px 10px;
-    border-bottom: 4px solid transparent;
+    padding: 13px 10px;
     transition: color 0.4s, background-color 0.4s;
 }
 
