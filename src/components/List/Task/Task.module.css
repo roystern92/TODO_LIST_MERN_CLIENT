@@ -32,8 +32,8 @@
 }
 
 .Task .Delete {
-    margin-right: 10px;
-
+    margin-right: 0;
+    font-size: 1.2em;
     color: red;
 }
 
@@ -49,6 +49,7 @@
 }
 
 .Task .Star {
+    font-size: 1.2em;
     margin-right: 10px;
     cursor: pointer;
     color: #0275d8;

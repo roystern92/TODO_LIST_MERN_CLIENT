@@ -24,8 +24,8 @@ class Home extends Component {
         let middle =
             <div className={classes.Middle}>
                 <div className={classes.DeadlineImage}/>
-                <h2>Looking For a Tailored Enterprise Solution?</h2>
-                <p>MeisterTask Business offers large teams a simple, intuitive task management solution that can be customized to suit your business's specific needs. With features distinctly designed for enterprise use, such as: user roles, project access rights, time tracking, automations and more. Find out how exactly MeisterTask Business can help you and your team get more done together.</p>
+                <h2>Looking for a new way to manage your day?</h2>
+                <p>Tasks offers a simple, intuitive task management solution that can be customized to suit your day specific needs. With features distinctly designed for personal use. Find out how exactly TASKS can help you manage your day better.</p>
 
             </div>;
 

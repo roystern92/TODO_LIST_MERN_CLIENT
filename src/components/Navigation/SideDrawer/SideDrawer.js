@@ -48,6 +48,8 @@ const sideDrawer = (props) => {
 
             </NavLink>
 
+            <hr/>
+
             <NavLink
                 exact
                 to='/profile'
@@ -57,6 +59,9 @@ const sideDrawer = (props) => {
                 </div>
 
             </NavLink>
+
+            <hr/>
+
 
 
             <NavLink
