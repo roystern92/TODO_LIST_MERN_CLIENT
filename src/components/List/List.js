@@ -71,50 +71,50 @@ class List extends Component {
     };
 
 
-    createDropDown = () => {
-        let deleteIcon =
-            <div className={classes.Icon}>
-                <FontAwesomeIcon
-                    onClick={(e) => this.taskStatusChangeHandler(e, false, true)}
-                    icon={faTrashAlt}
-                    size="lg"/>
-            </div>;
-
-        let editIcon =
-            <div className={classes.Icon}>
-                <FontAwesomeIcon
-                    onClick={(e) => this.taskStatusChangeHandler(e, false, true)}
-                    icon={faEdit}
-                    size="lg"/>
-            </div>;
-
-        let listOptions = !this.props.isMyDay ?
-            <Dropdown isOpen={this.state.openDropDown}  toggle={this.toggle}>
-                <DropdownToggle className={classes.Dropdown} color="">
-                    ...
-                </DropdownToggle>
-
-                <DropdownMenu className={classes.DropdownMenu}>
-                    <DropdownItem onClick={() => {
-                        console.log("FFFFF");
-                    }}>
-                        <div className={classes.DropdownItem}>
-                        {editIcon}
-                        Rename list
-                        </div>
-                    </DropdownItem>
-                    <hr/>
-                    <DropdownItem >
-                        <div className={classes.DropdownItem}>
-                        {deleteIcon}
-                        Delete list
-                        </div>
-                    </DropdownItem>
-                </DropdownMenu>
-            </Dropdown> : null ;
-
-        return listOptions;
-    };
+    // createDropDown = () => {
+    //     let deleteIcon =
+    //         <div className={classes.Icon}>
+    //             <FontAwesomeIcon
+    //                 onClick={(e) => this.taskStatusChangeHandler(e, false, true)}
+    //                 icon={faTrashAlt}
+    //                 size="lg"/>
+    //         </div>;
+    //
+    //     let editIcon =
+    //         <div className={classes.Icon}>
+    //             <FontAwesomeIcon
+    //                 onClick={(e) => this.taskStatusChangeHandler(e, false, true)}
+    //                 icon={faEdit}
+    //                 size="lg"/>
+    //         </div>;
+    //
+    //     let listOptions = !this.props.isMyDay ?
+    //         <Dropdown isOpen={this.state.openDropDown}  toggle={this.toggle}>
+    //             <DropdownToggle className={classes.Dropdown} color="">
+    //                 ...
+    //             </DropdownToggle>
+    //
+    //             <DropdownMenu className={classes.DropdownMenu}>
+    //                 <DropdownItem onClick={() => {
+    //                     console.log("FFFFF");
+    //                 }}>
+    //                     <div className={classes.DropdownItem}>
+    //                     {editIcon}
+    //                     Rename list
+    //                     </div>
+    //                 </DropdownItem>
+    //                 <hr/>
+    //                 <DropdownItem >
+    //                     <div className={classes.DropdownItem}>
+    //                     {deleteIcon}
+    //                     Delete list
+    //                     </div>
+    //                 </DropdownItem>
+    //             </DropdownMenu>
+    //         </Dropdown> : null ;
+    //
+    //     return listOptions;
+    // };
 
 
     createHeader = () => {

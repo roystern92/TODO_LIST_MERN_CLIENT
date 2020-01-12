@@ -1,42 +1,43 @@
-.Container{
+.Container {
     width: 100%;
 }
 
-.Line{
+.Line {
     width: 95%;
     margin-left: 0;
 }
-/*.Task{*/
-    /**/
-/*}*/
 
-.Task{
+.Task {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: start;
+
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(200, 200, 200, 0.5);
+
 }
 
-.Task:hover{
+.Task:hover {
     cursor: pointer;
     background-color: #dddddd;
     color: #000000;
 }
 
-.Task .Icon{
+.Task .Icon {
     margin-right: 5px;
     color: rgb(120, 120, 120);
     cursor: pointer;
 
 }
 
-.Task .Delete{
+.Task .Delete {
     margin-right: 10px;
 
     color: red;
 }
 
-.Task h1{
+.Task h1 {
     font-family: 'Handlee', cursive;
     font-weight: bold;
     font-size: 1.1rem;
@@ -47,7 +48,7 @@
 
 }
 
-.Task .Star{
+.Task .Star {
     margin-right: 10px;
     cursor: pointer;
     color: #0275d8;

@@ -106,3 +106,19 @@
 
     }
 }
+
+@media only screen and (max-width: 400px) {
+    .Note{
+        width: calc(577px * 0.55);
+        height: calc(392px * 0.55);
+
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .Note{
+        width: calc(577px * 0.4);
+        height: calc(392px * 0.4);
+
+    }
+}

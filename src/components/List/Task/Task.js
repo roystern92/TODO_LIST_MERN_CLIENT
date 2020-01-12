@@ -120,7 +120,7 @@ class Task extends Component {
 
                     </div>
 
-                    <hr className={classes.Line}/>
+                    {/*<hr className={classes.Line}/>*/}
                 </div>
 
             </Fragment>

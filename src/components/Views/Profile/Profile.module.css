@@ -22,7 +22,6 @@
 
 .Profile h1{
     font-size: 2rem ;
-
 }
 
 .Profile h5{
@@ -109,3 +108,36 @@
     background-color: #eeeeee;
 }
 
+
+
+@media (max-width: 700px) {
+    .ProfileForm{
+        padding-top: 15px;
+    }
+
+    .Profile {
+        width: 90%;
+        margin-top: 20px;
+    }
+
+    .Header h4{
+        font-size: 1.2rem ;
+    }
+
+    .Profile h1{
+        font-size: 1.5rem ;
+    }
+
+    .Profile h5{
+        font-size: 0.9rem ;
+    }
+
+    .Row h4 {
+        font-size: 1rem;
+    }
+
+    .Row p {
+        font-size: 0.9rem;
+    }
+
+}
