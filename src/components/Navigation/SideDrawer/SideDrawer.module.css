@@ -10,6 +10,16 @@
     padding: 32px 16px;
     box-sizing: border-box;
     transition: transform 0.3s ease-out;
+    background-color: black;
+    color: white;
+}
+
+.SideDrawer .MobileNavItem{
+    color: white;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+
 }
 
 @media (min-width: 500px) {
@@ -27,6 +37,7 @@
 }
 
 .Logo {
-    height: 11%;
+
+    /*height: 11%;*/
     margin-bottom: 32px;
 }
