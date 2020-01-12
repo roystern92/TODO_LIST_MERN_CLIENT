@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import classes from './AuthNavItems.module.css';
 import NavigationItem from '../NavigationItem/NavigationItem';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -31,9 +32,9 @@ class AuthNavItems extends Component {
             </ul>
         );
 
-        if (this.props.isAuth) {
-            let userEmail = localStorage.getItem('userEmail');
-            let userFullName = localStorage.getItem('userFullName');
+        if (this.props.isAuth && this.props.user) {
+            let userEmail = this.props.user.email;
+            let userFullName = this.props.user.name;
 
             navigationItems =
                 <div className={classes.ProfileDropdown + " DropdownMenu"}>
@@ -76,4 +77,11 @@ class AuthNavItems extends Component {
 
 };
 
-export default withRouter(AuthNavItems);
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.auth.user
+    }
+};
+
+export default withRouter(connect(mapStateToProps)(AuthNavItems));

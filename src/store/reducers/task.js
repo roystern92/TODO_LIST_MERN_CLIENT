@@ -21,9 +21,11 @@ const setCurrentNote = (state, action) => {
 
 
 const setCurrentTask = (state, action) => {
+    let note = action.task ? action.task.note : null;
+    let title = action.task ? action.task.task : null;
+    let task = action.task ? {...action.task} : null;
     return updateObject(state,
-        {note: action.task.note, title : action.task.task,
-            currentTask: {...action.task}});
+        {note: note, title : title, currentTask: task});
 };
 
 

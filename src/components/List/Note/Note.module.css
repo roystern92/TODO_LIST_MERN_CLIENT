@@ -60,3 +60,49 @@
     font-weight: bold;
     font-size: 1rem;
 }
+
+
+@media only screen and (max-width: 1570px) {
+    .Note {
+        width: 577px;
+        height: 392px;
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    .Note {
+        width: calc(577px * 0.9);
+        height: calc(392px * 0.9);
+    }
+}
+
+@media only screen and (max-width: 1125px) {
+    .Note {
+        width: calc(577px * 0.8);
+        height: calc(392px * 0.8);
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .Note{
+        margin: 10px auto;
+        width: calc(577px * 0.9);
+        height: calc(392px * 0.9);
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .Note{
+        width: calc(577px * 0.7);
+        height: calc(392px * 0.7);
+
+    }
+}
+
+@media only screen and (max-width: 440px) {
+    .Note{
+        width: calc(577px * 0.6);
+        height: calc(392px * 0.6);
+
+    }
+}

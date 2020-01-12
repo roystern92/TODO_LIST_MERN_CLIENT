@@ -1,5 +1,14 @@
 .DropdownMenu div.dropdown-menu.show {
-    transform: translate3d(-106px, 44px, 0px) !important;
+    width: 150px !important;
+    transform: translate3d(0, 0, 0) !important;
+    position: fixed !important;
+    top: 55px !important;
+    overflow: hidden;
+    left: calc(100% - 161px)!important;
+    /*right: 0;*/
+    /*left: 90% !important;*/
+    /*top*/
+
 }
 
 .DropdownMenu button.dropdown-item {

@@ -24,10 +24,16 @@
 }
 
 .Task .Icon{
-    margin-right: 6px;
+    margin-right: 5px;
     color: rgb(120, 120, 120);
     cursor: pointer;
 
+}
+
+.Task .Delete{
+    margin-right: 10px;
+
+    color: red;
 }
 
 .Task h1{
@@ -42,8 +48,8 @@
 }
 
 .Task .Star{
+    margin-right: 10px;
     cursor: pointer;
-    margin-left: 6px;
     color: #0275d8;
     /*padding: 3px;*/
     /*font-size: 0.7rem;*/

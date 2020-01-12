@@ -33,6 +33,8 @@
 
 .Profile h3{
     font-size: 1.2rem;
+    overflow: hidden;
+
 }
 
 .Profile h5{

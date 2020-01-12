@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {ContextMenu, MenuItem, ContextMenuTrigger} from "react-contextmenu";
 import './Task.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faCircle, faStar, faCheckCircle} from '@fortawesome/free-regular-svg-icons';
+import {faCircle, faStar, faCheckCircle, faTrashAlt} from '@fortawesome/free-regular-svg-icons';
 import {faStar as solidStar} from '@fortawesome/free-solid-svg-icons';
 import classes from './Task.module.css';
 import axios from '../../../axios/axios-todo-lists';
@@ -96,11 +96,25 @@ class Task extends Component {
                     <div className={classes.Task}>
                         {element}
                         {content}
+
+
+
                         <FontAwesomeIcon
                             className={classes.Star}
                             icon={icon} size="sm"
                             onClick={(e) => {
                                 this.taskStatusChangeHandler(e, true, false);
+                            }}
+                        />
+
+                        <FontAwesomeIcon
+                            className={classes.Delete}
+                            icon={faTrashAlt} size="sm"
+                            onClick={ (event) => {
+                                event.stopPropagation();
+                                this.props.onSetModal(true);
+                                this.props.onDeleteTask(this.state.task._id);
+                                this.props.onSetTask(null);
                             }}
                         />
 
@@ -133,6 +147,7 @@ class Task extends Component {
                     <MenuItem onClick={ () => {
                         this.props.onSetModal(true);
                         this.props.onDeleteTask(this.state.task._id);
+                        this.props.onSetTask(null);
                     }}>
                         Delete
                     </MenuItem>
