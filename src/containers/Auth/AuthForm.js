@@ -50,8 +50,6 @@ class AuthForm extends Component {
             })
         });
 
-        // let formIsValid = this.checkIfFormIsValid();
-
         this.setState({controls: updatedControls}, this.checkIfFormIsValid);
     };
 
@@ -66,9 +64,11 @@ class AuthForm extends Component {
                     valid,
                     touched,
                     validation,
-                    elementConfig}} = formElement;
+                    elementConfig
+                }
+            } = formElement;
 
-        return <Input
+            return <Input
                 elementType={elementType}
                 label={id}
                 key={id}
@@ -85,18 +85,11 @@ class AuthForm extends Component {
     };
 
     createTitle = () => {
-        let res;
-
-        if (this.props.isSignIn) {
-            res = <div className={classes.Title}>
-                <h2>Log In</h2>
+        let title = this.props.isSignIn ? 'Sign In' : 'Sign Up';
+        let res =
+            <div className={classes.Title}>
+                <h2>{title}</h2>
             </div>;
-        } else {
-            res = <div className={classes.Title}>
-                <h2>Sign Up</h2>
-            </div>;
-        }
-
         return res;
     };
 
@@ -124,10 +117,7 @@ class AuthForm extends Component {
         return member;
     };
 
-    createFormOfInputs = (formElementsArray) => {
-        let inputs = this.createInputs(formElementsArray);
-        let submit = this.props.isSignIn ? 'Log In' : 'Sign Up';
-        let title = this.createTitle();
+    createTerms = () => {
         let terms = !this.props.isSignIn ?
             <div className={classes.TermsAndPolicy}>
                 <p>
@@ -138,59 +128,52 @@ class AuthForm extends Component {
                 </p>
             </div> : null;
 
-        let member = this.createMemberView();
-        let button =
-            <div
-                onClick={(event) => {
-                    if (this.state.formIsValid) {
-                        console.log("GGGGG");
+        return terms;
+    };
 
-                        this.submitHandler(event);
-                    }
-                }}
-                className={this.state.formIsValid ? classes.Submit : classes.SubmitDisabled + " " + classes.Submit }>
+    createSubmitButton = () => {
+        let submit = this.props.isSignIn ? 'Log In' : 'Sign Up';
+        let button =
+            <div className={this.state.formIsValid ? classes.Submit : classes.SubmitDisabled + " " + classes.Submit}>
                 <Button disabled={!this.state.formIsValid}>{submit}</Button>
             </div>;
 
+        return button;
+    }
+
+
+    createFormOfInputs = (formElementsArray) => {
+        let title = this.createTitle();
         let error = this.createErrors();
-
-
-        let form = <form className={classes.AuthForm} onSubmit={this.submitHandler}>
-            {title}
-            {error}
-            {inputs}
-            {button}
-            {terms}
-            {member}
-        </form>;
+        let inputs = this.createInputs(formElementsArray);
+        let button = this.createSubmitButton();
+        let terms = this.createTerms();
+        let member = this.createMemberView();
+        let form =
+            <form className={classes.AuthForm} onSubmit={this.submitHandler}>
+                {title}
+                {error}
+                {inputs}
+                {button}
+                {terms}
+                {member}
+            </form>;
 
         if (this.props.loading) {
             form = <Spinner/>
         }
-
-        if (this.props.loading) {
-            form = <Spinner/>
-        }
-
 
         return form;
     };
 
-    submitHandler = async (event) => {
-        try {
+    submitHandler =  (event) => {
             event.preventDefault();
-            let signUp = this.props.isSignIn === false;
 
-
-            if (signUp) {
-               await this.props.onAuth(this.state.controls.Email.value, this.state.controls.Password.value, this.state.controls.Name.value, true, this.state.controls.Gender.value);
+            if (!this.props.isSignIn ) {
+                 this.props.onAuth(this.state.controls.Email.value, this.state.controls.Password.value, this.state.controls.Name.value, true, this.state.controls.Gender.value);
             } else {
                 this.props.onAuth(this.state.controls.Email.value, this.state.controls.Password.value, null, false);
             }
-        }catch (e) {
-
-        }
-
     };
 
     createErrors = () => {

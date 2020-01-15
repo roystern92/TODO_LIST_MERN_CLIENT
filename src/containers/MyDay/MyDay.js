@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import classes from './MyDay.module.css';
 import List from '../../components/List/List';
 import {connect} from  'react-redux';
-import * as actions from "../../store/actions";
+import {setList} from "../../store/actions";
 
 class MyDay extends Component {
 
@@ -30,7 +30,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setCurrentList : (list) => dispatch(actions.setList(list))
+        setCurrentList : (list) => dispatch(setList(list))
 
     };
 };
