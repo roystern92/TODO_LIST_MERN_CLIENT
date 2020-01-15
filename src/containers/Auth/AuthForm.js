@@ -15,25 +15,18 @@ import Input from '../../components/UI/Input/Input';
 class AuthForm extends Component {
     state = {
         controls: this.props.controls,
-        formIsValid: false,
-        signIn: this.props.isSignIn
+        formIsValid: false
     };
 
-    static getDerivedStateFromProps(props, state) {
-        if (props.isSignIn !== state.signIn) {
-            console.log("getDerivedStateFromProps");
-            return {
-                controls: props.controls,
-                signIn: props.isSignIn
-            };
-        }
-        return null;
-    }
 
     componentDidMount() {
         // console.log("componentDidMount");
         this.props.onResetError();
     };
+
+    componentWillUnmount() {
+        // console.log("componentWillUnmount");
+    }
 
 
     checkIfFormIsValid = () => {
@@ -62,19 +55,6 @@ class AuthForm extends Component {
         this.setState({controls: updatedControls}, this.checkIfFormIsValid);
     };
 
-    createArrayFromObject = () => {
-        let formElementsArray = [];
-
-        for (let key in this.state.controls) {
-            formElementsArray.push({
-                    id: key,
-                    config: this.state.controls[key]
-                }
-            );
-        }
-
-        return formElementsArray;
-    };
 
     createInputs = (formElementsArray) => {
         let inputs = formElementsArray.map(formElement => {
@@ -213,7 +193,6 @@ class AuthForm extends Component {
 
     render() {
         let formElementsArray = createArrayFromObject(this.state.controls);
-
         let form = this.createFormOfInputs(formElementsArray);
         let authForm =
             <div className={classes.Auth}>
@@ -229,7 +208,7 @@ class AuthForm extends Component {
 const mapStatesToProps = (state) => {
     return {
         loading: state.auth.loading,
-        isAuthenticated: state.auth.token !== null,
+        isAuthenticated: !!state.auth.token,
         error: state.auth.error,
     };
 };
