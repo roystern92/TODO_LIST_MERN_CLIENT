@@ -4,7 +4,7 @@ import Task from './Task/Task';
 import AddTask from './AddTask/AddTask';
 import Note from './Note/Note';
 import {animateScroll} from "react-scroll";
-import * as actions from "../../store/actions";
+import {setList, setModal, onDeleteTask} from "../../store/actions";
 import {connect} from 'react-redux';
 import Modal from '../UI/Modal/Modal';
 import ConfirmModal from '../UI/Modal/confirmModal';
@@ -128,11 +128,10 @@ const mapStateToProps = state => {
 
 
 const mapDispatchToProps = dispatch => {
-
     return {
-        setCurrentList: (list) => dispatch(actions.setList(list)),
-        onSetModal: (showModal) => dispatch(actions.setModal(showModal)),
-        onDeleteTask: (currentList, taskId) => dispatch(actions.onDeleteTask(currentList, taskId))
+        setCurrentList: (list) => dispatch(setList(list)),
+        onSetModal: (showModal) => dispatch(setModal(showModal)),
+        onDeleteTask: (currentList, taskId) => dispatch(onDeleteTask(currentList, taskId))
     };
 };
 

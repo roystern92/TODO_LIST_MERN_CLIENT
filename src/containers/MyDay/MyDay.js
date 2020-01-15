@@ -4,7 +4,6 @@ import List from '../../components/List/List';
 import {connect} from  'react-redux';
 import {setList, fetchCurrentList} from "../../store/actions";
 import Spinner from '../../components/UI/Spinner/Spinner'
-import axios from "../../axios/axios-todo-lists";
 
 class MyDay extends Component {
 
@@ -18,7 +17,7 @@ class MyDay extends Component {
         try {
             await this.props.fetchList('My_Day');
         }catch (e) {
-
+            console.log(e);
         }
 
     };
@@ -41,6 +40,7 @@ const mapStateToProps = state => {
         currentList: state.lists.currentList
     };
 };
+
 
 const mapDispatchToProps = dispatch => {
     return {

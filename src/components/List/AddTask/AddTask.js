@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import {Button} from 'reactstrap';
 import {connect} from 'react-redux';
-import * as actions from "../../../store/actions";
+import {addingNewTask} from "../../../store/actions";
 import {animateScroll} from "react-scroll/modules";
 
 
@@ -107,7 +107,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 
     return {
-        AddingNewTask: (list, task) => dispatch(actions.addingNewTask(list, task))
+        AddingNewTask: (list, task) => dispatch(addingNewTask(list, task))
     };
 };
 

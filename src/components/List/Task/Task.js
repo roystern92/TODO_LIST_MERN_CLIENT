@@ -6,7 +6,7 @@ import {faCircle, faStar, faCheckCircle, faTrashAlt} from '@fortawesome/free-reg
 import {faStar as solidStar} from '@fortawesome/free-solid-svg-icons';
 import classes from './Task.module.css';
 import axios from '../../../axios/axios-todo-lists';
-import * as actions from "../../../store/actions";
+import {setCurrentTask, setDeletedTask, setModal, setList} from "../../../store/actions";
 import {connect} from 'react-redux';
 
 
@@ -199,10 +199,8 @@ class Task extends Component {
                 task: props.task
             };
         }
-
         return null;
     }
-
 
     render() {
         console.log("[Task] - Render ");
@@ -220,13 +218,12 @@ const mapStateToProps = state => {
 
 
 const mapDispatchToProps = dispatch => {
-
     return {
-        onSetTask: (task) => dispatch(actions.setCurrentTask(task)),
-        onDeleteTask: (taskId) => dispatch(actions.setDeletedTask(taskId)),
-        onTaskClicked: (task) => dispatch(actions.setCurrentTask(task)),
-        onSetModal: (showModal) => dispatch(actions.setModal(showModal)),
-        onSetCurrentList: (list) => dispatch(actions.setList(list))
+        onSetTask: (task) => dispatch(setCurrentTask(task)),
+        onDeleteTask: (taskId) => dispatch(setDeletedTask(taskId)),
+        onTaskClicked: (task) => dispatch(setCurrentTask(task)),
+        onSetModal: (showModal) => dispatch(setModal(showModal)),
+        onSetCurrentList: (list) => dispatch(setList(list))
     };
 };
 

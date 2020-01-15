@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import classes from './Note.module.css';
 import {connect} from 'react-redux';
-import * as actions from '../../../store/actions';
+import {setCurrentTask, setTitle, setNote, fetchCurrentList, setList} from '../../../store/actions';
 import axios from '../../../axios/axios-todo-lists';
 
 class Note extends Component {
@@ -110,11 +110,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 
     return {
-        onSetTask: (task) => dispatch(actions.setCurrentTask(task)),
-        onTitleChanged: (title) => dispatch(actions.setTitle(title)),
-        onNoteChanged: (note) => dispatch(actions.setNote(note)),
-        onFetchCurrentList: (listName) => dispatch(actions.fetchCurrentList(listName)),
-        onSetCurrentList: (list) => dispatch(actions.setList(list)),
+        onSetTask: (task) => dispatch(setCurrentTask(task)),
+        onTitleChanged: (title) => dispatch(setTitle(title)),
+        onNoteChanged: (note) => dispatch(setNote(note)),
+        onFetchCurrentList: (listName) => dispatch(fetchCurrentList(listName)),
+        onSetCurrentList: (list) => dispatch(setList(list)),
 
     };
 };
