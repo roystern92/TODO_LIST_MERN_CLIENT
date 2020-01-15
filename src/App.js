@@ -31,30 +31,6 @@ class App extends Component {
         console.log('[App] Render' );
 
         let routes = <Routes isAuthenticated={this.props.isAuthenticated}/> ;
-        // <Routes/>
-        //
-        // if (this.props.isAuthenticated) {
-        //     routes = (
-        //         <Switch>
-        //             <Route path="/my-day" component={MyDay}/>
-        //             <Route path="/profile" component={Profile}/>
-        //             <Route path="/logout" component={Logout}/>
-        //             <Route path="/" exact component={Home}/>
-        //             <Redirect to="/my-day"/>
-        //         </Switch>
-        //     );
-        // } else {
-        //     routes = (
-        //         <Switch>
-        //             <Route path="/signIn" exact component={SignIn}/>
-        //             <Route path="/signUp" exact component={SignUp}/>
-        //
-        //             <Route path="/" exact component={Home}/>
-        //             <Redirect to="/"/>
-        //         </Switch>
-        //     );
-        // }
-
 
         return (
             <div className="App">

@@ -58,24 +58,34 @@ class AuthForm extends Component {
 
     createInputs = (formElementsArray) => {
         let inputs = formElementsArray.map(formElement => {
-            return <Input
-                elementType={formElement.config.elementType}
-                label={formElement.id}
-                key={formElement.id}
-                value={formElement.config.value}
-                invalid={!formElement.config.valid}
-                touched={formElement.config.touched}
-                shouldValidate={formElement.config.validation}
-                elementConfig={formElement.config.elementConfig}
-                value={formElement.config.value}
-                changed={(event) => this.onInputChangeHandler(event, formElement.id)}
+            const {
+                id,
+                config: {
+                    value,
+                    elementType,
+                    valid,
+                    touched,
+                    validation,
+                    elementConfig}} = formElement;
+
+        return <Input
+                elementType={elementType}
+                label={id}
+                key={id}
+                value={value}
+                invalid={!valid}
+                touched={touched}
+                shouldValidate={validation}
+                elementConfig={elementConfig}
+                value={value}
+                changed={(event) => this.onInputChangeHandler(event, id)}
             />
         });
         return inputs;
     };
 
     createTitle = () => {
-        let res = null;
+        let res;
 
         if (this.props.isSignIn) {
             res = <div className={classes.Title}>
@@ -91,7 +101,7 @@ class AuthForm extends Component {
     };
 
     createMemberView = () => {
-        let member = null;
+        let member;
 
         if (!this.props.isSignIn) {
             member = <div className={classes.Member}>

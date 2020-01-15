@@ -7,30 +7,22 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 
 
 class SignOut extends Component {
-    componentWillMount() {
+    componentDidMount() {
         this.props.logout();
-    };
-    
+    }
+
     render() {
-        let logout = <Spinner />;
-        
-        if (this.props.isAuthenticated) {
-            logout = <Redirect to="/" />;
-        }
-
-        return (logout);
-
+       const logout =  <Redirect to="/" />;
+        return logout;
     };
 
 
 };
 
 const mapStateToProps = (state) => {
-    return (
-        {
+    return {
             isAuthenticated: !!state.auth.token
-        }
-    );
+        };
 };
 
 const mapDispatchToProps = dispatch => {
