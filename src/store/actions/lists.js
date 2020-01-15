@@ -148,3 +148,4 @@ export const setDeletedTask = (taskId) => {
         taskId: taskId
     };
 };
+

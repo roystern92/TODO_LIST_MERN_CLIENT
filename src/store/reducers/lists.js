@@ -2,7 +2,6 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../../shared/utility';
 
 const initialState = {
-    error: null,
     lists: null,
     disabled: false,
     currentList: null,

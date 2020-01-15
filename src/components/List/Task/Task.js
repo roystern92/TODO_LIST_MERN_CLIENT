@@ -23,14 +23,33 @@ class Task extends Component {
         let currentTask = {...this.state.task};
         currentTask.important = important;
         currentTask.completed = completed;
-        this.props.onSetTask(currentTask);
-    }
 
-    taskStatusChangeHandler =  (event, isImportant, isCompleted) => {
+        this.props.onSetTask(currentTask);
+
+        return currentTask;
+    };
+
+    updateCurrentListWithTheUpdatedTask = (updatedTask) => {
+        let list = {...this.props.currentList};
+        let tasks = this.props.currentList.tasks.map(el => {
+            if(el._id === updatedTask._id){
+                return updatedTask;
+            }
+            return el;
+        });
+
+        console.log(tasks);
+
+        list.tasks = [...tasks];
+        console.log("@");
+        this.props.onSetCurrentList(list);
+
+    };
+
+    taskStatusChangeHandler =  async (event, isImportant, isCompleted) => {
             event.stopPropagation();
 
             if(!this.state.changing){
-                console.log("1");
                 this.setState({changing: true}, async () => {
                     try {
                         let url = '/admin/todo-item/' + this.state.task._id;
@@ -39,7 +58,8 @@ class Task extends Component {
                         let data = new FormData();
                         let important = isImportant ? !this.state.important : this.state.important;
                         let completed = isCompleted ? !this.state.completed : this.state.completed;
-                        this.updateCurrentTaskWithDummyTask(important, completed);
+                        let currentTask = this.updateCurrentTaskWithDummyTask(important, completed);
+                        this.updateCurrentListWithTheUpdatedTask(currentTask);
 
                         this.setState({completed: completed, important: important});
 
@@ -51,6 +71,7 @@ class Task extends Component {
 
                         let res = await axios.put(url, data);
                         this.props.onSetTask(res.data.task);
+
 
                         this.setState({task: res.data.task, changing: false});
 
@@ -204,7 +225,8 @@ const mapDispatchToProps = dispatch => {
         onSetTask: (task) => dispatch(actions.setCurrentTask(task)),
         onDeleteTask: (taskId) => dispatch(actions.setDeletedTask(taskId)),
         onTaskClicked: (task) => dispatch(actions.setCurrentTask(task)),
-        onSetModal: (showModal) => dispatch(actions.setModal(showModal))
+        onSetModal: (showModal) => dispatch(actions.setModal(showModal)),
+        onSetCurrentList: (list) => dispatch(actions.setList(list))
     };
 };
 

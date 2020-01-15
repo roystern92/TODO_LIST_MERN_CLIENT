@@ -1,7 +1,5 @@
 import axios from '../../axios/axios-todo-lists';
 import * as actionTypes from './actionTypes';
-import * as actions from "./index";
-
 
 const authStart = () => {
     return {
@@ -26,7 +24,7 @@ const authSuccess = (token, userId) => {
 };
 
 
-const checkAuthTimeout = (expirationTime) => {
+const setAuthTimeout = (expirationTime) => {
     return dispatch => {
         setTimeout(() => {
             dispatch(logout());
@@ -75,25 +73,20 @@ const createMyDayList = async () => {
 
 
 export const postAuth = async (formData, url, signUp, dispatch) => {
-
     try {
-        let res = await axios.post(url, formData);
+        const res = await axios.post(url, formData);
+        const expirationDate = new Date(new Date().getTime() + res.data.expiresTimeInMiliseconds);
+        const timeToLogout = expirationDate.getTime() - new Date().getTime();
+
+        dispatch(setAuthTimeout(timeToLogout));
         dispatch(authUserProfile(res.data.user));
 
-        const expirationDate = new Date(new Date().getTime() + res.data.expiresTimeInMiliseconds);
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('expirationDate', expirationDate);
-        // localStorage.setItem('userFullName', res.data.user.name);
-        // localStorage.setItem('userEmail', res.data.user.email);
 
-        let timeToLogout = expirationDate.getTime() - new Date().getTime();
-
-        dispatch(checkAuthTimeout(timeToLogout));
         if (signUp) {
             await createMyDayList();
-
         }
-        await actions.fetchListsHelper(dispatch);
         dispatch(authSuccess(res.data.token, res.data.userId));
     } catch (e) {
         console.log(e.response);
@@ -105,6 +98,7 @@ export const postAuth = async (formData, url, signUp, dispatch) => {
 export const auth = (email, password, name, signUp, gender) => {
     return dispatch => {
         dispatch(authStart());
+
         let url = '/auth/login';
 
         const formData = new FormData();
@@ -138,9 +132,8 @@ export const authCheckState =  () => {
 
                 const userId = localStorage.getItem('userId');
                 dispatch(authSuccess(token, userId));
-                dispatch(checkAuthTimeout(expirationDate.getTime() - new Date().getTime()));
+                dispatch(setAuthTimeout(expirationDate.getTime() - new Date().getTime()));
                 fetchProfile(dispatch);
-                await actions.fetchListsHelper(dispatch);
             }
         }
     };
