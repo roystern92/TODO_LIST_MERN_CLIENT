@@ -6,6 +6,7 @@
     background: url("https://medlininc.com/wp-content/uploads/2018/09/iStock-939184094.jpg");
     background-size: cover;
     background-position-x: 0%;
+    overflow: auto;
 }
 
 .AuthForm {
