@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import classes from './AuthForm.module.css';
 import {createArrayFromObject} from '../../shared/utility';
-import {updateObject, checkValidity} from '../../shared/utility';
+import {checkValidity} from '../../shared/utility';
 import {Link} from 'react-router-dom';
 
 import {connect} from 'react-redux';
@@ -145,7 +145,7 @@ class AuthForm extends Component {
     createSubmitButton = () => {
         let submit = this.props.isSignIn ? 'Log In' : 'Sign Up';
         let button =
-            <div className={this.state.formIsValid ? classes.Submit : classes.SubmitDisabled + " " + classes.Submit}>
+            <div onClick={this.submitHandler} className={this.state.formIsValid ? classes.Submit : classes.SubmitDisabled + " " + classes.Submit}>
                 <Button disabled={!this.state.formIsValid}>{submit}</Button>
             </div>;
 
@@ -165,9 +165,9 @@ class AuthForm extends Component {
                 {title}
                 {error}
                 {inputs}
-                {button}
                 {terms}
                 {member}
+                {button}
             </form>;
 
         if (this.props.loading) {

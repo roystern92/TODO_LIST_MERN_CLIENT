@@ -28,9 +28,7 @@ const rootReducer = combineReducers({
     task: taskReducer
 });
 
-const store = createStore(rootReducer, composeEnhancers(
-    applyMiddleware(thunk)
-));
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 
 const app = (

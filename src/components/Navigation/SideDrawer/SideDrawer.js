@@ -23,6 +23,9 @@ const sideDrawer = (props) => {
 
         </NavLink>
 
+        <hr/>
+
+
         <NavLink
             exact
             to='/signUp'

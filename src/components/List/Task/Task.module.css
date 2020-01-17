@@ -32,7 +32,7 @@
 }
 
 .Task .Delete {
-    margin-right: 0;
+    margin-right: 8px;
     font-size: 1.2em;
     color: red;
 }

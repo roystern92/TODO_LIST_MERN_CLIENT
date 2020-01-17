@@ -54,7 +54,7 @@ export const onDeleteTask = (currentList, taskId) => {
     };
 };
 
- const fetchCurrentListHelper = async (dispatch, listName) => {
+export const fetchCurrentListHelper = async (dispatch, listName) => {
     try{
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
         let url = '/admin/list/' + listName;
@@ -81,29 +81,6 @@ export const fetchCurrentList = (listName) => {
 
 
 
-
-export const fetchListsHelper = async (dispatch) => {
-    try{
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
-        let result = await axios.get('/admin/lists');
-        let lists = result.data.lists;
-        dispatch(getLists(lists));
-    }
-    catch (e) {
-        console.log(e.response);
-    }
-};
-
-
-export const fetchLists = () => {
-    return async (dispatch) => {
-        try {
-            await fetchListsHelper(dispatch);
-        }catch (e) {
-            console.log(e.response);
-        }
-    };
-};
 
 
 export const disableStart = (list) => {

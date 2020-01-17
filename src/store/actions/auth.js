@@ -1,5 +1,6 @@
 import axios from '../../axios/axios-todo-lists';
 import * as actionTypes from './actionTypes';
+import {fetchCurrentListHelper} from './index';
 
 const authStart = () => {
     return {
@@ -78,15 +79,21 @@ export const postAuth = async (formData, url, signUp, dispatch) => {
         const expirationDate = new Date(new Date().getTime() + res.data.expiresTimeInMiliseconds);
         const timeToLogout = expirationDate.getTime() - new Date().getTime();
 
-        dispatch(setAuthTimeout(timeToLogout));
-        dispatch(authUserProfile(res.data.user));
+
 
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('expirationDate', expirationDate);
 
+
         if (signUp) {
             await createMyDayList();
+            fetchCurrentListHelper(dispatch, 'My Day');
+        }else{
+            await fetchCurrentListHelper(dispatch, 'My Day');
         }
+
+        dispatch(authUserProfile(res.data.user));
+        dispatch(setAuthTimeout(timeToLogout));
         dispatch(authSuccess(res.data.token, res.data.userId));
     } catch (e) {
         console.log(e.response);
@@ -134,6 +141,7 @@ export const authCheckState =  () => {
                 dispatch(authSuccess(token, userId));
                 dispatch(setAuthTimeout(expirationDate.getTime() - new Date().getTime()));
                 fetchProfile(dispatch);
+
             }
         }
     };

@@ -36,7 +36,7 @@
     margin-top: 0;
 }
 
-.Task .AddButton, .Task .AddButton:disabled{
+.Task .AddButton{
     color: #0275d8;
     border-color: #0275d8;
     background-color: white;
@@ -47,6 +47,17 @@
 
 .Task .AddButton:hover{
     background-color: #0275d8;
+    color: white;
+
 }
 
+
+
+.Task .AddButton:focus{
+    color: #0275d8;
+    border-color: #0275d8;
+    background-color: white;
+    box-shadow: none;
+
+}
 
