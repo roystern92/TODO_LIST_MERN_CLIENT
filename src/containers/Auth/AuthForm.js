@@ -42,15 +42,26 @@ class AuthForm extends Component {
     };
 
     onInputChangeHandler = (event, controlName) => {
-        const updatedControls = updateObject(this.state.controls, {
-            [controlName]: updateObject(this.state.controls[controlName], {
-                value: event.target.value,
-                touched: true,
-                valid: checkValidity(event.target.value, this.state.controls[controlName].validation)
-            })
-        });
+        // const updatedControls = updateObject(this.state.controls, {
+        //     [controlName]: updateObject(this.state.controls[controlName], {
+        //         value: event.target.value,
+        //         touched: true,
+        //         valid: checkValidity(event.target.value, this.state.controls[controlName].validation)
+        //     })
+        // });
 
-        this.setState({controls: updatedControls}, this.checkIfFormIsValid);
+
+        console.log(this.state.controls);
+
+        let updated = {...this.state.controls};
+        let control = updated[controlName];
+        control['value'] = event.target.value;
+        control['valid'] = checkValidity(event.target.value, this.state.controls[controlName].validation);
+        control['touched'] = true;
+        updated[controlName] = control;
+        console.log(updated);
+
+        this.setState({controls: updated}, this.checkIfFormIsValid);
     };
 
 
