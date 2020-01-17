@@ -25,10 +25,6 @@
     cursor: pointer ;
 }
 
-/*.Task .IconDisabled{*/
-    /*color: white;*/
-    /*background-color: rgb(161, 165, 170);*/
-/*}*/
 
 .Line{
     width: 95%;
@@ -36,7 +32,7 @@
     margin-top: 0;
 }
 
-.Task .AddButton{
+.Task button {
     color: #0275d8;
     border-color: #0275d8;
     background-color: white;
@@ -45,19 +41,29 @@
     font-size: 0.9rem;
 }
 
-.Task .AddButton:hover{
+
+
+.Task button:hover{
     background-color: #0275d8;
     color: white;
 
 }
 
 
-
-.Task .AddButton:focus{
+.Task button:focus{
     color: #0275d8;
     border-color: #0275d8;
     background-color: white;
     box-shadow: none;
-
 }
+
+
+@media only screen and (max-width: 600px) {
+    .Task button:hover{
+        color: #0275d8;
+        border-color: #0275d8;
+        background-color: white;
+    }
+}
+
 
