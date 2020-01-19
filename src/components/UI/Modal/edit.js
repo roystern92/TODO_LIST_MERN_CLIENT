@@ -27,16 +27,14 @@ class edit extends Component {
 
     confirmChangeHandler = async () => {
         try {
-            // console.log("editing");
             this.props.onCancel();
-
             const type = this.state.type.toLowerCase();
 
             const formData = new FormData();
             formData.append(type, this.state.control.value);
 
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token').toString();
-            let res = await axios.put('/auth/profile', formData);
+            await axios.put('/auth/profile', formData);
 
             this.props.onConfirm();
         }catch (e) {

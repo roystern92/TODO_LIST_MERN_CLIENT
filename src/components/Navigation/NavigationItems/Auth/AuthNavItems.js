@@ -5,7 +5,7 @@ import NavigationItem from '../NavigationItem/NavigationItem';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser} from "@fortawesome/free-regular-svg-icons";
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
-import {NavLink, withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import './dropdown.css';
 
 class AuthNavItems extends Component {

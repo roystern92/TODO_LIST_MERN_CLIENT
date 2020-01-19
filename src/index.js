@@ -11,7 +11,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 //Redux Configuration
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+
 import thunk from 'redux-thunk';
 
 //Reducers
@@ -19,7 +20,8 @@ import authReducer from './store/reducers/auth';
 import listsReducer from './store/reducers/lists';
 import taskReducer from './store/reducers/task';
 
-const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
+// const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
+// import {compose } from 'redux';
 
 
 const rootReducer = combineReducers({

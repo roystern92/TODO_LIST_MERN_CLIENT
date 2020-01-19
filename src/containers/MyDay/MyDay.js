@@ -36,7 +36,6 @@ class MyDay extends Component {
 
 const mapStateToProps = state => {
     return {
-        lists: state.lists.lists,
         currentList: state.lists.currentList
     };
 };

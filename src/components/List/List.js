@@ -8,9 +8,6 @@ import {setList, setModal, onDeleteTask} from "../../store/actions";
 import {connect} from 'react-redux';
 import Modal from '../UI/Modal/Modal';
 import ConfirmModal from '../UI/Modal/confirmModal';
-import {Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
-import {faTrashAlt, faEdit} from '@fortawesome/free-regular-svg-icons';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class List extends Component {
 
@@ -27,13 +24,11 @@ class List extends Component {
     };
 
     componentDidMount() {
-        console.log("[List] componentDidMount");
         this.scrollToTop();
         this.props.setCurrentList(this.props.list);
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        console.log("[List] shouldComponentUpdate");
         if (this.props.currentList !== nextProps.currentList ||
             this.state.openDropDown !== nextState.openDropDown ||
             this.props.showModal !== nextProps.showModal) {
@@ -84,7 +79,6 @@ class List extends Component {
 
     render() {
 
-        console.log("[List] - Render ");
         let list = null;
 
         if (this.props.currentList) {

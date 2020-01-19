@@ -2,7 +2,6 @@ import React, {Fragment} from 'react';
 import Logo from '../../Logo/Logo';
 import {NavLink} from 'react-router-dom';
 
-import NavigationItems from '../NavigationItems/NavigationItems';
 import classes from './SideDrawer.module.css';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 

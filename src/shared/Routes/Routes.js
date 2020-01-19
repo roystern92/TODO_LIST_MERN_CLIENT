@@ -1,4 +1,4 @@
-import {Route, Switch, Redirect,withRouter} from 'react-router-dom';
+import {Route, Switch, Redirect} from 'react-router-dom';
 import Logout from '../../containers/Auth/Signout';
 import SignIn from '../../containers/Auth/Forms/SignIn';
 import MyDay from '../../containers/MyDay/MyDay';

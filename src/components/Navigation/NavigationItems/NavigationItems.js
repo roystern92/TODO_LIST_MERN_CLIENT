@@ -1,8 +1,6 @@
 import React from 'react';
 import classes from './NavigationItems.module.css';
 import NavigationItem from './NavigationItem/NavigationItem';
-import {faUser} from '@fortawesome/free-regular-svg-icons';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const navigationItems = (props) => {
 

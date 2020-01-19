@@ -6,9 +6,6 @@ import axios from '../../../axios/axios-todo-lists';
 
 class Note extends Component {
 
-    componentDidMount() {
-        console.log("[Note] componentDidMount ");
-    }
 
     updateCurrentListWithTheUpdatedTask = () => {
 
@@ -89,7 +86,6 @@ class Note extends Component {
     };
 
     render() {
-        console.log("[Note] render ");
         let note = this.createNote();
         return note;
     };

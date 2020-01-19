@@ -22,7 +22,6 @@ class AddTask extends Component {
     };
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        console.log("[AddTask] - shouldComponentUpdate ");
 
         if (this.state.value !== nextState.value ||
             this.props.addTaskDisabled !== nextProps.addTaskDisabled) {
@@ -88,10 +87,8 @@ class AddTask extends Component {
 
 
     render() {
-        console.log("[AddTask] - Render ");
         let addTask = this.createAddTask();
         return addTask;
-
     };
 
 }

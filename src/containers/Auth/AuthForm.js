@@ -20,14 +20,8 @@ class AuthForm extends Component {
 
 
     componentDidMount() {
-        // console.log("componentDidMount");
         this.props.onResetError();
     };
-
-    componentWillUnmount() {
-        // console.log("componentWillUnmount");
-    }
-
 
     checkIfFormIsValid = () => {
         let isFormValid = true;
@@ -42,24 +36,12 @@ class AuthForm extends Component {
     };
 
     onInputChangeHandler = (event, controlName) => {
-        // const updatedControls = updateObject(this.state.controls, {
-        //     [controlName]: updateObject(this.state.controls[controlName], {
-        //         value: event.target.value,
-        //         touched: true,
-        //         valid: checkValidity(event.target.value, this.state.controls[controlName].validation)
-        //     })
-        // });
-
-
-        console.log(this.state.controls);
-
         let updated = {...this.state.controls};
         let control = updated[controlName];
         control['value'] = event.target.value;
         control['valid'] = checkValidity(event.target.value, this.state.controls[controlName].validation);
         control['touched'] = true;
         updated[controlName] = control;
-        console.log(updated);
 
         this.setState({controls: updated}, this.checkIfFormIsValid);
     };
@@ -83,7 +65,6 @@ class AuthForm extends Component {
                 elementType={elementType}
                 label={id}
                 key={id}
-                value={value}
                 invalid={!valid}
                 touched={touched}
                 shouldValidate={validation}
@@ -145,7 +126,11 @@ class AuthForm extends Component {
     createSubmitButton = () => {
         let submit = this.props.isSignIn ? 'Log In' : 'Sign Up';
         let button =
-            <div onClick={this.submitHandler} className={this.state.formIsValid ? classes.Submit : classes.SubmitDisabled + " " + classes.Submit}>
+            <div onClick={(event) => {
+                if(this.state.formIsValid){
+                    this.submitHandler(event);
+                }
+            }} className={this.state.formIsValid ? classes.Submit : classes.SubmitDisabled + " " + classes.Submit}>
                 <Button disabled={!this.state.formIsValid}>{submit}</Button>
             </div>;
 

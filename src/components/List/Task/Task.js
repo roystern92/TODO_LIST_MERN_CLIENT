@@ -38,10 +38,8 @@ class Task extends Component {
             return el;
         });
 
-        console.log(tasks);
 
         list.tasks = [...tasks];
-        console.log("@");
         this.props.onSetCurrentList(list);
 
     };
@@ -179,14 +177,10 @@ class Task extends Component {
     };
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        console.log("[Task] shouldComponentUpdate");
-
         if (this.state.task._id !== nextProps.task._id ||
             this.state.completed !== nextState.completed ||
             this.props.task.task !== nextProps.task.task ||
             this.state.important !== nextState.important) {
-            console.log("[Task] shouldComponentUpdate -  TRUE");
-
             return true;
         }
 
@@ -203,8 +197,6 @@ class Task extends Component {
     }
 
     render() {
-        console.log("[Task] - Render ");
-
         let task = this.createTask();
         return task;
     };

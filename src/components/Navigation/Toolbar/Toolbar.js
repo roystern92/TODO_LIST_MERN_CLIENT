@@ -1,4 +1,4 @@
-import React,{Fragment} from 'react';
+import React from 'react';
 import classes from './Toolbar.module.css';
 import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
 import Logo from '../../Logo/Logo';
