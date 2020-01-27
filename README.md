@@ -28,4 +28,4 @@ in order to fully install all requirements (including server):
 ## Authors
 
 * **Roy Stern** - *Initial work*
-* **Avihu Cohen** - *Initial work*
+* **Avihu Cohen** -  *https://github.com/AvihuCohen - Initial work*
