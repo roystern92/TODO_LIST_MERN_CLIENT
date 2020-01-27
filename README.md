@@ -21,9 +21,9 @@ in order to fully install all requirements (including server):
 
 ## Built With
 
-* [ReactJS](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [NodeJS](https://maven.apache.org/) - Dependency Management
-* [MongoDB Atlas](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [ReactJS](https://reactjs.org) - The web framework.
+* [NodeJS](https://nodejs.org/en/) - Server. 
+* [MongoDB Atlas](https://www.mongodb.com) - Data Base.
 
 ## Authors
 
